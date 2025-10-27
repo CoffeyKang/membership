@@ -9,27 +9,41 @@ class Member extends Component
 {
     public $member;
     public $depositAmount;
-    public $showDepositInput = false;
-    public $depositHistories;
+
+    public $showSpendModal = false;
+    public $showDepositModal = false;
+
+    protected $listeners = [
+        'depositCompleted' => 'balanceUpdated',
+        'modalClosed' => 'closeModals'
+    ];
+
     public function mount($member)
     {
         $this->member = MemberModel::find($member);
-        $this->depositHistories = $this->member->depositHistories()->orderBy('created_at', 'desc')->get();
     }
-    public function deposit()
+
+    public function balanceUpdated()
+    {   
+        session()->flash('status', 'Deposit successfully.');
+        $this->showDepositModal = false;
+    }
+
+    public function closeModals()
     {
-        $this->member->balance += $this->depositAmount;
-        $this->member->save();
-        return redirect()->back()->with('status', 'Deposit successful!');
+        $this->showSpendModal = false;
+        $this->showDepositModal = false;
     }
 
     public function render()
     {
         return view('livewire.member-show', [
             'member' => $this->member,
-            'showDepositInput' => $this->showDepositInput,
             'depositAmount' => $this->depositAmount,
-            'depositHistories' => $this->depositHistories,
+            'showSpendModal' => $this->showSpendModal,
+            'showDepositModal' => $this->showDepositModal,
         ]);
     }
+
+    
 }

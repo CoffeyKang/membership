@@ -23,10 +23,10 @@
 		<tbody class="bg-white divide-y divide-gray-200">
 			@foreach($members as $member)
 				<tr wire:click="showMember({{ $member->id }})" class="hover:bg-gray-100 cursor-pointer">
-					<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $member->member_id }}</td>
-					<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $member->full_name }}</td>
-					<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $member->phone_number }}</td>
-					<td class="px-6 py-4 whitespace-nowrap text-sm 
+					<td class="px-6 py-4 whitespace-nowrap text-lg text-gray-900">{{ $member->member_id }}</td>
+					<td class="px-6 py-4 whitespace-nowrap text-lg text-gray-900">{{ $member->full_name }}</td>
+					<td class="px-6 py-4 whitespace-nowrap text-lg text-gray-900">{{ $member->phone_number }}</td>
+					<td class="px-6 py-4 whitespace-nowrap text-2xl 
 						@if($member->balance < 100)
 							text-red-600
 						@elseif($member->balance > 1000)
