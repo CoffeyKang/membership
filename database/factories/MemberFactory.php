@@ -20,7 +20,23 @@ class MemberFactory extends Factory
             'member_id' => 'M' . $this->faker->unique()->numerify('###'),
             'full_name' => $this->faker->name('zh_CN'),
             'phone_number' => $this->faker->numerify('1##########'),
-            'balance' => intval(round($this->faker->numberBetween(0, 2000) / 10) * 10),
+            'balance' => 0,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function ($member) {
+            $count = rand(1, 5);
+            for ($i = 0; $i < $count; $i++) {
+                $member->depositHistories()->create([
+                    'amount' => intval(round($this->faker->numberBetween(10, 500) / 10) * 10),
+                    'type' => $this->faker->randomElement([0, 1, 2, 3]),
+                    'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+                ]);
+            }
+            $member->balance = $member->depositHistories()->sum('amount');
+            $member->save();
+        });
     }
 }

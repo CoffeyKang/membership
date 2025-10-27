@@ -18,4 +18,9 @@ class Member extends Model
         'phone_number',
         'balance',
     ];
+
+    public function depositHistories()
+    {
+        return $this->hasMany(DepositHistory::class);
+    }
 }

@@ -8,15 +8,17 @@ use App\Models\Content\Member as MemberModel;
 class Member extends Component
 {
     public $member;
-
+    public $depositAmount;
+    public $showDepositInput = false;
+    public $depositHistories;
     public function mount($member)
     {
         $this->member = MemberModel::find($member);
+        $this->depositHistories = $this->member->depositHistories()->orderBy('created_at', 'desc')->get();
     }
-
-    public function deposit($amount)
-    {   
-        $this->member->balance += $amount; 
+    public function deposit()
+    {
+        $this->member->balance += $this->depositAmount;
         $this->member->save();
         return redirect()->back()->with('status', 'Deposit successful!');
     }
@@ -25,6 +27,9 @@ class Member extends Component
     {
         return view('livewire.member-show', [
             'member' => $this->member,
+            'showDepositInput' => $this->showDepositInput,
+            'depositAmount' => $this->depositAmount,
+            'depositHistories' => $this->depositHistories,
         ]);
     }
 }
