@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Content\Member as MemberModel;
+use App\Models\Member as MemberModel;
 
 class Member extends Component
 {
@@ -15,6 +15,7 @@ class Member extends Component
 
     protected $listeners = [
         'depositCompleted' => 'balanceUpdated',
+        'spendCompleted' => 'spendCompleted',
         'modalClosed' => 'closeModals'
     ];
 
@@ -27,6 +28,12 @@ class Member extends Component
     {   
         session()->flash('status', 'Deposit successfully.');
         $this->showDepositModal = false;
+    }
+
+    public function spendCompleted()
+    {
+        session()->flash('status', 'Spend successfully. Welcome back!');
+        $this->showSpendModal = false;
     }
 
     public function closeModals()

@@ -21,19 +21,19 @@
 					<h2 class="text-xl font-bold text-blue-700 mb-6">{{ __('Personal Information') }}</h2>
 					<div class="space-y-4">
 						<div class="flex justify-between items-center">
-							<span class="text-gray-600 text-base font-semibold">{{ __('member.member_id') }}</span>
+							<span class="text-gray-600 text-base font-semibold">{{ __('Member ID') }}</span>
 							<span class="text-blue-700 text-lg font-bold">{{ $member->member_id }}</span>
 						</div>
 						<div class="flex justify-between items-center">
-							<span class="text-gray-600 text-base font-semibold">{{ __('member.full_name') }}</span>
+							<span class="text-gray-600 text-base font-semibold">{{ __('Full Name') }}</span>
 							<span class="text-gray-900 text-lg font-bold">{{ $member->full_name }}</span>
 						</div>
 						<div class="flex justify-between items-center">
-							<span class="text-gray-600 text-base font-semibold">{{ __('member.phone_number') }}</span>
+							<span class="text-gray-600 text-base font-semibold">{{ __('Phone Number') }}</span>
 							<span class="text-gray-900 text-lg font-bold">{{ $member->phone_number }}</span>
 						</div>
 						<div class="flex justify-between items-center">
-							<span class="text-gray-600 text-base font-semibold">{{ __('member.balance') }}</span>
+							<span class="text-gray-600 text-base font-semibold">{{ __('Balance') }}</span>
 							<span class="text-green-700 text-lg font-bold">{{ $member->balance }}</span>
 						</div>
 					</div>
@@ -54,16 +54,7 @@
 		
 			<!-- Spend Modal -->
 			@if($showSpendModal)
-				<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
-					<div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-						<h3 class="text-lg font-bold mb-4">{{ __('Spend Amount') }}</h3>
-						<input type="number" wire:model.defer="spendAmount" class="w-full border rounded px-3 py-2 mb-4" placeholder="{{ __('Enter amount to spend') }}">
-						<div class="flex justify-end space-x-2">
-							<button wire:click="confirmSpend" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">{{ __('Confirm') }}</button>
-							<button wire:click="$set('showSpendModal', false)" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">{{ __('Cancel') }}</button>
-						</div>
-					</div>
-				</div>
+				@livewire('spend-form', ['member' => $member])
 			@endif
 
 			<!-- Deposit Modal -->
@@ -75,5 +66,25 @@
 		<div class="w-1/2 pl-8">
 			<livewire:deposit-history :$member />
 		</div>
+
+	</div>
+
+	<div class="w-full mt-8 border-t pt-6">
+		@foreach($member->transactions as $transaction)
+			<div class="border-b py-2">
+				<div class="flex justify-between">
+					<div>
+						<span class="font-semibold">{{ __('Staff ID:') }}</span> {{ $transaction->staff->nick_name }} @ <b>{{ $transaction->created_at->format('Y-m-d H:i') }}</b>
+					</div>
+					<div>
+						<span class="font-semibold">{{ __('Amount:') }}</span> {{ $transaction->amount }}
+					</div>
+				</div>
+				<div class="text-sm text-gray-600">
+					<span class="font-semibold">{{ __('Notes:') }}</span> {{ $transaction->notes ?? __('N/A') }}
+				</div>
+			</div>
+		@endforeach	
+	</div>
 		
 </div>

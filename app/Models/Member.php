@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Content;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,5 +22,10 @@ class Member extends Model
     public function depositHistories()
     {
         return $this->hasMany(DepositHistory::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

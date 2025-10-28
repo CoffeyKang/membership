@@ -21,3 +21,7 @@ Route::view('members', 'members.index')
 Route::view('members/{member}', 'members.show')
     ->middleware(['auth'])
     ->name('members.show');
+
+Route::view('staff', 'staff.index')
+    ->middleware(['auth'])
+    ->name('staff.index');

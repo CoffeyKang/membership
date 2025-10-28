@@ -10,12 +10,12 @@ class MemberList extends Component
     public $searchTerm = '';
     public function mount()
     {
-        $this->members = \App\Models\Content\Member::orderBy('member_id')->get();
+        $this->members = \App\Models\Member::orderBy('member_id')->get();
     }
 
     public function updatedSearchTerm()
     {
-        $this->members = \App\Models\Content\Member::where(function($query) {
+        $this->members = \App\Models\Member::where(function($query) {
             $query
                 ->where('full_name', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('member_id', 'like', '%' . $this->searchTerm . '%')

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Content\DepositHistory;
+use App\Models\DepositHistory;
 use Illuminate\Http\Request;
 
 class DepositHistoryController extends Controller
