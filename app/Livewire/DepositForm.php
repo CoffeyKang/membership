@@ -25,6 +25,10 @@ class DepositForm extends Component
         ]);
     
         $this->member->balance += $this->depositAmount;
+
+        if ($this->depositAmount >= 1000) {
+            $this->member->setPrimary();
+        }
         
         $this->member->depositHistories()->create([
             'amount' => $this->depositAmount,

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('full_name')->nullable(false);
             $table->string('phone_number')->nullable(false);
             $table->integer('balance');
+            $table->boolean('is_primary')->default(false);
             $table->timestamps();
         });
     }

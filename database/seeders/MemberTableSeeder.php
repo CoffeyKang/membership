@@ -17,7 +17,7 @@ class MemberTableSeeder extends Seeder
                 'member_id' => 'M001',
                 'full_name' => '散客',
                 'phone_number' => '0912345678',
-                'balance' => 0,
+                'balance' => 1000000,
             ],
             [
                 'member_id' => 'M002',

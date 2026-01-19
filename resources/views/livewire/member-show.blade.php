@@ -16,7 +16,7 @@
 	
 	<div class="flex w-full">
 		<div class="w-1/2">
-			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 border-2 border-blue-200">
+			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 {{ $member->is_primary ? 'border-4 border-yellow-400' : 'border-2 border-blue-200' }}">
 				<div class="p-6">
 					<h2 class="text-xl font-bold text-blue-700 mb-6">{{ __('Personal Information') }}</h2>
 					<div class="space-y-4">
@@ -27,6 +27,10 @@
 						<div class="flex justify-between items-center">
 							<span class="text-gray-600 text-base font-semibold">{{ __('Full Name') }}</span>
 							<span class="text-gray-900 text-lg font-bold">{{ $member->full_name }}</span>
+						</div>
+						<div class="flex justify-between items-center">
+							<span class="text-gray-600 text-base font-semibold">{{ __('Member Level') }}</span>
+							<span class="text-gray-900 text-lg font-bold">{{ $member->is_primary ? __('Primary') : __('Normal') }}</span>
 						</div>
 						<div class="flex justify-between items-center">
 							<span class="text-gray-600 text-base font-semibold">{{ __('Phone Number') }}</span>

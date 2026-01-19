@@ -31,7 +31,8 @@ class SpendForm extends Component
         ]);
 
         // Deduct amount from member's balance
-        $this->member->balance -= $this->spendAmount;
+        
+        $this->member->spend($this->spendAmount);
         $this->member->save();
 
         // Optionally, create a transaction record here

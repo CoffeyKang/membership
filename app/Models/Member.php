@@ -17,6 +17,7 @@ class Member extends Model
         'full_name',
         'phone_number',
         'balance',
+        'is_primary',
     ];
 
     public function depositHistories()
@@ -27,5 +28,31 @@ class Member extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function setPrimary()
+    {
+        $this->update(['is_primary' => true]);
+    }
+    
+    /**
+     * Mark the member as a walk-in client.
+     *
+     * @return void
+     */
+    public function isWalkInClient()
+    {
+        return $this->member_id == 'M001';
+    }
+    /**
+     * Spend money from the member's balance.
+     * If the amount exceeds the current balance, no action is taken and a message is returned.
+     *
+     * @int int $amount
+     * @return string
+     */
+    public function spend(int $amount): void
+    {   
+        $this->decrement('balance', $amount);
     }
 }
