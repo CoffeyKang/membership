@@ -6,9 +6,14 @@ use Livewire\Component;
 
 class MemberForm extends Component
 {   
-    public function mount()
+    public $member;
+    public $name;
+    public $email;
+    public $phone;
+
+    public function mount($member)
     {
-        // Initialization code can go here
+        $this->member = $member;
     }
 
     public function submit()

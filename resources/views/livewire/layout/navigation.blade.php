@@ -43,6 +43,8 @@ new class extends Component
                 </div>
             </div>
 
+
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -92,6 +94,8 @@ new class extends Component
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -81,7 +81,7 @@ class QuickSave extends Component
     {
         $this->selectedMemberID = $memberID;
         $client = Member::find($memberID);
-        $this->memberTransactions = $client->transactions()->take(3)->get();
+        $this->memberTransactions = $client->transactions()->take(5)->get();
     }
 
 

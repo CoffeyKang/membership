@@ -8,7 +8,10 @@
 		</div>
 	@endif
 	
-	<div class="flex w-full justify-end items-center">
+	<div class="flex w-full justify-between items-center">
+		<a href="{{ route('members.edit', $member) }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 text-white text-sm font-semibold rounded hover:bg-yellow-600 transition">
+			{{ __('Edit Member') }}
+		</a>
 		<a href="{{ route('members.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition">
 			&larr; {{ __('Back to Member List') }}
 		</a>

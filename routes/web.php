@@ -22,6 +22,10 @@ Route::view('members/{member}', 'members.show')
     ->middleware(['auth'])
     ->name('members.show');
 
+Route::view('members/edit/{member}', 'members.form')
+    ->middleware(['auth'])
+    ->name('members.edit');
+
 Route::view('staff', 'staff.index')
     ->middleware(['auth'])
     ->name('staff.index');

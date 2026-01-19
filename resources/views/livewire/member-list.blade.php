@@ -6,10 +6,10 @@
 			placeholder="Search members..."
 			class="px-4 py-2 border rounded w-80"
 		/>
-		<a
-			{{-- href="{{ route('members.show') }}" --}}
+		{{-- <a
+			href="{{ route('members.form', ['member' => new \App\Models\Member()]) }}"
 			class="px-4 py-2 bg-blue-500 text-white rounded"
-		>{{ __('Add new member') }}</a>
+		>{{ __('Add New Member') }}</a> --}}
 	</div>
 	<table class="min-w-full divide-y divide-gray-200">
 		<thead class="bg-gray-50">
