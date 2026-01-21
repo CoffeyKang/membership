@@ -22,7 +22,13 @@ class DepositForm extends Component
             'depositAmount' => 'required|numeric|min:100',
             'type' => 'required|in:0,1,2,3',
             'confirmDepositAmount' => 'required|same:depositAmount',
+        ], [
+            'depositAmount.required' => 'Please enter the deposit amount.',
+            'type.required' => 'Please select the deposit type.',
+            'confirmDepositAmount.required' => 'Please confirm the deposit amount.',
+            'confirmDepositAmount.same' => 'The confirmed deposit amount does not match.',
         ]);
+
     
         $this->member->balance += $this->depositAmount;
 

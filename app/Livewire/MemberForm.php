@@ -17,7 +17,7 @@ class MemberForm extends Component
     public $balance;
 
     public function mount(Member $member)
-    {   
+    {
         $this->member = $member ?? new Member();
         $this->full_name = $member->full_name;
         $this->member_id = $member->member_id;
@@ -34,13 +34,21 @@ class MemberForm extends Component
     }
     public function save()
     {
-        // Validate input
+        
         $validated = $this->validate([
             'full_name'     => 'required|string|max:255|unique:members,full_name,' . $this->member->id,
             'phone_number'  => 'required|string|max:20',
             'balance'       => 'required|numeric|min:0',
-            'is_primary'    => 'required',
         ]);
+       
+        if ( empty($this->member_id) ) {
+            do {
+                $count = \App\Models\Member::count();
+                $newMemberId = 'M' . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+                $exists = \App\Models\Member::where('member_id', $newMemberId)->exists();
+            } while ($exists);
+            $validated['member_id'] = $newMemberId;
+        }
 
         // Update or create member
         $this->member->fill($validated)->save();
@@ -50,7 +58,6 @@ class MemberForm extends Component
 
     public function render()
     {
-        return view('members.form',
-        );
+        return view('members.form');
     }
 }

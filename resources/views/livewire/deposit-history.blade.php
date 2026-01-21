@@ -28,7 +28,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-gray-700">
                                 {{ $history->created_at->format('Y-m-d H:i') }}
                             </td>
-                        </tr>
+                        
                     @empty
                         <tr>
                             <td colspan="2" class="px-6 py-4 text-center text-gray-500">
@@ -36,6 +36,11 @@
                             </td>
                         </tr>
                     @endforelse
+                        </tr>
+                            <td colspan="3" class="px-6 py-4 text-center text-green-500">
+                                {{ $depositHistories->links() }}
+                            </td>
+                        </tr>
                 </tbody>
             </table>
         </div>

@@ -26,24 +26,24 @@ Route::get('members', function () {
     ->middleware(['auth'])
     ->name('members.index');
 
+Route::get('members/create', \App\Livewire\MemberForm::class)
+    ->middleware(['auth'])
+    ->name('members.create');
+
 Route::get('members/{member}', function (\App\Models\Member $member) {
     return view('members.show', compact('member'));
 })
     ->middleware(['auth'])
     ->name('members.show');
 
-// Nothing to replace – the selection was empty.
-
 Route::get('members/edit/{member}', \App\Livewire\MemberForm::class)
     ->middleware(['auth'])
     ->name('members.edit');
-
-Route::get('members/create', \App\Livewire\MemberForm::class)
-    ->middleware(['auth'])
-    ->name('members.create');
 
 Route::get('staff', function () {
     return view('staff.index');
 })
     ->middleware(['auth'])
     ->name('staff.index');
+
+

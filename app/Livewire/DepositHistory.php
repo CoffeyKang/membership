@@ -13,7 +13,7 @@ class DepositHistory extends Component
     public function render()
     {
         return view('livewire.deposit-history', [
-            'depositHistories' => $this->member->depositHistories()->orderBy('created_at', 'desc')->get() ,
+            'depositHistories' => $this->member->depositHistories()->orderBy('created_at', 'desc')->paginate(4) ,
         ]);
     }
 }

@@ -47,10 +47,11 @@
                             <input
                                 id="balance"
                                 type="number"
-                                step="0.01"
+                                step="1"
                                 wire:model.defer="balance"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="0.00"
+                                min="0"
                                 required
                             />
                             @error('balance')
