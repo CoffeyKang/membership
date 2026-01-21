@@ -20,6 +20,10 @@ class Member extends Model
         'is_primary',
     ];
 
+    protected $casts = [
+        'is_primary' => 'boolean',
+    ];
+
     public function depositHistories()
     {
         return $this->hasMany(DepositHistory::class);

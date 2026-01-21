@@ -7,18 +7,20 @@
 			{{ session('status') }}
 		</div>
 	@endif
-	
-	<div class="flex w-full justify-between items-center">
-		<a href="{{ route('members.edit', $member) }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 text-white text-sm font-semibold rounded hover:bg-yellow-600 transition">
-			{{ __('Edit Member') }}
-		</a>
+	<div class="flex w-full justify-end gap-4 items-center">
 		<a href="{{ route('members.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition">
 			&larr; {{ __('Back to Member List') }}
+		</a>
+		<a 
+			href="{{ route('members.edit', ['member' => $member]) }}" 
+			class="inline-flex items-center px-4 py-2 bg-yellow-500 text-white text-sm font-semibold rounded hover:bg-yellow-600 transition">
+			{{ __('Edit Member') }}
 		</a>
 	</div>
 	
 	<div class="flex w-full">
 		<div class="w-1/2">
+			
 			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 {{ $member->is_primary ? 'border-4 border-yellow-400' : 'border-2 border-blue-200' }}">
 				<div class="p-6">
 					<h2 class="text-xl font-bold text-blue-700 mb-6">{{ __('Personal Information') }}</h2>
@@ -93,5 +95,4 @@
 			</div>
 		@endforeach	
 	</div>
-		
 </div>

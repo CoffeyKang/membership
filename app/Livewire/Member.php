@@ -19,9 +19,9 @@ class Member extends Component
         'modalClosed' => 'closeModals'
     ];
 
-    public function mount($member)
+    public function mount(MemberModel $member)
     {
-        $this->member = MemberModel::find($member);
+        $this->member = $member;
     }
 
     public function balanceUpdated()
@@ -36,10 +36,20 @@ class Member extends Component
         $this->showSpendModal = false;
     }
 
+    public function memberInfoChanged()
+    {
+        session()->flash('status', 'Member info has been updated!');
+    }
+
     public function closeModals()
     {
         $this->showSpendModal = false;
         $this->showDepositModal = false;
+    }
+
+    public function memberUpdated()
+    {
+        session()->flash('status', 'Member updated successfully.');
     }
 
     public function render()
