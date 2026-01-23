@@ -25,7 +25,7 @@ class QuickSave extends Component
     public function mount()
     {   
         $this->members = Member::all();
-        $this->staff = Staff::activeStaff()->get();
+        $this->staff = Staff::activeStaff()->notLeft()->get();
         $this->selectedMemberID = Member::where('member_id', 'M001')->first()->id;
         $this->walkinClientID = Member::where('member_id', 'M001')->first()->id;
     
@@ -50,6 +50,12 @@ class QuickSave extends Component
             'amount'           => 'required|numeric|min:0',
             'confirmAmount'    => 'required|same:amount',
             'notes'            => 'nullable|string|max:255',
+        ], [
+            'selectedMemberID.required' => 'Please select a member.',
+            'selectedStaffId.required' => 'Please select a staff member.',
+            'amount.required' => 'Please enter the amount.',
+            'confirmAmount.required' => 'Please confirm the amount.',
+            'confirmAmount.same' => 'The confirmed amount does not match.',
         ]);
         // Find the member by ID
         $member = Member::find($this->selectedMemberID);

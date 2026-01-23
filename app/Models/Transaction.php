@@ -20,6 +20,8 @@ class Transaction extends Model
         'notes',
     ];
 
+    protected $periods = ['today', 'this_month', 'this_year', 'all'];
+
     public function member()
     {
         return $this->belongsTo(Member::class);
@@ -29,10 +31,45 @@ class Transaction extends Model
     {
         return $this->belongsTo(Staff::class);
     }
+
+    public function scopeSetPeriod($query, $period)
+    {
+        if (!in_array($period, $this->periods)) {
+            throw new \InvalidArgumentException("Invalid period. Allowed periods are: " . implode(', ', $this->periods));
+        }
+        return $query->where(function ($q) use ($period) {
+            switch ($period) {
+                case 'today':
+                    $q->whereDate('created_at', today());
+                    break;
+                case 'this_month':
+                    $q->whereMonth('created_at', now()->month)
+                      ->whereYear('created_at', now()->year);
+                    break;
+                case 'this_year':
+                    $q->whereYear('created_at', now()->year);
+                    break;
+                case 'all':
+                    // No additional conditions needed for 'all'
+                    break;
+            }
+        });
+
+    }
+
+    public function scopeUnPaid($query)
+    {
+        return $query->where('is_paid', false);
+    }
+
     protected static function booted()
     {
         static::addGlobalScope('order', function ($query) {
             $query->orderByDesc('created_at');
+        });
+
+        static::addGlobalScope('unpaid', function ($query) {
+            $query->unPaid();
         });
     }
 }

@@ -17,9 +17,24 @@ class Staff extends Model
         'is_left',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_left' => 'boolean',
+    ];
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function scopeIsLeft($query)
+    {
+        return $query->where('is_left', true);
+    }
+
+    public function scopeNotLeft($query)
+    {
+        return $query->where('is_left', false);
     }
 
     public static function activeStaff()

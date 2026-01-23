@@ -46,4 +46,26 @@ Route::get('staff', function () {
     ->middleware(['auth'])
     ->name('staff.index');
 
+Route::get('staff/create', function() {
+    return view('staff.show', ['staff' => new \App\Models\Staff()]);
+})->name('staff.create');
 
+
+Route::get('staff/{staff}', function(\App\Models\Staff $staff){
+    return view('staff.show', compact('staff'));
+})
+    ->middleware(['auth'])
+    ->name('staff.show');
+
+    
+Route::get('staff-management', function () {
+    return view('staff.management.index');
+})
+    ->middleware(['auth'])
+    ->name('staff-management.index');
+
+Route::get('staff/{staff}/transactions', function(\App\Models\Staff $staff){
+        return view('staff.management.transactions', compact('staff'));
+    })
+    ->middleware(['auth'])
+    ->name('staff.management.transactions');

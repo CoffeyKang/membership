@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('staff_id');
             $table->integer('amount');
             $table->string('notes')->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

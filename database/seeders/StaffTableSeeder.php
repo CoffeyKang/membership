@@ -22,6 +22,7 @@ class StaffTableSeeder extends Seeder
                 'commission_rate' => 0.5,
                 'is_active' => true,
                 'is_left' => false,
+                'created_at' => now(),
             ],
             [
                 'nick_name' => '小李',
@@ -32,6 +33,7 @@ class StaffTableSeeder extends Seeder
                 'commission_rate' => 0.4,
                 'is_active' => true,
                 'is_left' => false,
+                'created_at' => now(),      
             ],
             [
                 'nick_name' => '阿强',
@@ -42,6 +44,7 @@ class StaffTableSeeder extends Seeder
                 'commission_rate' => 0.3,
                 'is_active' => false,
                 'is_left' => true,
+                'created_at' => now(),      
             ],
         ];
 

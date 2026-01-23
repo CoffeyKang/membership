@@ -14,7 +14,7 @@ class Staff extends Component
         $this->staff->is_active = !$this->staff->is_active;
         $this->staff->save();
     }
-
+        
     public function render()
     {
         return view('livewire.staff', [
