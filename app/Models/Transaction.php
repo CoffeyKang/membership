@@ -18,6 +18,7 @@ class Transaction extends Model
         'staff_id',
         'amount',
         'notes',
+        'is_paid',
     ];
 
     protected $periods = ['today', 'this_month', 'this_year', 'all'];
@@ -55,6 +56,11 @@ class Transaction extends Model
             }
         });
 
+    }
+
+    public function payCheque()
+    {
+        $this->update(['is_paid' => true]);
     }
 
     public function scopeUnPaid($query)

@@ -13,6 +13,12 @@ class StaffManagement extends Component
     {   
         $this->staff = Staff::all();
     }
+
+    public function payCheque($staffId)
+    {
+        $staff = Staff::findOrFail($staffId);
+        $staff->payCheque();
+    }
         
     public function render()
     {
