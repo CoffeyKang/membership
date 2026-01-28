@@ -32,6 +32,11 @@ class Staff extends Model
         return $this->hasMany(Dayoff::class);
     }
 
+    public function payoutHistories()
+    {
+        return $this->hasMany(PayoutHistory::class);
+    }
+
     public function scopeIsLeft($query)
     {
         return $query->where('is_left', true);
@@ -45,6 +50,11 @@ class Staff extends Model
     public function getUnpaidAmountAttribute()
     {
         return $this->transactions()->sum('amount');
+    }
+
+    public function getTodayAmountAttribute()
+    {
+        return $this->transactions()->whereDate('created_at', today())->sum('amount');
     }
 
     public function getNumberOfWorkingDaysAttribute()
@@ -62,16 +72,51 @@ class Staff extends Model
         return $this->dayoffs()->count();
     }
 
+    public function getDayoffDatesAttribute()
+    {
+        return $this->dayoffs()->pluck('date')->toArray();
+    }
+
     public static function activeStaff()
     {
         return self::where('is_active', true);
     }
 
-    public function payCheque()
+    public function getTotalSalesAmountAttribute()
     {
-        $this->dayoffs()->notArchived()->get()->each->archive();
-        $this->transactions()->unPaid()->get()->each->payCheque();
+        return $this->transactions()->sum('amount');
     }
 
+    public function getCommissionAmountAttribute()
+    {   
+        $net_sales_amount = max(0, $this->total_sales_amount - $this->monthly_minimum_sales_amount);
+        return $this->commission_rate * $net_sales_amount;
+    }
+
+    public function getTotalSalaryAttribute()
+    {
+       return $this->base_salary + $this->commission_amount;
+    }
+
+    public function payout()
+    {   
+        if ($this->payoutHistories()->whereDate('payout_date', today())->exists()) {
+            return false;
+        }
+
+        $this->payoutHistories()->create([
+            'total_amount' => $this->total_salary,
+            'base_salary' => $this->base_salary,
+            'sales_amount' => $this->total_sales_amount,
+            'commission_amount' => $this->commission_amount,
+            'number_of_transactions' => $this->number_of_working_days,
+            'payout_date' => today(),
+        ]);
+
+        $this->dayoffs()->notArchived()->get()->each->archive();
+        $this->transactions()->unPaid()->get()->each->payCheque();
+
+        return true;
+    }
 
 }

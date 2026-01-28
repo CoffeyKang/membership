@@ -64,6 +64,12 @@ Route::get('staff-management', function () {
     ->middleware(['auth'])
     ->name('staff-management.index');
 
+Route::get('staff/{staff}/payout', function(\App\Models\Staff $staff){
+    return view('staff.management.payout', compact('staff'));
+})
+    ->middleware(['auth'])
+    ->name('staff.management.payout');
+
 Route::get('staff/{staff}/transactions', function(\App\Models\Staff $staff){
         return view('staff.management.transactions', compact('staff'));
     })

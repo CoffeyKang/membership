@@ -57,12 +57,12 @@ class TestCaseSeeder extends Seeder
         $staffs = [];
         for ($i = 0; $i < 4; $i++) {
             $staffs[] = [
-                'full_name' => $faker->firstName . ' ' . $faker->lastName,
+                'full_name' => $faker->firstName . $faker->lastName,
                 'nick_name' => $faker->firstName,
                 'phone_number' => $faker->numerify('1##########'), // Chinese-style phone number
-                'base_salary' => $faker->numberBetween(3000, 8000),
+                'base_salary' => $faker->numberBetween(3000, 3500),
                 'monthly_minimum_sales_amount' => $faker->numberBetween(5000, 15000),
-                'commission_rate' => $faker->randomElement([0.05, 0.08, 0.10, 0.12, 0.15]),
+                'commission_rate' => $faker->randomElement([0.5, 0.4]),
                 'is_left' => $faker->boolean(10), // 10% chance of leaving
                 'created_at' => $faker->dateTimeBetween('-2 years', 'now'),
                 'updated_at' => $faker->dateTimeBetween('-2 years', 'now'),
@@ -72,7 +72,7 @@ class TestCaseSeeder extends Seeder
         foreach (array_chunk($staffs, 100) as $chunk) {
             DB::table('staff')->insert($chunk);
         }
-
+        
         $this->command->info('Created 4 staff members.');
 
         // Get the IDs after inserting
@@ -121,6 +121,31 @@ class TestCaseSeeder extends Seeder
 
         $this->command->info('Created 100 dayoffs.');
 
+        // Create test payout histories (80 payout histories)
+        $this->command->info('Creating 80 payout histories...');
+
+        $payoutHistories = [];
+        for ($i = 0; $i < 80; $i++) {
+            $payoutHistories[] = [
+                'staff_id' => $faker->randomElement($staffIds),
+                'total_amount' => $faker->numberBetween(1000, 8000),
+                'base_salary' => $faker->numberBetween(3000, 3500),
+                'sales_amount' => $faker->numberBetween(5000, 15000),
+                'commission_amount' => $faker->numberBetween(1000, 4000),
+                'number_of_transactions' => $faker->numberBetween(10, 30),
+                'payout_date' => $faker->dateTimeBetween('-6 months', 'now')->format('Y-m-d'),
+                'created_at' => $faker->dateTimeBetween('-6 months', 'now'),
+                'updated_at' => $faker->dateTimeBetween('-6 months', 'now'),
+            ];
+        }
+
+        foreach (array_chunk($payoutHistories, 100) as $chunk) {
+            DB::table('payout_histories')->insert($chunk);
+        }
+
+        $this->command->info('Created 80 payout histories.');
+
+        
         $this->command->info('Test data seeding completed successfully!');
         $this->command->info('Summary:');
         $this->command->info('- 50 Members created');
@@ -128,4 +153,6 @@ class TestCaseSeeder extends Seeder
         $this->command->info('- 300 Transactions created');
         $this->command->info('- 100 Dayoffs created');
     }
+
+        
 }

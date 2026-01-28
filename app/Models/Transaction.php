@@ -68,6 +68,11 @@ class Transaction extends Model
         return $query->where('is_paid', false);
     }
 
+    public static function todayTransactions()
+    {
+        return self::setPeriod('today')->sum('amount');
+    }
+
     protected static function booted()
     {
         static::addGlobalScope('order', function ($query) {

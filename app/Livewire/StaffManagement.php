@@ -4,14 +4,17 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Staff;
+use App\Models\Transaction;
 
 class StaffManagement extends Component
 {   
     public $staff;
+    public $todayTransactions;
 
     public function mount()
     {   
         $this->staff = Staff::all();
+        $this->todayTransactions = Transaction::todayTransactions();
     }
 
     public function payCheque($staffId)
