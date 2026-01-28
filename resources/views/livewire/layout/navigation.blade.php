@@ -31,22 +31,20 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('dashboard') }}
+                        {{ __('messages.dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('members.index')" :active="request()->routeIs('members.index')" wire:navigate>
-                        {{ __('members') }}
+                        {{ __('messages.members') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('staff.index')" :active="request()->routeIs('staff.index')" wire:navigate>
-                        {{ __('staff') }}
+                        {{ __('messages.staff') }}
                     </x-nav-link>
                     <x-nav-link :href="route('reports.transactions')" :active="request()->routeIs('reports.transactions')" wire:navigate>
-                        {{ __('transactions') }}
+                        {{ __('messages.transactions') }}
                     </x-nav-link>
                 </div>
             </div>
-
-
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

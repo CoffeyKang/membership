@@ -1,5 +1,4 @@
 <div>
-    <h1 class="font-bold font-xl mb-4">{{ __('Quick Save')}}</h1>
     @if (session()->has('error'))
         <div class="bg-red-100 text-red-700 border border-red-400 mb-4 p-3 rounded">
             {{ session('error') }}
@@ -13,8 +12,8 @@
     <div class="flex">
         <div class="w-1/2 p-4 m-2 border rounded shadow bg-white">
             <form wire:submit.prevent="saveQuick">
-                <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2">Hairstylist</label>
+                <div class="mb-4">  
+                    <label class="block text-gray-700 font-bold mb-2">{{ __('messages.hairstylist') }}</label>
                     <div class="flex flex-row max-h-64 overflow-y-auto gap-5">
                     @foreach ($staff as $item)
                         <div
@@ -28,35 +27,35 @@
                     @error('selectedStaffId') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2">Member</label>
+                    <label class="block text-gray-700 font-bold mb-2">{{ __('messages.member') }}</label>
                     <span>{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : 'Walkin Client' }}</span>
                     @error('selectedMemberID') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2">Amount</label>
+                    <label class="block text-gray-700 font-bold mb-2">{{ __('messages.amount') }}</label>
                     <input type="number" wire:model="amount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="Enter amount" />
                     @error('amount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2">Confirm Amount</label>
+                    <label class="block text-gray-700 font-bold mb-2">{{ __('messages.confirm_amount') }}</label>
                     <input type="number" wire:model="confirmAmount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="Confirm amount" />
                     @error('confirmAmount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2">Notes</label>
+                    <label class="block text-gray-700 font-bold mb-2">{{ __('messages.notes') }}</label>
                     <textarea wire:model="notes" class="w-full p-2 border rounded" rows="3" placeholder="Add notes..."></textarea>
                     @error('notes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end">
                     <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded shadow">
-                        Save
+                        {{ __('messages.save') }}
                     </button>
                 </div>
             </form>
         </div>
         <div class="w-1/2 p-4 m-2 border rounded shadow bg-white">
             <div class="mb-3">
-                <label class="block text-gray-700 font-bold mb-2">Search Member</label>
+                <label class="block text-gray-700 font-bold mb-2">{{ __('messages.search_member') }}</label>
                 <div class="flex gap-2 mb-2">
                     <input
                         type="text"
@@ -65,7 +64,7 @@
                         wire:model.live.debounce.300ms="memberSearch"
                     />
                     <button type="button" wire:click="$set('selectedMemberID', {{ $walkinClientID }}))" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow">
-                        Walk in Client
+                        {{ __('messages.walkin_client') }}
                     </button>
                 </div>
                 @if(!empty($memberSearch))
@@ -82,7 +81,7 @@
                                 </strong></p>
                             </div>
                         @empty
-                            <div class="p-2 text-gray-500">No members found.</div>
+                            <div class="p-2 text-gray-500">{{ __('messages.no_members_found') }}</div>
                         @endforelse
                     </div>
                 @endif
