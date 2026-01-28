@@ -75,3 +75,9 @@ Route::get('staff/{staff}/transactions', function(\App\Models\Staff $staff){
     })
     ->middleware(['auth'])
     ->name('staff.management.transactions');
+
+Route::get('reports/transactions', function () {
+    return view('reports.transactions');
+})
+    ->middleware(['auth'])
+    ->name('reports.transactions');
