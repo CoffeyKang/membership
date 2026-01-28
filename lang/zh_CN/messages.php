@@ -1914,6 +1914,8 @@ return [
     'today' => '今日',
     'staff_name' => '员工姓名',
     'note' => '备注',
+    'edit_member' => '编辑会员',
+    'enter_full_name' => '请输入会员姓名',
 ];
 ?>
 

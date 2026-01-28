@@ -1263,6 +1263,9 @@ return [
     'old_money' => 'Old Money',
     'enter_amount_to_deposit' => 'Enter Amount to Deposit',
     'confirm_the_deposit_amount' => 'Confirm the Deposit Amount',
+    'deposit' => 'Deposit',
+
+    'deposit_success' => 'Deposit Success',
 ];
 
 
