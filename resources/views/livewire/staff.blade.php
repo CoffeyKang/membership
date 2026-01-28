@@ -8,15 +8,22 @@
                 {{ $staff->nick_name }}
             </div>
         </div>
-        <div class="mb-2 text-gray-600">Phone: {{ $staff->phone_number }}</div>
+        <div class="mb-2 text-gray-600">
+            <span class="flex items-center space-x-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                <span>{{ $staff->phone_number }}</span>
+            </span>
+        </div>
         <div class="mb-4">
             <span class="px-2 py-1 rounded-full text-xs {{ $staff->is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                {{ $staff->is_active ? 'Active' : 'Inactive' }}
+                {{ $staff->is_active ? __('messages.active') : __('messages.inactive') }}
             </span>
         </div>
         <button wire:click="toggleActive"
             class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition">
-            {{ $staff->is_active ? 'Deactivate' : 'Activate' }}
+            {{ $staff->is_active ? __('messages.leave') : __('messages.activate') }}
         </button>
     </div>
 </div>

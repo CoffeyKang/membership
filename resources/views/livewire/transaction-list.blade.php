@@ -19,11 +19,11 @@
     <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
         <thead class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
             <tr>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Staff</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Member</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Amount</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Note</th>
-                <th class="px-6 py-3 text-center text-sm font-semibold uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.staff_column') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.member_column') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.amount_column') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.note_column') }}</th>
+                <th class="px-6 py-3 text-center text-sm font-semibold uppercase tracking-wider">{{ __('messages.actions_column') }}</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
@@ -38,17 +38,17 @@
                             <button 
                                 class="text-red-600 hover:text-red-900 transition-colors duration-150" 
                                 @click="open = ! open"
-                                title="Delete">
+                                title="{{ __('messages.delete_button') }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
 
                             <div x-show="open" class="modal">
                                 <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                                     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
-                                        <p class="text-sm text-gray-600 mb-4">确定要执行此操作吗？</p>
+                                        <p class="text-sm text-gray-600 mb-4">{{ __('messages.delete_modal_title') }}</p>
                                         <div class="flex justify-end space-x-3">
-                                            <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">取消</button>
-                                            <button @click="open = false; $wire.deleteTransaction({{ $transaction->id }});" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">确定</button>
+                                            <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">{{ __('messages.cancel_delete') }}</button>
+                                            <button @click="open = false; $wire.deleteTransaction({{ $transaction->id }});" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">{{ __('messages.confirm_delete') }}</button>
                                         </div>
                                     </div>
                                 </div>

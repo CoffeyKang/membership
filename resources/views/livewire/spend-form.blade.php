@@ -18,9 +18,9 @@
 
     <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-            <h3 class="text-lg font-bold mb-4">{{ $member->full_name }} {{ __('Spend Amount') }} </h3>
+            <h3 class="text-lg font-bold mb-4">{{ $member->full_name }} {{ __('messages.spend_amount') }} </h3>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-                {{ __('Handled By Staff') }}
+                {{ __('messages.handled_by_staff') }}
             </label>
             <div class="mb-4">
                 @foreach ($staff as $staffMember)
@@ -36,32 +36,32 @@
             </div>
             
             <label for="confirmSpendAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Spend Amount') }}
+                {{ __('messages.spend_amount') }}
             </label>
-            <input type="number" wire:model.defer="spendAmount" class="w-full border rounded px-3 py-2 mb-4" placeholder="{{ __('Enter amount to spend') }}">
+            <input type="number" wire:model.defer="spendAmount" class="w-full border rounded px-3 py-2 mb-4" placeholder="{{ __('messages.enter_amount_to_spend') }}">
             
             <label for="confirmSpendAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Confirm Deposit Amount') }}
+                {{ __('messages.confirm_deposit_amount') }}
             </label>
             <input type="number" 
                 wire:model.defer="confirmSpendAmount"
                 class="w-full border rounded px-3 py-2 mb-4" 
-                placeholder="{{ __('Confirm the spend amount') }}
+                placeholder="{{ __('messages.confirm_the_spend_amount') }}
             ">
 
             <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Notes') }} ({{ __('optional') }})
+                {{ __('messages.notes') }} ({{ __('messages.optional') }})
             </label>
             <textarea 
                 wire:model.defer="notes"
                 id="notes"
                 class="w-full border rounded px-3 py-2 mb-4"
-                placeholder="{{ __('Add any notes (optional)') }}"
+                placeholder="{{ __('messages.add_any_notes_optional') }}"
                 rows="3"
             ></textarea>
             <div class="flex justify-end space-x-2">
-                <button wire:click="confirmSpend" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">{{ __('Confirm') }}</button>
-                <button wire:click="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">{{ __('Cancel') }}</button>
+                <button wire:click="confirmSpend" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">{{ __('messages.confirm') }}</button>
+                <button wire:click="closeModal" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">{{ __('messages.cancel') }}</button>
             </div>
         </div>
     </div>

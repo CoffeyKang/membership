@@ -18,10 +18,10 @@ class StaffPayout extends Component
     public function payout()
     {
         if( !$this->staff->payout()) {
-            session()->flash('fail', 'Payout failed.');
+            session()->flash('fail', __('messages.payout_failed'));
             return;
         }
-        session()->flash('success', 'Payout processed successfully.');
+        session()->flash('success', __('messages.payout_processed_successfully'));
     }
 
     public function render()

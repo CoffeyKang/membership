@@ -105,7 +105,7 @@
                             {{ empty($staff->id) ? 'hidden' : '' }}
                         "
                     >
-                        {{ $is_left ? 'Left' : 'On Working' }}
+                        {{ $is_left ? __('messages.left') : __('messages.on_working') }}
                     </button>
                 </div>
 

@@ -3,22 +3,22 @@
 		<input
 			type="text"
 			wire:model.live.debounce.300ms="searchTerm"
-			placeholder="Search members..."
+			placeholder="{{ __('messages.search_members') }}"
 			class="px-4 py-2 border rounded w-80"
 		/>
 		<a 
 			href="{{ route('members.create') }}" 
 			class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded hover:bg-indigo-700 transition">
-			{{ __('Create New Member') }}
+			{{ __('messages.create_new_member') }}
 		</a>
 	</div>
 	<table class="min-w-full divide-y divide-gray-200">
 		<thead class="bg-gray-50">
 			<tr>
-				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Member ID</th>
-				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
-				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance</th>
+				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.member_id') }}</th>
+				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.full_name') }}</th>
+				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.phone_number') }}</th>
+				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.balance') }}</th>
 			</tr>
 		</thead>
 		<tbody class="bg-white divide-y divide-gray-200">

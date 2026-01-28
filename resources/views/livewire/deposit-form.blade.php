@@ -17,50 +17,50 @@
         @endif
 
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
-            <h3 class="text-lg font-bold mb-4">{{ $member->full_name }} {{ __('Deposit Amount') }} </h3>
+            <h3 class="text-lg font-bold mb-4">{{ $member->full_name }} {{ __('messages.deposit_amount') }} </h3>
             <label for="type" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Deposit Type') }}
+                {{ __('messages.deposit_type') }}
             </label>
             <select 
                 id="preset"
                 wire:model="type"
                 class="w-full border rounded px-3 py-2 mb-4"
             >
-                <option value="">{{ __('Select Preset Value') }}</option>
-                <option value=0>{{ __('Cash') }}</option>
-                <option value=1>{{ __('Ali Pay') }}</option>
-                <option value=2>{{ __('Wechat Pay') }}</option>
-                <option value=3>{{ __('Old money') }}</option>
+                <option value="">{{ __('messages.select_preset_value') }}</option>
+                <option value=0>{{ __('messages.cash') }}</option>
+                <option value=1>{{ __('messages.ali_pay') }}</option>
+                <option value=2>{{ __('messages.wechat_pay') }}</option>
+                <option value=3>{{ __('messages.old_money') }}</option>
             </select>
             
             <label for="depositAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Deposit Amount') }}
+                {{ __('messages.deposit_amount') }}
             </label>
             <input type="number" 
                 wire:model.defer="depositAmount" 
                 class="w-full border rounded px-3 py-2 mb-4" 
-                placeholder="{{ __('Enter amount to deposit') }}
+                placeholder="{{ __('messages.enter_amount_to_deposit') }}
             ">
             <label for="confirmDepositAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('Confirm Deposit Amount') }}
+                {{ __('messages.confirm_deposit_amount') }}
             </label>
             <input type="number" 
                 wire:model.defer="confirmDepositAmount"
                 class="w-full border rounded px-3 py-2 mb-4" 
-                placeholder="{{ __('Confirm the deposit amount') }}
+                placeholder="{{ __('messages.confirm_the_deposit_amount') }}
             ">
             <div class="flex justify-end space-x-2">
                 <button 
                     wire:click="confirmDeposit" 
                     class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                 >
-                    {{ __('Confirm') }}
+                    {{ __('messages.confirm') }}
                 </button>
                 <button
                     wire:click="closeModal"
                     class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                 >
-                    {{ __('Cancel') }}
+                    {{ __('messages.cancel') }}
                 </button>
             </div>
         </div>

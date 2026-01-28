@@ -3,12 +3,12 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unpaid Amount</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Today Amount</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"># of Working Days</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"># of Dayoffs</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.full_name') }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.unpaid_amount') }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.today_amount') }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.number_of_working_days') }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.number_of_dayoffs') }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.actions_column') }}</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -20,28 +20,28 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $member->numberOfWorkingDays }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $member->numberOfDayoffs }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('staff.show', $member->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <a href="{{ route('staff.show', $member->id) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('messages.edit') }}</a>
                             <a 
                                 href="{{ route('staff.management.transactions', $member->id) }}" 
                                 class="text-indigo-600 hover:text-indigo-900 ml-4"
                                 wire:navigate
-                            >Transactions</a>
+                            >{{ __('messages.transactions') }}</a>
                             <a 
                                 href="{{ route('staff.management.payout', $member->id) }}" 
                                 class="text-red-600 hover:text-red-900 ml-4"
                                 wire:navigate
-                            >Pay Cheque!</a>
+                            >{{ __('messages.pay_cheque_action') }}</a>
                         </td>
                     </tr>
                 @endforeach
                 <tr class="bg-gray-50">
                     <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
-                        Total Today Transactions: <span class="text-2xl text-green-700 font-bold"> $ {{ number_format($todayTransactions, 2) }} </span>
+                        {{ __('messages.today_transactions') }}: <span class="text-2xl text-green-700 font-bold"> $ {{ number_format($todayTransactions, 2) }} </span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
-                        <a href="{{ route('staff.create') }}" class="text-indigo-600 hover:text-indigo-900">Add New Staff</a>
+                        <a href="{{ route('staff.create') }}" class="text-indigo-600 hover:text-indigo-900">{{ __('messages.add_new_staff') }}</a>
                     </td>
                 </tr>
             </tbody>

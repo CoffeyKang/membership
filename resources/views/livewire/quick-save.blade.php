@@ -28,22 +28,22 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">{{ __('messages.member') }}</label>
-                    <span>{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : 'Walkin Client' }}</span>
+                    <span>{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : __('messages.walkin_client') }}</span>
                     @error('selectedMemberID') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">{{ __('messages.amount') }}</label>
-                    <input type="number" wire:model="amount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="Enter amount" />
+                    <input type="number" wire:model="amount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="{{ __('messages.enter_amount') }}" />
                     @error('amount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">{{ __('messages.confirm_amount') }}</label>
-                    <input type="number" wire:model="confirmAmount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="Confirm amount" />
+                    <input type="number" wire:model="confirmAmount" class="w-full p-2 border rounded" min="0" step="0.01" placeholder="{{ __('messages.confirm_amount') }}" />
                     @error('confirmAmount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">{{ __('messages.notes') }}</label>
-                    <textarea wire:model="notes" class="w-full p-2 border rounded" rows="3" placeholder="Add notes..."></textarea>
+                    <textarea wire:model="notes" class="w-full p-2 border rounded" rows="3" placeholder="{{ __('messages.enter_notes') }}"></textarea>
                     @error('notes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end">
@@ -60,7 +60,7 @@
                     <input
                         type="text"
                         class="flex-1 p-2 border rounded"
-                        placeholder="Type member name..."
+                        placeholder="{{ __('messages.type_member_name') }}"
                         wire:model.live.debounce.300ms="memberSearch"
                     />
                     <button type="button" wire:click="$set('selectedMemberID', {{ $walkinClientID }}))" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow">
@@ -74,10 +74,10 @@
                                 class="mb-2 p-3 border-2 rounded-lg min-w-20 shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : 'bg-yellow-50' }}  cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
                                 wire:click="selectClient({{ $member->id }})"
                             >
-                                <h3>{{ $member->full_name }} <small>(ID: {{ $member->member_id }})</small> </h3>
+                                <h3>{{ $member->full_name }} <small>({{ __('messages.member_id') }}: {{ $member->member_id }})</small> </h3>
                                 <p>{{ $member->phone_number }}</p>
                                 <p><strong>
-                                    Balance: <span class="font-bold font-lg">{{ $member->balance }}</span>
+                                    {{ __('messages.balance') }}: <span class="font-bold font-lg">{{ $member->balance }}</span>
                                 </strong></p>
                             </div>
                         @empty
@@ -88,16 +88,16 @@
 
                 @if (!empty($selectedMemberID) && !empty($memberTransactions))
                     <div class="w-full mt-8 border-t pt-6">
-                        <p class="text-sm text-gray-600">{{ __('Last 3 Transactions') }}</p>
+                        <p class="text-sm text-gray-600">{{ __('messages.last_3_transactions') }}</p>
                         @foreach($memberTransactions as $transaction)
                             <div class="border-b py-2">
                                 <div class="flex justify-between">
                                     <div>
-                                        <span class="font-semibold">{{ __('Staff ID:') }}</span> {{ $transaction->staff->nick_name }} @ <b>{{ $transaction->created_at->format('Y-m-d H:i') }}</b>
+                                        <span class="font-semibold">{{ __('messages.staff_id') }}</span> {{ $transaction->staff->nick_name }} @ <b>{{ $transaction->created_at->format('Y-m-d H:i') }}</b>
                                     </div>
                                 </div>
                                 <div class="text-sm text-gray-600">
-                                    <span class="font-semibold">{{ __('Notes:') }}</span> {{ $transaction->notes ?? __('N/A') }}
+                                    <span class="font-semibold">{{ __('messages.notes') }}:</span> {{ $transaction->notes ?? __('messages.n_a') }}
                                 </div>
                             </div>
                         @endforeach	

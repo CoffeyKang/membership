@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Staff Management List') }}
+            {{ __('messages.staff_management_list') }}
         </h2>
-        <a href="{{ route('staff-management.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Back to Staff Management</a>
+        <a href="{{ route('staff-management.index') }}" class="text-sm text-gray-600 hover:text-gray-900">{{ __('messages.back_to_staff_management') }}</a>
     </x-slot>
 
     <div class="py-12">

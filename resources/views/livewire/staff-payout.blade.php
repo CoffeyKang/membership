@@ -21,23 +21,23 @@
                 </svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold">Staff Profile</h2>
-                <p class="text-indigo-100">Current Information Overview</p>
+                <h2 class="text-2xl font-bold">{{ __('messages.staff_profile') }}</h2>
+                <p class="text-indigo-100">{{ __('messages.current_information_overview') }}</p>
             </div>
         </div>
         <div x-data="{ open: false }">
             <button 
                 @click="open=true"           
                 class="bg-white text-purple-600 font-bold py-2 px-4 rounded-full hover:bg-purple-100 transition duration-300">
-                Pay Cheque
+                {{ __('messages.pay_cheque') }}
             </button>
             <div x-show="open" class="modal">
                 <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
-                        <p class="text-sm text-gray-600 mb-4">确定要执行此操作吗？</p>
+                        <p class="text-sm text-gray-600 mb-4">{{ __('messages.confirm_action') }}</p>
                         <div class="flex justify-end space-x-3">
-                            <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">取消</button>
-                            <button @click="open = false; $wire.payout();" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">确定</button>
+                            <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">{{ __('messages.cancel_action') }}</button>
+                            <button @click="open = false; $wire.payout();" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">{{ __('messages.confirm_action_button') }}</button>
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Full Name</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.full_name') }}</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $staff->full_name }} </p>
-                        <small class="text-sm text-gray-500">{{ $staff->nick_name }} Total Sales Amount: <span class="text-xl font-bold text-green-700">${{ number_format($staff->total_sales_amount, 2) }}</span></small>
+                        <small class="text-sm text-gray-500">{{ $staff->nick_name }} {{ __('messages.total_sales_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->total_sales_amount, 2) }}</span></small>
                     </div>
                 </div>
             </div>
@@ -76,9 +76,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Total Transaction Amount</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.total_transaction_amount') }}</p>
                         <p class="text-2xl font-bold text-green-700">${{ number_format($staff->total_salary, 2) }}</p>
-                        <p class="text-sm text-gray-500">Base Salary: ${{ number_format($staff->base_salary, 2) }} + Commission: ${{ number_format($staff->commission_amount, 2) }}</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.base_salary') }}: ${{ number_format($staff->base_salary, 2) }} + {{ __('messages.commission_amount') }}: ${{ number_format($staff->commission_amount, 2) }}</p>
                     </div>
                 </div>
                 <div class="text-green-600">
@@ -99,9 +99,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Total Dayoff Days</p>
-                        <p class="text-2xl font-bold text-blue-700">{{ $staff->number_of_dayoffs }} days</p>
-                        <p class="text-sm text-gray-500">Dayoff Dates: 
+                        <p class="text-sm text-gray-500">{{ __('messages.total_dayoff_days') }}</p>
+                        <p class="text-2xl font-bold text-blue-700">{{ $staff->number_of_dayoffs }} {{ __('messages.dayoff_dates') }}</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.dayoff_dates') }}: 
                             {{ implode(', ', $staff->dayoff_dates) }}
                         </p>
                     </div>
@@ -126,7 +126,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Payout History</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.payout_history') }}</p>
                     </div>
                 </div>
                 <div class="text-purple-600">
@@ -139,11 +139,11 @@
                 <table class="min-w-full divide-y divide-gray-200 max-h-48 overflow-y-auto pr-2">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Base</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Commission</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_base') }}</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_commission') }}</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_total') }}</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_date') }}</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_status') }}</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -157,7 +157,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center text-gray-500 text-sm py-4">No payout records yet.</td>
+                                <td colspan="5" class="text-center text-gray-500 text-sm py-4">{{ __('messages.no_payout_records_yet') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

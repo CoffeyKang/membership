@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $full_name ? __('Edit Member') : __('Add New Member') }}
+            {{ $full_name ? __('messages.edit_member') : __('messages.add_new_member') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -11,13 +11,13 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Full Name -->
                         <div class="md:col-span-2">
-                            <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <label for="full_name" class="block text-sm font-medium text-gray-700">{{ __('messages.full_name') }}</label>
                             <input
                                 id="full_name"
                                 type="text"
                                 wire:model.defer="full_name"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Enter full name"
+                                placeholder="{{ __('messages.enter_full_name') }}"
                                 required
                             />
                             @error('full_name')
@@ -27,13 +27,13 @@
                         
                         <!-- Phone Number -->
                         <div>
-                            <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <label for="phone_number" class="block text-sm font-medium text-gray-700">{{ __('messages.phone_number') }}</label>
                             <input
                                 id="phone_number"
                                 type="text"
                                 wire:model.defer="phone_number"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Enter phone number"
+                                placeholder="{{ __('messages.enter_phone_number') }}"
                                 required
                             />
                             @error('phone_number')
@@ -43,14 +43,14 @@
 
                         <!-- Balance -->
                         <div>
-                            <label for="balance" class="block text-sm font-medium text-gray-700">Balance</label>
+                            <label for="balance" class="block text-sm font-medium text-gray-700">{{ __('messages.balance') }}</label>
                             <input
                                 id="balance"
                                 type="number"
                                 step="1"
                                 wire:model.defer="balance"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="0.00"
+                                placeholder="{{ __('messages.enter_balance') }}"
                                 min="0"
                                 required
                             />
@@ -68,7 +68,7 @@
                                     wire:model.defer="is_primary"
                                     class="rounded scale-150 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 />
-                                <span class="ml-2 text-sm text-gray-700">Primary Member</span>
+                                <span class="ml-2 text-sm text-gray-700">{{ __('messages.primary_member') }}</span>
                             </label>
                             @error('is_primary')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -81,14 +81,14 @@
                         <a
                             href="{{ route('members.index') }}"
                             class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Cancel
+                            >
+                              {{ __('messages.cancel') }}
                         </a>
                         <button
                             type="submit"
                             class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            {{ $full_name ? 'Update Member' : 'Create Member' }}
+                            {{ $full_name ? __('messages.update_member') : __('messages.create_member') }}
                         </button>
                     </div>
                 </form>
