@@ -25,12 +25,23 @@
                 <p class="text-indigo-100">Current Information Overview</p>
             </div>
         </div>
-        <div>
+        <div x-data="{ open: false }">
             <button 
-                wire:click="payout"
+                @click="open=true"           
                 class="bg-white text-purple-600 font-bold py-2 px-4 rounded-full hover:bg-purple-100 transition duration-300">
                 Pay Cheque
             </button>
+            <div x-show="open" class="modal">
+                <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
+                        <p class="text-sm text-gray-600 mb-4">确定要执行此操作吗？</p>
+                        <div class="flex justify-end space-x-3">
+                            <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">取消</button>
+                            <button @click="open = false; $wire.payout();" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
