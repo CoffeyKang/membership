@@ -90,6 +90,13 @@ class QuickSave extends Component
         $this->memberTransactions = $client->transactions()->take(5)->get();
     }
 
+    public function selectWalkinClient()
+    {
+        $this->selectedMemberID = $this->walkinClientID;
+        $this->memberSearch = '';
+        $this->memberTransactions = null;
+    }
+
 
     public function render()
     {

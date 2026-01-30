@@ -63,7 +63,10 @@
                         placeholder="{{ __('messages.type_member_name') }}"
                         wire:model.live.debounce.300ms="memberSearch"
                     />
-                    <button type="button" wire:click="$set('selectedMemberID', {{ $walkinClientID }}))" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow">
+                    <button 
+                        type="button" 
+                        wire:click="selectWalkinClient" 
+                         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow">
                         {{ __('messages.walkin_client') }}
                     </button>
                 </div>

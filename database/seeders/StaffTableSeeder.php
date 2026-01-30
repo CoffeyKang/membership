@@ -15,8 +15,8 @@ class StaffTableSeeder extends Seeder
         $this->command->info('Creating Boss Info ...');
         
         \App\Models\Staff::create([
-            'nick_name' => '锅霞',
-            'full_name' => '大侠',
+            'nick_name' => '大侠',
+            'full_name' => '郭霞',
             'phone_number' => '13478211060',
             'base_salary' => 3500,
             'monthly_minimum_sales_amount' => 12000,

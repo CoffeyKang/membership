@@ -53,7 +53,7 @@ class MemberForm extends Component
         // Update or create member
         $this->member->fill($validated)->save();
         // Dispatch event and redirect
-        return redirect()->route('members.show', $this->member)->with('status', 'Member info has been updated!');
+        return redirect()->route('members.show', $this->member)->with('status', __("messages.member_info_updated"));
     }
 
     public function render()

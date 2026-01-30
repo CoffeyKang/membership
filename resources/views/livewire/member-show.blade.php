@@ -35,7 +35,7 @@
 						</div>
 						<div class="flex justify-between items-center">
 							<span class="text-gray-600 text-base font-semibold">{{ __('messages.member_level') }}</span>
-							<span class="text-gray-900 text-lg font-bold">{{ $member->is_primary ? __('messages.primary') : __('messages.normal') }}</span>
+							<span class="text-gray-900 text-lg font-bold">{{ $member->is_primary ? __('messages.primary_member') : __('messages.normal_member') }}</span>
 						</div>
 						<div class="flex justify-between items-center">
 							<span class="text-gray-600 text-base font-semibold">{{ __('messages.phone_number') }}</span>

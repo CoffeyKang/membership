@@ -31,8 +31,8 @@
                         
                     @empty
                         <tr>
-                            <td colspan="2" class="px-6 py-4 text-center text-gray-500">
-                                {{ __('messages.no_deposit_history_found') }}
+                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                未找到充值记录
                             </td>
                         </tr>
                     @endforelse

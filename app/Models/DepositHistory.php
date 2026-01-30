@@ -17,7 +17,7 @@ class DepositHistory extends Model
         0 => '现金',
         1 => '支付宝',
         2 => '微信',
-        3 => '老账本余额',
+        3 => '开卡充值',
     ];
 
     public function member()

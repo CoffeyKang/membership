@@ -24,6 +24,16 @@ class Member extends Model
         'is_primary' => 'boolean',
     ];
 
+    protected static function booted()
+    {
+        static::created(function ($member) {
+            $member->depositHistories()->create([
+                'amount' => $member->balance,
+                'type' => 3,
+            ]);
+        });
+    }
+    
     public function depositHistories()
     {
         return $this->hasMany(DepositHistory::class);
