@@ -1,4 +1,5 @@
-<div>
+<div>{{ __('messages.member_info_updated') }}
+	{{ __('messages.mailed') }}
 	@if (session('status'))
 		<div class="w-full p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
 			<svg class="inline w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -20,7 +21,6 @@
 	
 	<div class="flex w-full">
 		<div class="w-1/2">
-			
 			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 {{ $member->is_primary ? 'border-4 border-yellow-400' : 'border-2 border-blue-200' }}">
 				<div class="p-6">
 					<h2 class="text-xl font-bold text-blue-700 mb-6">{{ __('messages.personal_information') }}</h2>

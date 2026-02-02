@@ -14,10 +14,10 @@ class DepositHistory extends Model
     ];
 
     protected $depositTypes = [
-        0 => '现金',
-        1 => '支付宝',
-        2 => '微信',
-        3 => '开卡充值',
+        0 => 'messages.cash',
+        1 => 'messages.alipay',
+        2 => 'messages.wechat_pay',
+        3 => 'messages.card_recharge',
     ];
 
     public function member()
@@ -27,6 +27,6 @@ class DepositHistory extends Model
 
     public function getTypeTextAttribute()
     {
-        return $this->depositTypes[$this->type] ?? '未知';
+        return __($this->depositTypes[$this->type] ?? 'messages.unknown');
     }
 }

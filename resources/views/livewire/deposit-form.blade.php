@@ -9,10 +9,9 @@
                 </ul>
             </div>
         @endif
-
         @if (session()->has('success'))
             <div class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4 z-60">
-                {{ session('success') }}
+                {{ __('messages.deposit_successfully') }}
             </div>
         @endif
 

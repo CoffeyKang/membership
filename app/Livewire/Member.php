@@ -26,19 +26,19 @@ class Member extends Component
 
     public function balanceUpdated()
     {   
-        session()->flash('status', 'Deposit successfully.');
+        session()->flash('status', __('messages.deposit_successfully'));
         $this->showDepositModal = false;
     }
 
     public function spendCompleted()
     {
-        session()->flash('status', 'Spend successfully. Welcome back!');
+        session()->flash('status', __('messages.spend_successfully'));
         $this->showSpendModal = false;
     }
 
     public function memberInfoChanged()
     {
-        session()->flash('status', 'Member info has been updated!');
+        session()->flash('status', __('messages.member_info_updated'));
     }
 
     public function closeModals()
@@ -49,7 +49,7 @@ class Member extends Component
 
     public function memberUpdated()
     {
-        session()->flash('status', 'Member updated successfully.');
+        session()->flash('status', __('messages.member_updated_successfully')); 
     }
 
     public function render()

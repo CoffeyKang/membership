@@ -1279,7 +1279,6 @@ return [
     'members' => '会员',
     'hairstylist' => '发型师',
     'member' => '会员',
-    'member_info_updated' => '会员信息已更新',
     'amount' => '金额',
     'confirm_amount' => '确认金额',
     'deposit_history_not_found' => '未找到充值记录',
@@ -1919,8 +1918,21 @@ return [
     'note' => '备注',
     'edit_member' => '编辑会员',
     'enter_full_name' => '请输入会员姓名',
+    'member_info_updated' => '会员信息已更新！',
+    'member_updated_successfully' => '会员已成功更新！',
+    'deposit_successfully' => '存款成功！',
+    'no_deposit_records_found' => '未找到充值记录',
+    'enter_full_name' => '输入姓名',
+    'enter_phone_number' => '输入手机号',
+    'enter_balance' => '输入余额',
+    'cash' => '现金',
+    'alipay' => '支付宝',
+    'wechat_pay' => '微信',
+    'card_recharge' => '开卡充值',
+    'unknown' => '未知',
+    'spend_successfully' => '消费成功！',
+    'welcome_back' => '欢迎回来！',
 ];
-?>
 
 
 
