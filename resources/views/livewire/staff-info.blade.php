@@ -18,16 +18,16 @@
     <div class="bg-white overflow-hidden shadow-lg sm:rounded-2xl {{ $is_left ? 'border-2 border-red-500' : '' }}">
         <div class="p-8 space-y-6">
             <h3 class="text-2xl font-semibold text-gray-800 border-b pb-4 flex justify-between items-center">
-                <span>Staff Information {{ $staff->full_name }}</span>
+                <span>{{ $staff->full_name }}</span>
                 <a href="{{ route('staff-management.index') }}" class="text-sm text-gray-500 hover:text-gray-700 transition">
-                    back to staff list
+                    {{ __('messages.back_to_staff_list') }}
                 </a>
             </h3>
-            <small class="text-gray-500">Join at {{ $created_at }}</small>
+            <small class="text-gray-500">{{ __('messages.join_at') }} {{ $created_at }}</small>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Full Name</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.full_name') }}</label>   
                     <input 
                         wire:model="full_name" 
                         d="full_name" 
@@ -37,7 +37,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Nick Name</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.nick_name') }}</label>
                     <input 
                         wire:model="nick_name" 
                         d="nick_name" 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Phone</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.phone_number') }}</label>
                     <input 
                         wire:model="phone_number" 
                         d="phone_number" 
@@ -57,7 +57,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Base Salary</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.base_salary') }}</label>
                     <input 
                         wire:model="base_salary" 
                         d="base_salary" 
@@ -70,7 +70,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Monthly Minimum Sales Amount</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.monthly_minimum_sales_amount') }}</label>
                     <input 
                         wire:model="monthly_minimum_sales_amount" 
                         d="monthly_minimum_sales_amount" 
@@ -83,7 +83,7 @@
                 </div>   
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">Commission Rate</label>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.commission_rate') }}</label>
                     <input 
                         wire:model="commission_rate" 
                         d="commission_rate" 
@@ -104,8 +104,8 @@
                             text-white transition
                             {{ empty($staff->id) ? 'hidden' : '' }}
                         "
-                    >
-                        {{ $is_left ? __('messages.left') : __('messages.on_working') }}
+                        >
+                        {{ $is_left ? __('messages.left') : __('messages.working') }}
                     </button>
                 </div>
 
@@ -113,7 +113,7 @@
                     <button 
                         wire:click="save"
                         class="px-4 py-2 w-[120px] rounded bg-blue-500 hover:bg-blue-600 text-white transition">
-                        Save
+                        {{ __('messages.save') }}
                     </button>
                 </div>
             </div>

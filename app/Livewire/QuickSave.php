@@ -22,6 +22,14 @@ class QuickSave extends Component
     public $notes;
     
 
+    protected $rules = [
+        'selectedMemberID' => 'required|exists:members,id',
+        'selectedStaffId'  => 'required|exists:staff,id',
+        'amount'           => 'required|numeric|min:0',
+        'confirmAmount'    => 'required|same:amount',
+        'notes'            => 'nullable|string|max:255',
+    ];
+
     public function mount()
     {   
         $this->members = Member::all();
@@ -43,26 +51,12 @@ class QuickSave extends Component
 
     public function saveQuick()
     {
-        // Validate required fields
-        $this->validate([
-            'selectedMemberID' => 'required|exists:members,id',
-            'selectedStaffId'  => 'required|exists:staff,id',
-            'amount'           => 'required|numeric|min:0',
-            'confirmAmount'    => 'required|same:amount',
-            'notes'            => 'nullable|string|max:255',
-        ], [
-            'selectedMemberID.required' => 'Please select a member.',
-            'selectedStaffId.required' => 'Please select a staff member.',
-            'amount.required' => 'Please enter the amount.',
-            'confirmAmount.required' => 'Please confirm the amount.',
-            'confirmAmount.same' => 'The confirmed amount does not match.',
-        ]);
+        $this->validate();
         // Find the member by ID
         $member = Member::find($this->selectedMemberID);
-
         // Check if amount exceeds member balance
         if ($this->amount > $member->balance) {
-            session()->flash('error', 'Amount exceeds member balance.');
+            session()->flash('error', __('messages.amount_exceeds_member_balance'));
             return false;
         }
         // update member balance
@@ -80,7 +74,7 @@ class QuickSave extends Component
         // Reset form fields after successful save
         $this->reset(['selectedMemberID', 'selectedStaffId', 'amount', 'confirmAmount', 'notes']);
         
-        session()->flash('success', 'Savings recorded successfully!');
+        session()->flash('success', __('messages.savings_recorded_successfully'));
     }
 
     public function selectClient($memberID)
@@ -88,6 +82,10 @@ class QuickSave extends Component
         $this->selectedMemberID = $memberID;
         $client = Member::find($memberID);
         $this->memberTransactions = $client->transactions()->take(5)->get();
+
+        $this->memberSearch = $client->full_name;
+        $this->memberResults = 
+            Member::whereIn('id', [$client->id, $this->walkinClientID])->get();
     }
 
     public function selectWalkinClient()
@@ -96,7 +94,6 @@ class QuickSave extends Component
         $this->memberSearch = '';
         $this->memberTransactions = null;
     }
-
 
     public function render()
     {

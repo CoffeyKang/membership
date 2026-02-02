@@ -4,11 +4,31 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\Reactive;
+use App\Models\Member;
 
 class DepositHistory extends Component
 {   
     #[Reactive]
     public $member;
+
+    public function deleteDeposit($id)
+    {   
+        $history = $this->member->depositHistories()->find($id);
+        if (!$history) {
+            return $this->dispatch('showError', message: __('messages.deposit_history_not_found'));
+        }
+        
+        // 更新成员的余额 - 先从数据库重新获取实例以避免reactive prop错误
+        $member = Member::find($this->member->id);
+        $member->balance -= $history->amount;
+        $member->save();
+        
+        $history->delete();
+        session()->flash('success', __('messages.deposit_history_deleted'));
+        // 刷新成员实例以更新余额
+        $this->dispatch('depositHistoryDeleted');
+        
+    }
 
     public function render()
     {

@@ -27,17 +27,6 @@ class StaffInfo extends Component
         'commission_rate' => 'required|numeric|min:0|max:1',
     ];
 
-    protected $messages = [
-        'full_name.required' => 'Full name is required.',
-        'nick_name.string' => 'Nick name must be a string.',
-        'phone_number.required' => 'Phone number is required.',
-        'base_salary.required' => 'Base salary is required.',
-        'monthly_minimum_sales_amount.required' => 'Monthly minimum sales amount is required.',
-        'commission_rate.required' => 'Commission rate is required.',
-        'commission_rate.min' => 'Commission rate must be at least 0.',
-        'commission_rate.max' => 'Commission rate must be at most 1.',
-    ];
-
     public function mount(Staff $staff)
     {   
         $this->staff = $staff;
@@ -62,7 +51,7 @@ class StaffInfo extends Component
     {
         $this->staff->fill($this->validate())->save();
         $this->staff->refresh();
-        session()->flash('success', 'Staff info updated successfully!');
+        session()->flash('success', __('messages.staff_info_updated'));
     }
     
     public function render()

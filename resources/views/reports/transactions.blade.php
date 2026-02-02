@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('messages.transactions_list') }}
+            {{ __('messages.transactions_list') }} - {{ date('Y-m-d') }}
         </h2>
     </x-slot>
 

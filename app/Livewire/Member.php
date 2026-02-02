@@ -16,7 +16,8 @@ class Member extends Component
     protected $listeners = [
         'depositCompleted' => 'balanceUpdated',
         'spendCompleted' => 'spendCompleted',
-        'modalClosed' => 'closeModals'
+        'modalClosed' => 'closeModals',
+        'depositHistoryDeleted' => 'depositHistoryDeleted',
     ];
 
     public function mount(MemberModel $member)
@@ -34,6 +35,12 @@ class Member extends Component
     {
         session()->flash('status', __('messages.spend_successfully'));
         $this->showSpendModal = false;
+    }
+
+    public function depositHistoryDeleted()
+    {   
+        $this->member = MemberModel::find($this->member->id);
+        session()->flash('status', __('messages.deposit_history_deleted'));
     }
 
     public function memberInfoChanged()

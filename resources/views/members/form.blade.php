@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -47,7 +44,7 @@
                                 type="number"
                                 step="1"
                                 wire:model.defer="balance"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                class="  mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="{{ __('messages.enter_balance') }}"
                                 min="0"
                                 required
@@ -77,10 +74,10 @@
                     <!-- Action Buttons -->
                     <div class="mt-6 flex items-center justify-end space-x-3">
                         <a
-                            href="{{ route('members.index') }}"
+                            href="{{ $full_name ? route('members.show', $member) : route('members.index') }}"
                             class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            {{ __('messages.cancel') }}
+                            {{ $full_name ? __('messages.back_to_member') : __('messages.back_to_member_list') }}
                         </a>
                         <button
                             type="submit"

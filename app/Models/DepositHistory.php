@@ -17,7 +17,7 @@ class DepositHistory extends Model
         0 => 'messages.cash',
         1 => 'messages.alipay',
         2 => 'messages.wechat_pay',
-        3 => 'messages.card_recharge',
+        3 => 'messages.open_card',
     ];
 
     public function member()

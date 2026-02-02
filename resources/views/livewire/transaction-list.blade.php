@@ -34,7 +34,7 @@
                     <td class="px-6 py-4 text-sm text-gray-900">{{ $transaction->member->full_name }}</td>
                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">${{ number_format($transaction->amount, 2) }}</td>
                     <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->notes }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->created_at->format('h:i:s A') }}</td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center justify-center space-x-2" x-data="{ open: false }">
                             <button 

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Member;
+use Illuminate\Support\Facades\Auth;
 
 class MemberForm extends Component
 {
@@ -40,8 +41,11 @@ class MemberForm extends Component
             'phone_number'  => 'required|string|max:20',
             'balance'       => 'required|numeric|min:0',
         ]);
-       
-        if ( empty($this->member_id) ) {
+
+        // 如果是更新现有会员，则不更新 balance 字段
+        if (!Auth::user()->isAdmin()) {
+            unset($validated['balance']); // 不更新 balance 字段
+        } else {
             do {
                 $count = \App\Models\Member::count();
                 $newMemberId = 'M' . str_pad($count + 1, 3, '0', STR_PAD_LEFT);

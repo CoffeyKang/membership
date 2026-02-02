@@ -27,7 +27,7 @@
             >
                 <option value="">{{ __('messages.select_preset_value') }}</option>
                 <option value=0>{{ __('messages.cash') }}</option>
-                <option value=1>{{ __('messages.ali_pay') }}</option>
+                <option value=1>{{ __('messages.alipay') }}</option>
                 <option value=2>{{ __('messages.wechat_pay') }}</option>
                 <option value=3>{{ __('messages.old_money') }}</option>
             </select>

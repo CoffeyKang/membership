@@ -110,13 +110,29 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('messages.profile') }}
+
+                <x-responsive-nav-link :href="route('dashboard')" wire:navigate>
+                    {{ __('messages.dashboard') }}
                 </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('members.index')" wire:navigate>
+                    {{ __('messages.members_list') }}
+                </x-responsive-nav-link>
+
+
+
+                {{-- hidden, this project do not need manage login users --}}
+                {{-- <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                    {{ __('messages.profile') }}
+                </x-responsive-nav-link> --}}
 
                 <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
                     {{ __('messages.staff_management') }}
                 </x-responsive-nav-link>
+
+                
+
+                
 
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">

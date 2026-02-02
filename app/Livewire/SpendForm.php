@@ -24,9 +24,9 @@ class SpendForm extends Component
     {
         // Validate spend amount
         $this->validate([
+            'selectedStaff' => 'required|exists:staff,id',
             'spendAmount' => 'required|numeric|min:10|max:' . $this->member->balance,
             'confirmSpendAmount' => 'required|same:spendAmount',
-            'selectedStaff' => 'required|exists:staff,id',
             'notes' => 'nullable|string|max:255',
         ]);
 
