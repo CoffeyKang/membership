@@ -46,7 +46,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 md:max-h-100 overflow-y-auto">
                                 @forelse($memberResults as $member)
                                     <div
-                                        class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : 'bg-yellow-50' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
+                                        class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : '' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
                                         wire:click="selectClient({{ $member->id }})"
                                     >
                                         <h2 class="text-sm md:text-base font-semibold">{{ $member->full_name }} <small>({{ $member->phone_number }})</small></h2>
@@ -120,11 +120,12 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 md:max-h-64 overflow-y-auto">
                         @forelse($memberResults as $member)
                             <div
-                                class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : 'bg-yellow-50' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
+                                class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : '' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
                                 wire:click="selectClient({{ $member->id }})"
                             >
                                 <h3 class="text-sm md:text-base font-semibold">{{ $member->full_name }} <small>({{ __('messages.member_id') }}: {{ $member->member_id }})</small></h3>
                                 <p class="text-xs md:text-sm">{{ $member->phone_number }}</p>
+                                <p class="text-xs md:text-sm"> {{ __('messages.last_transaction') }}: {{ $member->transactions->last()?->created_at ? $member->transactions->last()?->created_at->format('Y-m-d') : __('messages.n_a') }}</p>
                                 <p class="text-xs md:text-sm"><strong>{{ __('messages.balance') }}: <span class="font-bold">{{ $member->balance }}</span></strong></p>
                             </div>
                         @empty
@@ -133,24 +134,7 @@
                     </div>
                 @endif
 
-                <!-- Last 3 Transactions -->
-                @if (!empty($selectedMemberID) && !empty($memberTransactions))
-                    <div class="w-full mt-6 md:mt-8 border-t pt-4 md:pt-6">
-                        <p class="text-sm text-gray-600 mb-2">{{ __('messages.last_3_transactions') }}</p>
-                        @foreach($memberTransactions as $transaction)
-                            <div class="border-b py-2 text-sm md:text-base">
-                                <div class="flex justify-between">
-                                    <div>
-                                        <span class="font-semibold">{{ __('messages.staff_id') }}</span> {{ $transaction->staff->nick_name }} @ <b>{{ $transaction->created_at->format('Y-m-d H:i') }}</b>
-                                    </div>
-                                </div>
-                                <div class="text-xs md:text-sm text-gray-600">
-                                    <span class="font-semibold">{{ __('messages.notes') }}:</span> {{ $transaction->notes ?? __('messages.n_a') }}
-                                </div>
-                            </div>
-                        @endforeach	
-                    </div> 
-                @endif
+                @livewire('signature-pad')
             </div>
         </div>
     </div>

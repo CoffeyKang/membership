@@ -7,6 +7,7 @@
 			{{ session('status') }}
 		</div>
 	@endif
+
 	<div class="flex flex-row flex-row w-full justify-between">
 		<a href="{{ route('members.index') }}" class="inline-flex w-40 items-center px-4 py-2 bg-blue-600 text-white text-md font-bold rounded hover:bg-blue-700 transition">
 			&larr; {{ __('messages.back_to_member_list') }}
@@ -21,8 +22,8 @@
 		</a>
 	</div>
 	
-	<div class="flex flex-col lg:flex-row w-full">
-		<div class="w-full lg:w-1/2">
+	<div class="flex flex-col md:flex-row w-full">
+		<div class="w-full">
 			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 {{ $member->is_primary ? 'border-4 border-yellow-400' : 'border-2 border-blue-200' }}">
 				<div class="p-4 sm:p-6">
 					<h2 class="text-lg sm:text-xl font-bold text-blue-700 mb-4 sm:mb-6">{{ __('messages.personal_information') }}</h2>
@@ -62,7 +63,6 @@
 					</button>
 				</div>
 			</div>
-		
 			<!-- Spend Modal -->
 			@if($showSpendModal)
 				@livewire('spend-form', ['member' => $member])
@@ -74,7 +74,7 @@
 			@endif
 		</div>
 		
-		<div class="w-full lg:w-1/2 lg:pl-8 mt-8 lg:mt-0">
+		<div class="w-full">
 			<livewire:deposit-history :$member />
 		</div>
 

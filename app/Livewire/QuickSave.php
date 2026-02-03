@@ -73,6 +73,9 @@ class QuickSave extends Component
         
         // Reset form fields after successful save
         $this->reset(['selectedMemberID', 'selectedStaffId', 'amount', 'confirmAmount', 'notes']);
+
+        $this->memberSearch = '';
+        $this->memberResults = null;
         
         session()->flash('success', __('messages.savings_recorded_successfully'));
     }

@@ -44,7 +44,10 @@
                                             <p class="text-sm text-gray-600 mb-4">{{ __('messages.confirm_to_delete_this_deposit') }}</p>
                                             <div class="flex justify-end space-x-3">
                                                 <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">{{ __('messages.cancel_delete') }}</button>
-                                                <button @click="open = false; $wire.deleteDeposit({{ $history->id }});" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">{{ __('messages.delete') }}</button>
+                                                <button 
+                                                    @click="open = false; $wire.deleteDeposit({{ $history->id }});" 
+                                                    class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition"
+                                                >{{ __('messages.delete') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +56,7 @@
                         
                     @empty
                         <tr>
-                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
                                 {{ __('messages.no_deposit_records_found') }}
                             </td>
                         </tr>

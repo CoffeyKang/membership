@@ -1293,6 +1293,7 @@ return [
     'create_member' => '创建会员',
     'member_info_updated' => '会员信息已更新',
     'back_to_member' => '返回会员详情',
+    'no_deposit_records_found' => '没有存款记录',
 
 ];
 
