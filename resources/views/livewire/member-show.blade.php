@@ -50,23 +50,23 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex flex-col sm:flex-row justify-between p-4 mt-4 sm:mt-6 gap-2 sm:gap-0">
-					<button 
+				<div class="flex flex-col sm:flex-row justify-end p-4 mt-2 gap-2 sm:gap-0">
+					{{-- <button 
 						wire:click="$set('showSpendModal', true)" 
 						class="w-full sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-red-600 text-white rounded font-semibold hover:bg-red-700 transition">
 						{{ __('messages.spend') }}
-					</button>
+					</button> --}}
 					<button 
 						wire:click="$set('showDepositModal', true)" 
-						class="w-full sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-green-600 text-white rounded font-semibold hover:bg-green-700 transition">
+						class="w-full px-6 sm:px-12 py-3 sm:py-4 bg-green-600 text-white rounded font-semibold hover:bg-green-700 transition">
 						{{ __('messages.deposit') }}
 					</button>
 				</div>
 			</div>
 			<!-- Spend Modal -->
-			@if($showSpendModal)
+			{{-- @if($showSpendModal)
 				@livewire('spend-form', ['member' => $member])
-			@endif
+			@endif --}}
 
 			<!-- Deposit Modal -->
 			@if($showDepositModal)
@@ -88,8 +88,31 @@
 						<span class="font-semibold">{{ __('messages.staff_id') }}</span> {{ $transaction->staff->nick_name }} @ <b>{{ $transaction->created_at->format('Y-m-d H:i') }}</b>
 					</div>
 					<div>
+						@if($transaction->memberSignature->count() > 0)
+                            <div x-data="{ show: false }">
+                                <img src="{{ $transaction->memberSignature->first()->signature }}"
+                                     @click="show = true"
+                                     alt="{{ __('messages.signature') }}" 
+                                     class="max-h-[20px]"
+                                >
+                                <div x-show="show" class="absolute bottom-12 left-1/2 -translate-x-1/2 bg-white border border-gray-300 rounded-md shadow-lg p-2 text-right" 
+                                    @click="show = false"
+                                >
+                                    <img src="{{ $transaction->memberSignature->first()->signature }}" alt="{{ __('messages.signature') }}" class="max-h-[200px]">
+                                    <div class="text-sm text-gray-600 flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">{{__('messages.click_to_closed')}}</span>
+                                        <span class="text-xs text-gray-500">{{ __('messages.signed_at') }}: {{ $transaction->memberSignature->first()->created_at->format('h:i:s A') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            {{ __('messages.n_a') }}
+                        @endif
+					</div>
+					<div>
 						<span class="font-semibold">{{ __('messages.amount') }}</span> {{ $transaction->amount }}
 					</div>
+					
 				</div>
 				<div class="text-sm text-gray-600">
 					<span class="font-semibold">{{ __('messages.notes') }}</span> {{ $transaction->notes ?? __('messages.n_a') }}

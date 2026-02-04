@@ -1294,7 +1294,13 @@ return [
     'member_info_updated' => '会员信息已更新',
     'back_to_member' => '返回会员详情',
     'no_deposit_records_found' => '没有存款记录',
-
+    'save_signature' => '保存签名',
+    'clear_signature' => '清空签名',
+    'signature_prompt' => '请在此签名',
+    'signature' => '签名',
+    'add_signature' => '添加签名',
+    'signed_at' => '签名时间',
+    'click_to_closed' => '点击图片关闭',
 ];
 
 

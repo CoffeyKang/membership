@@ -97,9 +97,9 @@
         </div>
 
         <!-- Right Column: Search & Transactions -->
-        <div class="w-full md:w-1/2 p-3 md:p-4 m-1 md:m-2 border rounded shadow bg-white hidden md:block">
+        <div class="w-full md:w-1/2 p-3 md:p-4 m-1 md:m-2 border rounded shadow bg-white">
             <!-- Search Member -->
-            <div class="mb-3">
+            <div class="mb-3 hidden md:block">
                 <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.search_member') }}</label>
                 <div class="flex gap-2 mb-2">
                     <input
@@ -133,9 +133,13 @@
                         @endforelse
                     </div>
                 @endif
-
-                @livewire('signature-pad')
             </div>
+            <!-- Signature Pad -->
+            <div class="mb-3">
+                @livewire('signature-pad', ['memberId' => $selectedMemberID])
+            </div>
+
+            
         </div>
     </div>
 </div>
