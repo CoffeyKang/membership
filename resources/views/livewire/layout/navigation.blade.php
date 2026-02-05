@@ -119,6 +119,10 @@ new class extends Component
                     {{ __('messages.members_list') }}
                 </x-responsive-nav-link>
 
+                <x-responsive-nav-link :href="route('reports.transactions')" wire:navigate>
+                    {{ __('messages.today_transactions') }}
+                </x-responsive-nav-link>
+
 
 
                 {{-- hidden, this project do not need manage login users --}}

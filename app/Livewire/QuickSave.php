@@ -115,7 +115,7 @@ class QuickSave extends Component
 
         $this->memberSearch = $client->full_name;
         $this->memberResults = 
-            Member::whereIn('id', [$client->id, $this->walkinClientID])->get();
+            Member::whereIn('id', [$client->id])->get();
     }
 
     public function selectWalkinClient()

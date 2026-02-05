@@ -22,9 +22,9 @@
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.staff_column') }}</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.member_column') }}</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.amount_column') }}</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.note_column') }}</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.date') }}</th>
-                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.signature') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider hidden md:table-cell">{{ __('messages.note_column') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider hidden md:table-cell">{{ __('messages.date') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider hidden md:table-cell">{{ __('messages.signature') }}</th>
                 <th class="px-6 py-3 text-center text-sm font-semibold uppercase tracking-wider">{{ __('messages.actions_column') }}</th>
             </tr>
         </thead>
@@ -32,11 +32,11 @@
             @foreach($transactions as $transaction)
                 <tr class="hover:bg-indigo-50 transition-colors duration-200">
                     <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ $transaction->staff->full_name }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900">{{ $transaction->member->full_name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">{{ $transaction->member->full_name }}</td>
                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">${{ number_format($transaction->amount, 2) }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->notes }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->created_at->format('h:i:s A') }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-700">
+                    <td class="px-6 py-4 text-sm text-gray-700 hidden md:table-cell">{{ $transaction->notes }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700 hidden md:table-cell">{{ $transaction->created_at->format('h:i:s A') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700 hidden md:table-cell">
                         @if($transaction->memberSignature->count() > 0)
                             <div x-data="{ show: false }">
                                 <img src="{{ $transaction->memberSignature->first()->signature }}"
@@ -44,7 +44,7 @@
                                      alt="{{ __('messages.signature') }}" 
                                      class="max-h-[20px]"
                                 >
-                                <div x-show="show" class="absolute top-12 left-1/2 -translate-x-1/2 bg-white border border-gray-300 rounded-md shadow-lg p-2 text-right" 
+                                <div x-show="show" class="-translate-x-1/2 bg-white border border-gray-300 rounded-md shadow-lg p-2 text-right" 
                                     @click="show = false"
                                 >
                                     <img src="{{ $transaction->memberSignature->first()->signature }}" alt="{{ __('messages.signature') }}" class="max-h-[200px]">

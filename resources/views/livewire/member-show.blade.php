@@ -81,7 +81,7 @@
 	</div>
 
 	<div class="w-full mt-8 border-t pt-6">
-		@foreach($member->transactions as $transaction)
+		@foreach($member->transactions()->orderBy('created_at', 'desc')->get() as $transaction)
 			<div class="border-b py-2">
 				<div class="flex flex-col sm:flex-row sm:justify-between">
 					<div>
@@ -119,5 +119,5 @@
 				</div>
 			</div>
 		@endforeach	
-	</div>
+		</div>
 </div>

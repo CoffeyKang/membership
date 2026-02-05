@@ -35,13 +35,23 @@
                     <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.member') }}</label>
                     <!-- Live search input on mobile, read-only span on desktop -->
                     <div class="w-full md:hidden">
-                        <input 
-                            type="text"
-                            class="w-full p-2 border rounded text-sm md:hidden mb-2"
-                            placeholder="{{ __('messages.type_member_name') }}"
-                            wire:model.live.debounce.300ms="memberSearch"
-                           value="{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : '' }}"
-                        >
+
+                        <div class="grid grid-cols-[1fr_auto] gap-0">
+                            <input 
+                                type="text"
+                                class="w-full p-2 border rounded text-sm md:text-base md:hidden"
+                                placeholder="{{ __('messages.type_member_name') }}"
+                                wire:model.live.debounce.300ms="memberSearch"
+                            value="{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : '' }}"
+                            >
+                            <button 
+                                type="button" 
+                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 transition duration-200 rounded"
+                                wire:click="selectWalkinClient"
+                                >
+                                {{ __('messages.walkin_client') }}
+                            </button>
+                        </div>
                         @if(!empty($memberSearch))
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 md:max-h-100 overflow-y-auto">
                                 @forelse($memberResults as $member)
@@ -87,12 +97,7 @@
                     @error('notes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
-                <!-- Submit -->
-                <div class="flex justify-end">
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 md:px-6 rounded shadow text-sm md:text-base">
-                        {{ __('messages.save') }}
-                    </button>
-                </div>
+                
             </form>
         </div>
 
@@ -140,6 +145,16 @@
             </div>
         </div>
     </div>
+    <!-- Submit -->
+                <div class="flex justify-center w-full">
+                    <button 
+                        type="submit" 
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 w-full md:px-6 rounded shadow text-sm md:text-base"
+                        wire:click="saveQuick"
+                        >
+                        {{ __('messages.save') }}
+                    </button>
+                </div>
     
     <!-- Member Info Modal -->
     @if($showMemberInfoModal)
@@ -183,7 +198,7 @@
             <div class="mt-6 flex justify-end space-x-3">
                 <button 
                     onclick="window.location.reload()" 
-                    class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200 ease-in-out flex items-center">
+                    class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200 ease-in-out flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
