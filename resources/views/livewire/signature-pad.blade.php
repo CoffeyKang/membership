@@ -63,13 +63,6 @@
         document.addEventListener('livewire:update', function () {
             setTimeout(initializeSignaturePad, 150);
         });
-
-        window.addEventListener('error', (e) => {
-            if (e.message.includes('Snapshot missing')) {
-                location.reload(); // 强制刷新
-            }
-        });
-
         
         function initializeSignaturePad() {
             var signatureContainer = document.getElementById('signature-pad');

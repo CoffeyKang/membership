@@ -22,6 +22,9 @@ class QuickSave extends Component
     public $confirmAmount;
     public $notes;
     public $savedSignature;
+    public $signatureData = '';
+    public $showMemberInfoModal = false;
+    public $memberInfo = [];
     
     protected $listeners = [
         'saveSignature' => 'saveSignature',
@@ -91,6 +94,16 @@ class QuickSave extends Component
         $this->memberResults = null;
         $this->savedSignature = null;
         session()->flash('success', __('messages.savings_recorded_successfully'));
+        
+        // 设置会员信息并显示弹窗
+        $this->memberInfo = [
+            'full_name' => $member->full_name,
+            'balance' => $member->balance,
+        ];
+        $this->showMemberInfoModal = true;
+        
+        // Dispatch event to notify any necessary updates
+        $this->dispatch('form-saved');
       
     }
 

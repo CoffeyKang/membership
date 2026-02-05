@@ -1301,6 +1301,7 @@ return [
     'add_signature' => '添加签名',
     'signed_at' => '签名时间',
     'click_to_closed' => '点击图片关闭',
+    'member_info' => '会员信息',
 ];
 
 
