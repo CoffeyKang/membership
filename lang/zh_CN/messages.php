@@ -1303,6 +1303,9 @@ return [
     'click_to_closed' => '点击图片关闭',
     'member_info' => '会员信息',
     'backup_manager' => '备份管理器',
+    'backup_file_not_found' => '备份文件未找到',
+    'backup_downloaded_successfully' => '备份下载成功',
+    'backup_download_initiated' => '备份下载已启动',
     'create_backup' => '创建备份',
     'create_new_database_backup_now' => '立即创建新的数据库备份',
     'create_backup_now' => '立即创建备份',
@@ -1310,6 +1313,7 @@ return [
     'clean_old_backups' => '清理旧备份',
     'remove_backups_older_than_policy' => '删除超过保留策略的备份',
     'clean_up' => '清理',
+    'refresh' => '刷新',
     'scheduled_backups' => '计划备份',
     'automatic_backups_scheduled' => '自动备份计划每天凌晨2点运行',
     'active' => '激活',
@@ -1328,6 +1332,13 @@ return [
     'weekly_backups_retained' => '每周备份保留16周',
     'monthly_backups_retained' => '每月备份保留4个月',
     'yearly_backups_retained' => '每年备份保留2年',
+    'backup_created_successfully' => '数据库备份已成功创建',
+    'backup_failed' => '备份失败',
+    'backup_error' => '备份错误',
+    'backup_cleaned_successfully' => '旧备份已成功清理',
+    'backup_cleanup_failed' => '备份清理失败',
+    'backup_cleanup_error' => '备份清理错误',
+    'backup_information_refreshed' => '备份信息已刷新',
 ];
 
 

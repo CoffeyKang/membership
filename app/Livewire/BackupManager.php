@@ -4,13 +4,16 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
 
 class BackupManager extends Component
 {
     public $backups = [];
     public $isBackingUp = false;
-    public $message = '';
-    public $messageType = ''; // success, error, info
+
+    protected $listeners = [
+        'refreshBackups' => 'loadBackups',
+    ];
 
     public function mount()
     {
@@ -29,89 +32,151 @@ class BackupManager extends Component
             $exitCode = Artisan::call('backup:list');
             $output = Artisan::output();
             
-            // Parse the command output to extract backup information
-            $lines = explode("\n", $output);
-            $backups = [];
-            
-            foreach ($lines as $line) {
-                // Skip header lines
-                if (strpos($line, 'Hostname') !== false || strpos($line, '+-') === 0 || trim($line) === '') {
-                    continue;
-                }
-                
-                // Parse backup info from the table format
-                if (preg_match('/\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|/', $line, $matches)) {
+            $this->parseTableOutput($output);
+        } catch (\Exception $e) {
+            $this->addError('error', 'Error loading backups: ' . $e->getMessage());
+        }
+    }
+
+    private function parseTableOutput($output)
+    {
+        // The backup:list command shows summary information, not individual files
+        // We need to get the actual backup files from the storage directory
+        $backups = [];
+        
+        $backupDir = storage_path('app/private/RenMin Hair Salon');
+        if (is_dir($backupDir)) {
+            $files = array_diff(scandir($backupDir), array('.', '..'));
+            foreach ($files as $file) {
+                if (pathinfo($file, PATHINFO_EXTENSION) === 'zip') {
+                    $filePath = $backupDir . '/' . $file;
+                    $fileTime = filemtime($filePath);
+                    $fileSize = filesize($filePath);
+                    
                     $backups[] = [
-                        'disk' => trim($matches[1]),
-                        'date' => trim($matches[2]),
-                        'path' => trim($matches[3]),
-                        'size' => trim($matches[4])
+                        'disk' => 'local',
+                        'date' => date('Y-m-d H:i:s', $fileTime),
+                        'path' => 'RenMin Hair Salon/' . $file, // Just the relative path
+                        'size' => $this->formatBytes($fileSize)
                     ];
                 }
             }
-            
-            $this->backups = $backups;
-        } catch (\Exception $e) {
-            $this->setMessage('Error loading backups: ' . $e->getMessage(), 'error');
         }
+        
+        // Sort backups by date (newest first)
+        usort($backups, function($a, $b) {
+            return strtotime($b['date']) - strtotime($a['date']);
+        });
+        
+        $this->backups = $backups;
+    }
+    
+    private function formatBytes($size, $precision = 2) {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB');
+        
+        for ($i = 0; $size > 1024 && $i < count($units) - 1; $i++) {
+            $size /= 1024;
+        }
+        
+        return round($size, $precision) . ' ' . $units[$i];
     }
 
     public function createBackup()
     {
         $this->isBackingUp = true;
-        $this->setMessage('Starting backup process...', 'info');
+        
+        // Add flash message for starting backup
+        session()->flash('message', 'Starting backup process...');
+        session()->flash('messageType', 'info');
 
         try {
-            $exitCode = Artisan::call('backup:run', ['--only-db']);
+            $exitCode = Artisan::call('backup:run', [
+                '--only-db' => true
+            ]);
             
             if ($exitCode === 0) {
-                $this->setMessage('Database backup created successfully!', 'success');
+                session()->flash('message', __('messages.backup_created_successfully'));
+                session()->flash('messageType', 'success');
             } else {
-                $this->setMessage('Backup failed: ' . Artisan::output(), 'error');
+                session()->flash('message', __('messages.backup_failed') . ': ' . Artisan::output());
+                session()->flash('messageType', 'error');
             }
         } catch (\Exception $e) {
-            $this->setMessage('Error creating backup: ' . $e->getMessage(), 'error');
+            session()->flash('message', __('messages.backup_error') . ': ' . $e->getMessage());     
+            session()->flash('messageType', 'error');
         }
 
         $this->isBackingUp = false;
         $this->loadBackups(); // Refresh the backup list
+        
+        // Refresh the component to show the flash message
+        return redirect(request()->header('Referer'));
     }
 
     public function cleanupBackups()
     {
-        $this->setMessage('Cleaning up old backups...', 'info');
+        // Add flash message for starting cleanup
+        session()->flash('message', 'Cleaning up old backups...');
+        session()->flash('messageType', 'info');
 
         try {
             $exitCode = Artisan::call('backup:clean');
             
             if ($exitCode === 0) {
-                $this->setMessage('Old backups cleaned successfully!', 'success');
+                session()->flash('message', __('messages.backup_cleaned_successfully'));
+                session()->flash('messageType', 'success');
             } else {
-                $this->setMessage('Cleanup failed: ' . Artisan::output(), 'error');
+                session()->flash('message', __('messages.backup_cleanup_failed') . ': ' . Artisan::output());
+                session()->flash('messageType', 'error');
             }
         } catch (\Exception $e) {
-            $this->setMessage('Error cleaning backups: ' . $e->getMessage(), 'error');
+            session()->flash('message', __('messages.backup_cleanup_error') . ': ' . $e->getMessage()); 
+            session()->flash('messageType', 'error');
         }
 
         $this->loadBackups(); // Refresh the backup list
+        
+        // Refresh the component to show the flash message
+        return redirect(request()->header('Referer'));
     }
 
     public function downloadBackup($path)
     {
-        // For security reasons, we'll just provide a message
-        // Actual download would require additional security considerations
-        $this->setMessage('Download functionality would be implemented here. Path: ' . $path, 'info');
+        // Construct the full path to the backup file
+        $fullPath = storage_path('app/private/' . $path);
+        
+        // Check if the file exists
+        if (!file_exists($fullPath)) {
+            session()->flash('message', __('messages.backup_file_not_found') . ': ' . $path);
+            session()->flash('messageType', 'error');
+            return redirect(request()->header('Referer'));
+        }
+        
+        // Set success message before initiating download
+        session()->flash('message', __('messages.backup_download_initiated'));
+        session()->flash('messageType', 'info');
+        
+        // Generate a unique token and store the file path in cache
+        $token = \Illuminate\Support\Str::random(32);
+        \Illuminate\Support\Facades\Cache::put('backup_download_' . $token, [
+            'file_path' => $fullPath
+        ], 30); // Expire in 30 seconds
+        
+        // Use JavaScript to open the download URL in a new tab/window
+        $this->js("window.open('" . route('download.backup', ['token' => $token]) . "', '_blank')");
+        
+        return redirect(request()->header('Referer'));
     }
 
-    public function setMessage($message, $type)
+    public function refreshBackups()
     {
-        $this->message = $message;
-        $this->messageType = $type;
-    }
-
-    public function clearMessage()
-    {
-        $this->message = '';
-        $this->messageType = '';
+        $this->loadBackups();
+        
+        // Add flash message
+        session()->flash('message', __('messages.backup_information_refreshed'));
+        session()->flash('messageType', 'info');
+        
+        // Refresh the component to show the flash message
+        return redirect(request()->header('Referer'));
     }
 }

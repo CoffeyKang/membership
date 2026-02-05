@@ -4,18 +4,14 @@
     <div class="max-w-6xl mx-auto">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">{{ __('messages.backup_manager') }}</h1>
         
-        <!-- Status Messages -->
-        @if($message)
+        <!-- Flash Messages -->
+        @if(session()->has('message'))
             <div class="mb-6 p-4 rounded-md {{ 
-                $messageType === 'success' ? 'bg-green-100 text-green-800 border border-green-200' : 
-                ($messageType === 'error' ? 'bg-red-100 text-red-800 border border-red-200' : 
+                session('messageType') === 'success' ? 'bg-green-100 text-green-800 border border-green-200' : 
+                (session('messageType') === 'error' ? 'bg-red-100 text-red-800 border border-red-200' : 
                 'bg-blue-100 text-blue-800 border border-blue-200') 
             }}">
-                {{ $message }}
-                <button 
-                    wire:click="clearMessage" 
-                    class="float-right text-lg font-bold text-gray-600 hover:text-gray-800"
-                >&times;</button>
+                {{ session('message') }}
             </div>
         @endif
         
@@ -98,6 +94,16 @@
                     </div>
                 @endif
             </div>
+        </div>
+        
+        <!-- Refresh Button -->
+        <div class="mb-6">
+            <button 
+                wire:click="refreshBackups"
+                class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded"
+            >
+                {{ __('messages.refresh') }}
+            </button>
         </div>
         
         <!-- Information Panel -->

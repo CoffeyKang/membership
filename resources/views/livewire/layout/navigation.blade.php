@@ -43,9 +43,6 @@ new class extends Component
                     <x-nav-link :href="route('reports.transactions')" :active="request()->routeIs('reports.transactions')" wire:navigate>
                         {{ __('messages.transactions') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('backup.manager')" :active="request()->routeIs('backup.manager')" wire:navigate>
-                        {{ __('messages.backup_manager') }}
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +66,10 @@ new class extends Component
                             {{ __('messages.profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('backup.manager')" wire:navigate>
+                            {{ __('messages.backup_manager') }}
+                        </x-dropdown-link>
+                        
                         <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
                             {{ __('messages.staff_management') }}
                         </x-responsive-nav-link>
@@ -124,9 +125,6 @@ new class extends Component
 
                 <x-responsive-nav-link :href="route('reports.transactions')" wire:navigate>
                     {{ __('messages.today_transactions') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('backup.manager')" wire:navigate>
-                    {{ __('messages.backup_manager') }}
                 </x-responsive-nav-link>
 
 
