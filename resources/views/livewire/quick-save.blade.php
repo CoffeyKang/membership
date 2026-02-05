@@ -136,10 +136,8 @@
             </div>
             <!-- Signature Pad -->
             <div class="mb-3">
-                @livewire('signature-pad', ['memberId' => $selectedMemberID])
+                @livewire('signature-pad', ['memberId' => $selectedMemberID] , ['key' => 'pad-key:' . $selectedMemberID])
             </div>
-
-            
         </div>
     </div>
 </div>
