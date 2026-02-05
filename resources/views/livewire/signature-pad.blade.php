@@ -9,7 +9,8 @@
         <canvas 
             id="signature-pad" 
             height="200"
-            class="bg-white border border-gray-300 w-full h-[200px] px-4 py-2"
+            width="400"
+            class="bg-white border border-gray-300 px-4 py-2"
             style="touch-action: none;"
         >
         </canvas>
