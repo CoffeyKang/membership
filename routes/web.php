@@ -81,3 +81,7 @@ Route::get('reports/transactions', function () {
 })
     ->middleware(['auth'])
     ->name('reports.transactions');
+
+Route::get('backup-manager', \App\Livewire\BackupManager::class)
+    ->middleware(['auth'])
+    ->name('backup.manager');
