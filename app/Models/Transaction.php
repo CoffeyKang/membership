@@ -33,6 +33,11 @@ class Transaction extends Model
         return $this->belongsTo(Staff::class);
     }
 
+    public function memberSignature()
+    {
+        return $this->hasMany(MemberSignature::class);
+    }
+
     public function scopeSetPeriod($query, $period)
     {
         if (!in_array($period, $this->periods)) {
@@ -81,6 +86,10 @@ class Transaction extends Model
 
         static::addGlobalScope('unpaid', function ($query) {
             $query->unPaid();
+        });
+
+        static::deleted(function ($transaction) {
+            $transaction->memberSignature()->delete();
         });
     }
 }

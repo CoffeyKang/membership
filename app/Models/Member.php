@@ -44,6 +44,11 @@ class Member extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function memberSignatures()
+    {
+        return $this->hasMany(MemberSignature::class);
+    }
+
     public function setPrimary()
     {
         $this->update(['is_primary' => true]);

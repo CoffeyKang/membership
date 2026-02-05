@@ -97,9 +97,9 @@
         </div>
 
         <!-- Right Column: Search & Transactions -->
-        <div class="w-full md:w-1/2 p-3 md:p-4 m-1 md:m-2 border rounded shadow bg-white hidden md:block">
+        <div class="w-full md:w-1/2 p-3 md:p-4 m-1 md:m-2 border rounded shadow bg-white">
             <!-- Search Member -->
-            <div class="mb-3">
+            <div class="mb-3 hidden md:block">
                 <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.search_member') }}</label>
                 <div class="flex gap-2 mb-2">
                     <input
@@ -133,9 +133,64 @@
                         @endforelse
                     </div>
                 @endif
-
-                @livewire('signature-pad')
+            </div>
+            <!-- Signature Pad -->
+            <div class="mb-3">
+                @livewire('signature-pad', ['memberId' => $selectedMemberID] , ['key' => 'pad-key:' . $selectedMemberID])
             </div>
         </div>
     </div>
+    
+    <!-- Member Info Modal -->
+    @if($showMemberInfoModal)
+    
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl">
+            <!-- Modal Header with Icon -->
+            <div class="flex items-center mb-5">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full p-3 mr-3">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800">{{ __('messages.member_info') }}</h3>
+            </div>
+            
+            <!-- Member Details -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <span class="font-medium text-gray-700">{{ __('messages.full_name') }}</span>
+                    </div>
+                    <span class="text-gray-900 font-semibold">{{ $memberInfo['full_name'] ?? '' }}</span>
+                </div>
+                
+                <div class="flex items-center justify-between bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="font-medium text-gray-700">{{ __('messages.balance') }}</span>
+                    </div>
+                    <span class="text-green-700 font-bold text-lg">$ {{ number_format($memberInfo['balance'] ?? 0, 2) }}</span>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-end space-x-3">
+                <button 
+                    onclick="window.location.reload()" 
+                    class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200 ease-in-out flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    {{ __('messages.close') }}
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>

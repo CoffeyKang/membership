@@ -1247,6 +1247,7 @@ return [
     'unknown' => 'Unknown',
     'spend_successfully' => 'Spend Successfully!',
     'member_info_updated' => 'Member info updated!',
+    'member_info' => 'Member Info',
     
 ];
 

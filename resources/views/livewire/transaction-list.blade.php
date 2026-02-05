@@ -24,6 +24,7 @@
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.amount_column') }}</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.note_column') }}</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.date') }}</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">{{ __('messages.signature') }}</th>
                 <th class="px-6 py-3 text-center text-sm font-semibold uppercase tracking-wider">{{ __('messages.actions_column') }}</th>
             </tr>
         </thead>
@@ -35,6 +36,28 @@
                     <td class="px-6 py-4 text-sm text-gray-900 font-semibold">${{ number_format($transaction->amount, 2) }}</td>
                     <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->notes }}</td>
                     <td class="px-6 py-4 text-sm text-gray-700">{{ $transaction->created_at->format('h:i:s A') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700">
+                        @if($transaction->memberSignature->count() > 0)
+                            <div x-data="{ show: false }">
+                                <img src="{{ $transaction->memberSignature->first()->signature }}"
+                                     @click="show = true"
+                                     alt="{{ __('messages.signature') }}" 
+                                     class="max-h-[20px]"
+                                >
+                                <div x-show="show" class="absolute top-12 left-1/2 -translate-x-1/2 bg-white border border-gray-300 rounded-md shadow-lg p-2 text-right" 
+                                    @click="show = false"
+                                >
+                                    <img src="{{ $transaction->memberSignature->first()->signature }}" alt="{{ __('messages.signature') }}" class="max-h-[200px]">
+                                    <div class="text-sm text-gray-600 flex justify-between items-center">
+                                        <span class="text-xs text-gray-500">{{__('messages.click_to_closed')}}</span>
+                                        <span class="text-xs text-gray-500">{{ __('messages.signed_at') }}: {{ $transaction->memberSignature->first()->created_at->format('h:i:s A') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            {{ __('messages.n_a') }}
+                        @endif
+                    </td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center justify-center space-x-2" x-data="{ open: false }">
                             <button 
@@ -48,7 +71,7 @@
                                 <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                                     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm mx-4">
                                         <p class="text-sm text-gray-600 mb-4">{{ __('messages.delete_modal_title') }}</p>
-                                        <div class="flex justify-end space-x-3">
+                                        <div class="flex justify-between space-x-3 ">
                                             <button @click="open = false" class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition">{{ __('messages.cancel_delete') }}</button>
                                             <button @click="open = false; $wire.deleteTransaction({{ $transaction->id }});" class="px-4 py-2 text-sm text-white bg-purple-600 rounded hover:bg-purple-700 transition">{{ __('messages.confirm_delete') }}</button>
                                         </div>

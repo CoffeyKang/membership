@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Staff;
 use App\Models\Member;
+use App\Models\MemberSignature;
 
 class QuickSave extends Component
 {   
@@ -20,7 +21,14 @@ class QuickSave extends Component
     public $amount;
     public $confirmAmount;
     public $notes;
+    public $savedSignature;
+    public $signatureData = '';
+    public $showMemberInfoModal = false;
+    public $memberInfo = [];
     
+    protected $listeners = [
+        'saveSignature' => 'saveSignature',
+    ];
 
     protected $rules = [
         'selectedMemberID' => 'required|exists:members,id',
@@ -64,20 +72,39 @@ class QuickSave extends Component
         $member->save();
 
         // Create or store the transaction record
-        $member->transactions()->create([
+        $transaction = $member->transactions()->create([
             'staff_id' => $this->selectedStaffId,
             'amount' => $this->amount,
             'notes' => $this->notes,
         ]);
 
+        // Save signature if exists
+        if ($this->savedSignature) {
+            MemberSignature::create([
+                'member_id' => $this->selectedMemberID,
+                'transaction_id' => $transaction->id,
+                'signature' => $this->savedSignature,
+            ]);
+        }
         
         // Reset form fields after successful save
         $this->reset(['selectedMemberID', 'selectedStaffId', 'amount', 'confirmAmount', 'notes']);
 
         $this->memberSearch = '';
         $this->memberResults = null;
-        
+        $this->savedSignature = null;
         session()->flash('success', __('messages.savings_recorded_successfully'));
+        
+        // 设置会员信息并显示弹窗
+        $this->memberInfo = [
+            'full_name' => $member->full_name,
+            'balance' => $member->balance,
+        ];
+        $this->showMemberInfoModal = true;
+        
+        // Dispatch event to notify any necessary updates
+        $this->dispatch('form-saved');
+      
     }
 
     public function selectClient($memberID)
@@ -96,6 +123,11 @@ class QuickSave extends Component
         $this->selectedMemberID = $this->walkinClientID;
         $this->memberSearch = '';
         $this->memberTransactions = null;
+    }
+
+    public function saveSignature($signature)
+    {
+        $this->savedSignature = $signature;
     }
 
     public function render()
