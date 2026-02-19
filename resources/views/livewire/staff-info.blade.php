@@ -96,6 +96,20 @@
                     />   
                 </div>
 
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.bonus') }}</label>
+                    <input 
+                        wire:model="bonus" 
+                        d="bonus" 
+                        name="bonus" 
+                        type="number" 
+                        step="100"
+                        min="0"
+                        class="mt-1 block w-full" required autofocus autocomplete="bonus" 
+                    />   
+                </div>
+                <div></div>
+
                 <div> 
                     <button 
                         wire:click="toggleLeft"
@@ -108,7 +122,6 @@
                         {{ $is_left ? __('messages.left') : __('messages.working') }}
                     </button>
                 </div>
-
                 <div class="flex justify-end">
                     <button 
                         wire:click="save"
@@ -118,5 +131,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
 </div>

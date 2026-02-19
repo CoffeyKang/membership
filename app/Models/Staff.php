@@ -13,6 +13,7 @@ class Staff extends Model
         'base_salary',
         'monthly_minimum_sales_amount',
         'commission_rate',
+        'bonus',
         'is_active',
         'is_left',
     ];
@@ -95,7 +96,7 @@ class Staff extends Model
 
     public function getTotalSalaryAttribute()
     {
-       return $this->base_salary + $this->commission_amount;
+       return $this->base_salary + $this->commission_amount + $this->bonus;
     }
 
     public function payout()

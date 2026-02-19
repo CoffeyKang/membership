@@ -78,7 +78,7 @@
                     <div>
                         <p class="text-sm text-gray-500">{{ __('messages.total_salary') }}</p>
                         <p class="text-2xl font-bold text-green-700">${{ number_format($staff->total_salary, 2) }}</p>
-                        <p class="text-sm text-gray-500">{{ __('messages.base_salary') }}: ${{ number_format($staff->base_salary, 2) }} + {{ __('messages.commission_amount') }}: ${{ number_format($staff->commission_amount, 2) }}</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.base_salary') }}: ${{ number_format($staff->base_salary, 2) }} + {{ __('messages.commission_amount') }}: ${{ number_format($staff->commission_amount, 2) }} + {{ __('messages.bonus') }}: ${{ number_format($staff->bonus, 2) }}</p>
                     </div>
                 </div>
                 <div class="text-green-600">

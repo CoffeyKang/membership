@@ -1339,6 +1339,7 @@ return [
     'backup_cleanup_failed' => '备份清理失败',
     'backup_cleanup_error' => '备份清理错误',
     'backup_information_refreshed' => '备份信息已刷新',
+    'bonus' => '奖金',
 ];
 
 

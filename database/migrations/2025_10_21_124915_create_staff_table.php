@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('base_salary')->default(3500);
             $table->integer('monthly_minimum_sales_amount')->default(10000);
             $table->float('commission_rate')->default(0.4);
+            $table->integer('bonus')->default(0);
             $table->boolean('is_active')->default(true);
             $table->boolean('is_left')->default(false);
             $table->timestamps();

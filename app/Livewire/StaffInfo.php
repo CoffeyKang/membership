@@ -16,6 +16,7 @@ class StaffInfo extends Component
     public $monthly_minimum_sales_amount;
     public $commission_rate;
     public $is_left;
+    public $bonus;
     public $created_at;
 
     protected $rules = [
@@ -25,6 +26,7 @@ class StaffInfo extends Component
         'base_salary' => 'required|numeric|min:0',
         'monthly_minimum_sales_amount' => 'required|numeric|min:0',
         'commission_rate' => 'required|numeric|min:0|max:1',
+        'bonus' => 'required|numeric|min:0',
     ];
 
     public function mount(Staff $staff)
@@ -38,6 +40,7 @@ class StaffInfo extends Component
         $this->commission_rate = $staff->commission_rate;
         $this->is_left = $staff->is_left;
         $this->created_at = $staff->created_at;
+        $this->bonus = $staff->bonus;
     }
 
     public function toggleLeft( )
