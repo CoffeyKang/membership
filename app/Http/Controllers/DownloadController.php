@@ -38,7 +38,7 @@ class DownloadController extends Controller
         
         // Additional security check - make sure it's a backup file
         $realPath = realpath($filePath);
-        if (!$realPath || !str_contains($realPath, 'RenMin Hair Salon') || !str_ends_with($realPath, '.zip')) {
+        if (!$realPath || !str_contains($realPath, '人民发艺') || !str_ends_with($realPath, '.zip')) {
             abort(404, 'File not found');
         }
         

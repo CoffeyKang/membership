@@ -44,7 +44,7 @@ class BackupManager extends Component
         // We need to get the actual backup files from the storage directory
         $backups = [];
         
-        $backupDir = storage_path('app/private/RenMin Hair Salon');
+        $backupDir = storage_path('app/private/人民发艺');
         if (is_dir($backupDir)) {
             $files = array_diff(scandir($backupDir), array('.', '..'));
             foreach ($files as $file) {
@@ -56,7 +56,7 @@ class BackupManager extends Component
                     $backups[] = [
                         'disk' => 'local',
                         'date' => date('Y-m-d H:i:s', $fileTime),
-                        'path' => 'RenMin Hair Salon/' . $file, // Just the relative path
+                        'path' => '人民发艺/' . $file, // Just the relative path
                         'size' => $this->formatBytes($fileSize)
                     ];
                 }
