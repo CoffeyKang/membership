@@ -66,6 +66,10 @@ new class extends Component
                             {{ __('messages.profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('backup.manager')" wire:navigate>
+                            {{ __('messages.backup_manager') }}
+                        </x-dropdown-link>
+                        
                         <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
                             {{ __('messages.staff_management') }}
                         </x-responsive-nav-link>

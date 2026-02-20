@@ -61,7 +61,6 @@ class TestCaseSeeder extends Seeder
                 'nick_name' => $faker->firstName,
                 'phone_number' => $faker->numerify('1##########'), // Chinese-style phone number
                 'base_salary' => $faker->numberBetween(3000, 3500),
-                'monthly_minimum_sales_amount' => $faker->numberBetween(5000, 15000),
                 'commission_rate' => $faker->randomElement([0.5, 0.4]),
                 'is_left' => $faker->boolean(10), // 10% chance of leaving
                 'created_at' => $faker->dateTimeBetween('-2 years', 'now'),

@@ -21,11 +21,7 @@ return [
             'numeric' => '请输入基础工资, 只包含数字',
             'min' => '基础工资不能小于0',
         ],
-        'monthly_minimum_sales_amount' => [
-            'required' => '请输入每月最低销售额',
-            'numeric' => '请输入每月最低销售额, 只包含数字',
-            'min' => '每月最低销售额不能小于0',
-        ],
+        
         'commission_rate' => [
             'required' => '请输入佣金率',
             'numeric' => '请输入佣金率, 只包含数字',

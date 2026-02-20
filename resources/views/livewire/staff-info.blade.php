@@ -70,19 +70,6 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.monthly_minimum_sales_amount') }}</label>
-                    <input 
-                        wire:model="monthly_minimum_sales_amount" 
-                        d="monthly_minimum_sales_amount" 
-                        name="monthly_minimum_sales_amount" 
-                        type="number" 
-                        step="100"
-                        min="0"
-                        class="mt-1 block w-full" required autofocus autocomplete="monthly_minimum_sales_amount" 
-                    />   
-                </div>   
-
-                <div>
                     <label class="block text-sm font-medium text-gray-500">{{ __('messages.commission_rate') }}</label>
                     <input 
                         wire:model="commission_rate" 
@@ -93,6 +80,19 @@
                         min="0"
                         max="1"
                         class="mt-1 block w-full" required autofocus autocomplete="commission_rate" 
+                    />   
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.bonus') }}</label>
+                    <input 
+                        wire:model="bonus" 
+                        d="bonus" 
+                        name="bonus" 
+                        type="number" 
+                        step="100"
+                        min="0"
+                        class="mt-1 block w-full" required autofocus autocomplete="bonus" 
                     />   
                 </div>
 
@@ -108,7 +108,6 @@
                         {{ $is_left ? __('messages.left') : __('messages.working') }}
                     </button>
                 </div>
-
                 <div class="flex justify-end">
                     <button 
                         wire:click="save"
@@ -118,5 +117,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
 </div>

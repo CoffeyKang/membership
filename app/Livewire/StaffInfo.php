@@ -13,9 +13,9 @@ class StaffInfo extends Component
     public $nick_name;
     public $phone_number;
     public $base_salary;
-    public $monthly_minimum_sales_amount;
     public $commission_rate;
     public $is_left;
+    public $bonus;
     public $created_at;
 
     protected $rules = [
@@ -23,8 +23,8 @@ class StaffInfo extends Component
         'nick_name' => 'nullable|string|max:255',
         'phone_number' => 'required|string|max:20',
         'base_salary' => 'required|numeric|min:0',
-        'monthly_minimum_sales_amount' => 'required|numeric|min:0',
         'commission_rate' => 'required|numeric|min:0|max:1',
+        'bonus' => 'required|numeric|min:0',
     ];
 
     public function mount(Staff $staff)
@@ -34,10 +34,10 @@ class StaffInfo extends Component
         $this->nick_name = $staff->nick_name;
         $this->phone_number = $staff->phone_number;
         $this->base_salary = $staff->base_salary;
-        $this->monthly_minimum_sales_amount = $staff->monthly_minimum_sales_amount;
         $this->commission_rate = $staff->commission_rate;
         $this->is_left = $staff->is_left;
         $this->created_at = $staff->created_at;
+        $this->bonus = $staff->bonus;
     }
 
     public function toggleLeft( )

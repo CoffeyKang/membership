@@ -50,7 +50,7 @@
         <!-- Full Name -->
         <div class="bg-gray-50 rounded-xl p-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-top space-x-3">
                     <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
                         <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
@@ -59,7 +59,8 @@
                     <div>
                         <p class="text-sm text-gray-500">{{ __('messages.full_name') }}</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $staff->full_name }} </p>
-                        <small class="text-sm text-gray-500">{{ $staff->nick_name }} {{ __('messages.total_sales_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->total_sales_amount, 2) }}</span></small>
+                        <small class="text-sm text-gray-500">{{ __('messages.total_sales_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->total_sales_amount, 2) }}</span></small><br />
+                        <small class="text-sm text-gray-500">{{ __('messages.commission_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->commission_amount, 2) }}</span></small>
                     </div>
                 </div>
             </div>
@@ -68,7 +69,7 @@
         <!-- Total Transaction Amount -->
         <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-top space-x-3">
                     <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
                         <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
@@ -78,7 +79,8 @@
                     <div>
                         <p class="text-sm text-gray-500">{{ __('messages.total_salary') }}</p>
                         <p class="text-2xl font-bold text-green-700">${{ number_format($staff->total_salary, 2) }}</p>
-                        <p class="text-sm text-gray-500">{{ __('messages.base_salary') }}: ${{ number_format($staff->base_salary, 2) }} + {{ __('messages.commission_amount') }}: ${{ number_format($staff->commission_amount, 2) }}</p>
+                        <p class="text-sm text-gray-500">{{ __('messages.base_salary') }}: ${{ number_format($staff->base_salary, 2) }} </p> 
+                        <p class="text-sm text-gray-500">{{ __('messages.bonus') }}: ${{ number_format($staff->bonus, 2) }}</p>
                     </div>
                 </div>
                 <div class="text-green-600">
@@ -92,7 +94,7 @@
         <!-- Total Dayoff Days -->
         <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-200">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-top space-x-3">
                     <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
                         <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
@@ -140,20 +142,19 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_base') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_commission') }}</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.total_sales_amount') }}</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_total') }}</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_date') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_status') }}</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($staff->payoutHistories as $payout)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->base_salary, 2) }}</td>
-                                <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->commission_amount, 2) }}</td>
+                                <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->sales_amount, 2) }}</td>
                                 <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->total_amount, 2) }}</td>
                                 <td class="px-4 py-2 text-xs text-gray-500">{{ $payout->created_at->format('M d, Y') }}</td>
-                                <td class="px-4 py-2 text-xs text-purple-600 font-medium">{{ ucfirst($payout->status) }}</td>
+                                
                             </tr>
                         @empty
                             <tr>
