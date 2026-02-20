@@ -70,19 +70,6 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">{{ __('messages.monthly_minimum_sales_amount') }}</label>
-                    <input 
-                        wire:model="monthly_minimum_sales_amount" 
-                        d="monthly_minimum_sales_amount" 
-                        name="monthly_minimum_sales_amount" 
-                        type="number" 
-                        step="100"
-                        min="0"
-                        class="mt-1 block w-full" required autofocus autocomplete="monthly_minimum_sales_amount" 
-                    />   
-                </div>   
-
-                <div>
                     <label class="block text-sm font-medium text-gray-500">{{ __('messages.commission_rate') }}</label>
                     <input 
                         wire:model="commission_rate" 
@@ -108,7 +95,6 @@
                         class="mt-1 block w-full" required autofocus autocomplete="bonus" 
                     />   
                 </div>
-                <div></div>
 
                 <div> 
                     <button 

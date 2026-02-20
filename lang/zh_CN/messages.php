@@ -196,7 +196,7 @@ return [
     'comely' => '相貌',
     'comfort' => '舒适',
     'comic' => '漫画',
-    'commission_amount' => '佣金金额',
+    'commission_amount' => '分成金额',
     'common' => '普通',
     'communication' => '沟通',
     'community' => '社区',

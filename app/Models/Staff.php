@@ -11,7 +11,6 @@ class Staff extends Model
         'full_name',
         'phone_number',
         'base_salary',
-        'monthly_minimum_sales_amount',
         'commission_rate',
         'bonus',
         'is_active',
@@ -90,13 +89,12 @@ class Staff extends Model
 
     public function getCommissionAmountAttribute()
     {   
-        $net_sales_amount = max(0, $this->total_sales_amount - $this->monthly_minimum_sales_amount);
-        return $this->commission_rate * $net_sales_amount;
+        return $this->commission_rate * $this->total_sales_amount;
     }
 
     public function getTotalSalaryAttribute()
     {
-       return $this->base_salary + $this->commission_amount + $this->bonus;
+       return max($this->base_salary,  $this->commission_amount) + $this->bonus;
     }
 
     public function payout()
@@ -104,7 +102,6 @@ class Staff extends Model
         if ($this->payoutHistories()->whereDate('payout_date', today())->exists()) {
             return false;
         }
-
         $this->payoutHistories()->create([
             'total_amount' => $this->total_salary,
             'base_salary' => $this->base_salary,

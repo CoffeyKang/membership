@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('full_name')->nullable(false);
             $table->string('phone_number')->nullable(false);
             $table->integer('base_salary')->default(3500);
-            $table->integer('monthly_minimum_sales_amount')->default(10000);
             $table->float('commission_rate')->default(0.4);
             $table->integer('bonus')->default(0);
             $table->boolean('is_active')->default(true);

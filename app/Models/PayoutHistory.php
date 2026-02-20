@@ -9,6 +9,7 @@ class PayoutHistory extends Model
     protected $fillable = [
         'staff_id',
         'total_amount',
+        'base_salary',
         'sales_amount',
         'commission_amount',
         'number_of_transactions',

@@ -19,7 +19,6 @@ class StaffTableSeeder extends Seeder
             'full_name' => '郭霞',
             'phone_number' => '13478211060',
             'base_salary' => 3500,
-            'monthly_minimum_sales_amount' => 12000,
             'commission_rate' => 0.4,
             'is_active' => true,
             'is_left' => false,
