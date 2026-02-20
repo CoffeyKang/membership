@@ -20,6 +20,9 @@ class Kernel extends ConsoleKernel
         
         // Schedule daily health checks
         $schedule->command('backup:monitor')->daily();
+        
+        // Schedule daily reset of staff status to active at 2 AM
+        $schedule->command('set:staff-active')->daily()->at('02:00');
     }
 
     /**
