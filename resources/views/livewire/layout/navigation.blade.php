@@ -62,17 +62,21 @@ new class extends Component
                     </x-slot>
 
                     <x-slot name="content">
+                        @if(auth()->user()->isAdmin())
                         <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('messages.profile') }}
                         </x-dropdown-link>
-
-                        <x-dropdown-link :href="route('backup.manager')" wire:navigate>
-                            {{ __('messages.backup_manager') }}
-                        </x-dropdown-link>
-                        
-                        <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
-                            {{ __('messages.staff_management') }}
-                        </x-responsive-nav-link>
+                        @endif
+                        @if(auth()->user()->isAdmin())
+                            <x-dropdown-link :href="route('backup.manager')" wire:navigate>
+                                {{ __('messages.backup_manager') }}
+                            </x-dropdown-link>
+                        @endif
+                        @if(auth()->user()->isAdmin())
+                            <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
+                                {{ __('messages.staff_management') }}
+                            </x-responsive-nav-link>
+                        @endif
                         
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
@@ -114,18 +118,21 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-
+                @if(auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('dashboard')" wire:navigate>
                     {{ __('messages.dashboard') }}
                 </x-responsive-nav-link>
-
+                @endif
+                @if(auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('members.index')" wire:navigate>
                     {{ __('messages.members_list') }}
                 </x-responsive-nav-link>
-
+                @endif
+                @if(auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('reports.transactions')" wire:navigate>
                     {{ __('messages.today_transactions') }}
                 </x-responsive-nav-link>
+                @endif
 
 
 
@@ -133,11 +140,11 @@ new class extends Component
                 {{-- <x-responsive-nav-link :href="route('profile')" wire:navigate>
                     {{ __('messages.profile') }}
                 </x-responsive-nav-link> --}}
-
-                <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
-                    {{ __('messages.staff_management') }}
-                </x-responsive-nav-link>
-
+                @if(auth()->user()->isAdmin())
+                    <x-responsive-nav-link :href="route('staff-management.index')" wire:navigate>
+                        {{ __('messages.staff_management') }}
+                    </x-responsive-nav-link>
+                @endif
                 
 
                 
