@@ -69,12 +69,12 @@ class Staff extends Model
 
     public function getNumberOfDayoffsAttribute()
     {
-        return $this->dayoffs()->count();
+        return count($this->dayoff_dates);
     }
 
     public function getDayoffDatesAttribute()
     {
-        return $this->dayoffs()->pluck('date')->toArray();
+        return array_unique($this->dayoffs()->pluck('date')->toArray());
     }
 
     public static function activeStaff()
