@@ -38,6 +38,7 @@ class MemberForm extends Component
             'full_name'     => 'required|string|max:255|unique:members,full_name,' . $this->member->id,
             'phone_number'  => 'nullable|string|max:20',
             'balance'       => 'required|numeric|min:0',
+            'is_primary'    => 'nullable|boolean',
         ]);
 
         // 如果是更新现有会员，则不更新 balance 字段
