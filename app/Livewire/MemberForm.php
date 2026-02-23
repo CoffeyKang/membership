@@ -41,6 +41,10 @@ class MemberForm extends Component
             'is_primary'    => 'nullable|boolean',
         ]);
 
+        if($validated['is_primary'] == null) {
+            $validated['is_primary'] = 0;
+        }
+
         // 如果是更新现有会员，则不更新 balance 字段
         if (!Auth::user()->isAdmin()) {
             unset($validated['balance']); // 不更新 balance 字段
