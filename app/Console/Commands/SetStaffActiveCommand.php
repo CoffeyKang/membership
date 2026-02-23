@@ -30,8 +30,7 @@ class SetStaffActiveCommand extends Command
 
         // Update all staff members to active status
         // Set is_active to true for all staff who haven't left (is_left = false)
-        $updatedCount = Staff::where('is_left', false)
-                            ->update(['is_active' => true]);
+        $updatedCount = Staff::update(['is_active' => true]);
 
         $this->info("Successfully updated {$updatedCount} staff member(s) to active status.");
         

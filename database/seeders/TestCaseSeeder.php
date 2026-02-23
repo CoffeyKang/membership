@@ -36,7 +36,6 @@ class TestCaseSeeder extends Seeder
             $members[] = [
                 'full_name' => $faker->firstName . ' ' . $faker->lastName,
                 'phone_number' => $faker->numerify('1##########'), // Chinese-style phone number
-                'member_id' => 'M' . str_pad($i + 1, 3, '0', STR_PAD_LEFT),
                 'balance' => $faker->numberBetween(0, 5000),
                 'is_primary' => $faker->boolean(70), // 70% chance of being primary
                 'created_at' => $faker->dateTimeBetween('-2 years', 'now'),

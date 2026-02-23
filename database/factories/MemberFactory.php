@@ -17,7 +17,6 @@ class MemberFactory extends Factory
     public function definition(): array
     {
         return [
-            'member_id' => 'M' . $this->faker->unique()->numerify('###'),
             'full_name' => $this->faker->name('zh_CN'),
             'phone_number' => $this->faker->numerify('1##########'),
             'balance' => 0,

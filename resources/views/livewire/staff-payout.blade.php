@@ -141,8 +141,8 @@
                 <table class="min-w-full divide-y divide-gray-200 max-h-48 overflow-y-auto pr-2">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_base') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.total_sales_amount') }}</th>
+                            <th class="hidden md:block px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_base') }}</th>
+                            <th class="hidden md:block px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.total_sales_amount') }}</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_total') }}</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('messages.payout_date') }}</th>
                         </tr>
@@ -150,8 +150,8 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($staff->payoutHistories as $payout)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->base_salary, 2) }}</td>
-                                <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->sales_amount, 2) }}</td>
+                                <td class="hidden md:block px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->base_salary, 2) }}</td>
+                                <td class="hidden md:block px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->sales_amount, 2) }}</td>
                                 <td class="px-4 py-2 text-sm font-semibold text-gray-800">${{ number_format($payout->total_amount, 2) }}</td>
                                 <td class="px-4 py-2 text-xs text-gray-500">{{ $payout->created_at->format('M d, Y') }}</td>
                                 

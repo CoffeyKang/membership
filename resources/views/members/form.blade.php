@@ -29,7 +29,6 @@
                                 wire:model.defer="phone_number"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 placeholder="{{ __('messages.enter_phone_number') }}"
-                                required
                             />
                             @error('phone_number')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

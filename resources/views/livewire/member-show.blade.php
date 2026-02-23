@@ -29,10 +29,6 @@
 					<h2 class="text-lg sm:text-xl font-bold text-blue-700 mb-4 sm:mb-6">{{ __('messages.personal_information') }}</h2>
 					<div class="space-y-3 sm:space-y-4">
 						<div class="flex justify-between items-center">
-							<span class="text-gray-600 text-sm sm:text-base font-semibold">{{ __('messages.member_id') }}</span>
-							<span class="text-blue-700 text-base sm:text-lg font-bold">{{ $member->member_id }}</span>
-						</div>
-						<div class="flex justify-between items-center">
 							<span class="text-gray-600 text-sm sm:text-base font-semibold">{{ __('messages.full_name') }}</span>
 							<span class="text-gray-900 text-base sm:text-lg font-bold">{{ $member->full_name }}</span>
 						</div>

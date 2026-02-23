@@ -13,7 +13,6 @@ class Member extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
         'full_name',
         'phone_number',
         'balance',
@@ -61,7 +60,7 @@ class Member extends Model
      */
     public function isWalkInClient()
     {
-        return $this->member_id == 'M001';
+        return $this->full_name == '散客';
     }
     /**
      * Spend money from the member's balance.

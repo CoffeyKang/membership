@@ -15,7 +15,6 @@ class MemberTableSeeder extends Seeder
         $this->command->info('Creating Walkin Client Member Info ...');
         
         \App\Models\Member::create([
-            'member_id' => 'M001',
             'full_name' => '散客',
             'phone_number' => '0912345678',
             'balance' => 1000000,

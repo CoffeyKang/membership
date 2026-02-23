@@ -42,8 +42,8 @@ class QuickSave extends Component
     {   
         $this->members = Member::all();
         $this->staff = Staff::activeStaff()->notLeft()->get();
-        $this->selectedMemberID = Member::where('member_id', 'M001')->first()->id;
-        $this->walkinClientID = Member::where('member_id', 'M001')->first()->id;
+        $this->selectedMemberID = Member::first()->id;
+        $this->walkinClientID = Member::first()->id;
     
     }
 
@@ -52,7 +52,6 @@ class QuickSave extends Component
         $this->memberResults = \App\Models\Member::where(function($query) {
             $query
                 ->where('full_name', 'like', '%' . $this->memberSearch . '%')
-                ->orWhere('member_id', 'like', '%' . $this->memberSearch . '%')
                 ->orWhere('phone_number', 'like', '%' . $this->memberSearch . '%');
         })->get();
     }

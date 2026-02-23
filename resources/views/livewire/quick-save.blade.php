@@ -128,7 +128,7 @@
                                 class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : '' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
                                 wire:click="selectClient({{ $member->id }})"
                             >
-                                <h3 class="text-sm md:text-base font-semibold">{{ $member->full_name }} <small>({{ __('messages.member_id') }}: {{ $member->member_id }})</small></h3>
+                                <h3 class="text-sm md:text-base font-semibold">{{ $member->full_name }}</h3>
                                 <p class="text-xs md:text-sm">{{ $member->phone_number }}</p>
                                 <p class="text-xs md:text-sm"> {{ __('messages.last_transaction') }}: {{ $member->transactions->last()?->created_at ? $member->transactions->last()?->created_at->format('Y-m-d') : __('messages.n_a') }}</p>
                                 <p class="text-xs md:text-sm"><strong>{{ __('messages.balance') }}: <span class="font-bold">{{ $member->balance }}</span></strong></p>

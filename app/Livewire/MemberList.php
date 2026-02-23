@@ -10,7 +10,7 @@ class MemberList extends Component
     public $searchTerm = '';
     public function mount()
     {
-        $this->members = \App\Models\Member::orderBy('member_id')->get();
+        $this->members = \App\Models\Member::orderBy('id')->get();
     }
 
     public function updatedSearchTerm()
@@ -18,7 +18,6 @@ class MemberList extends Component
         $this->members = \App\Models\Member::where(function($query) {
             $query
                 ->where('full_name', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('member_id', 'like', '%' . $this->searchTerm . '%')
                 ->orWhere('phone_number', 'like', '%' . $this->searchTerm . '%');
         })->get();
     }
