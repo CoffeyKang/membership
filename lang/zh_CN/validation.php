@@ -10,6 +10,7 @@ return [
             'required' => '请输入姓名',
             'string' => '请输入姓名, 只包含字母、数字和空格',
             'max' => '姓名最多255个字符',
+            'unique' => '姓名已存在',
         ],
         'phone_number' => [
             'required' => '请输入手机号',

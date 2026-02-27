@@ -26,7 +26,9 @@ Route::get('members', function () {
     ->middleware(['auth'])
     ->name('members.index');
 
-Route::get('members/create', \App\Livewire\MemberForm::class)
+Route::get('members/create', function() {
+    return view('members.form', ['member' => new \App\Models\Member()]);
+})
     ->middleware(['auth'])
     ->name('members.create');
 
@@ -36,7 +38,9 @@ Route::get('members/{member}', function (\App\Models\Member $member) {
     ->middleware(['auth'])
     ->name('members.show');
 
-Route::get('members/edit/{member}', \App\Livewire\MemberForm::class)
+Route::get('members/edit/{member}', function(\App\Models\Member $member) {
+    return view('members.form', compact('member'));
+})
     ->middleware(['auth'])
     ->name('members.edit');
 

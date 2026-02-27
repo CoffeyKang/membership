@@ -33,9 +33,8 @@ class MemberForm extends Component
     }
     public function save()
     {
-        
         $validated = $this->validate([
-            'full_name'     => 'required|string|max:255|unique:members,full_name,' . $this->member->id,
+            'full_name'     => 'required|string|max:255',
             'phone_number'  => 'nullable|string|max:20',
             'balance'       => 'required|numeric|min:0',
             'is_primary'    => 'nullable|boolean',
@@ -57,6 +56,6 @@ class MemberForm extends Component
 
     public function render()
     {
-        return view('members.form');
+        return view('livewire.member-form');
     }
 }
