@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="description" content="{{ __('messages.company_description') }}">  
+        <meta name="keywords" content="人民发艺,沈阳理发店,老北市理发,沈阳老字号理发,男女剪发,染发,烫发,沈阳美发,和平区理发,成宝百货理发,老师傅理发,实惠理发,沈阳本地理发店,老店理发">
         <title>Laravel</title>
 
         <!-- Fonts -->

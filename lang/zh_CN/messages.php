@@ -1340,6 +1340,7 @@ return [
     'backup_cleanup_error' => '备份清理错误',
     'backup_information_refreshed' => '备份信息已刷新',
     'bonus' => '奖金',
+    'company_description' => '人民发艺——沈阳老北市口碑传承的老字号理发店，专注男女剪发、染发、烫发。老师傅手艺精湛，服务亲切，价格实惠，是街坊信赖、游客喜爱的地道美发老店。',
 ];
 
 
