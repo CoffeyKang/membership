@@ -9,10 +9,13 @@
             {{ session('success') }}
         </div>
     @endif
-    
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">
+        {{ __('messages.member') }}: {{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : __('messages.walkin_client') }}
+    </h1>
     <div class="flex flex-col md:flex-row">
         <!-- Left Column: Form -->
         <div class="w-full md:w-1/2 p-3 md:p-4 m-1 md:m-2 border rounded shadow bg-white">
+            
             <form wire:submit.prevent="saveQuick">
                 <!-- Hairstylist -->
                 <div class="mb-4">
@@ -32,7 +35,7 @@
 
                 <!-- Member -->
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.member') }}</label>
+                    <label class="md:hidden block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.member') }}</label>
                     <!-- Live search input on mobile, read-only span on desktop -->
                     <div class="w-full md:hidden">
 
@@ -69,11 +72,6 @@
                             </div>
                         @endif
                     </div>
-                
-                    
-                    <span class="hidden md:inline text-sm md:text-base">{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : __('messages.walkin_client') }}</span>
-                    @error('selectedMemberID') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                    
                 </div>
 
                 <!-- Amount -->
@@ -84,17 +82,27 @@
                 </div>
 
                 <!-- Confirm Amount -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.confirm_amount') }}</label>
                     <input type="number" wire:model="confirmAmount" class="w-full p-2 border rounded text-sm md:text-base" min="0" step="0.01" placeholder="{{ __('messages.confirm_amount') }}" />
                     @error('confirmAmount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
+                </div> --}}
 
                 <!-- Notes -->
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.notes') }}</label>
-                    <textarea wire:model="notes" class="w-full p-2 border rounded text-sm md:text-base" rows="3" placeholder="{{ __('messages.enter_notes') }}"></textarea>
-                    @error('notes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    <span class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.notes') }}</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-2">
+                        @foreach($services as $service)
+                            <div 
+                                class="inline-block items-center text-center border border-gray-300 bg-gray-100 rounded-md cursor-pointer px-4 py-4 min-w-[80px] {{ in_array($service, $selectedServices) ? 'bg-green-500 text-white' : '' }}"
+                                wire:click="addService('{{ $service }}')"
+                            >
+                                {{ $service }}
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                    <span class="text-sm md:text-base text-green-500"><b>{{ __('messages.notes') }}:</b>  <span class="text-lg font-bold text-black">{{ $notes }}</span></span>
                 </div>
 
                 

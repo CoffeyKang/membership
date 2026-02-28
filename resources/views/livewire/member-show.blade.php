@@ -22,7 +22,7 @@
 		</a>
 	</div>
 	
-	<div class="flex flex-col md:flex-row w-full">
+	<div class="flex flex-col lg:flex-row w-full">
 		<div class="w-full">
 			<div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-8 {{ $member->is_primary ? 'border-4 border-yellow-400' : 'border-2 border-blue-200' }}">
 				<div class="p-4 sm:p-6">

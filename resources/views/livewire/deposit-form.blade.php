@@ -40,14 +40,6 @@
                 class="w-full border rounded px-3 py-2 mb-4" 
                 placeholder="{{ __('messages.enter_amount_to_deposit') }}
             ">
-            <label for="confirmDepositAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ __('messages.confirm_deposit_amount') }}
-            </label>
-            <input type="number" 
-                wire:model.defer="confirmDepositAmount"
-                class="w-full border rounded px-3 py-2 mb-4" 
-                placeholder="{{ __('messages.confirm_the_deposit_amount') }}
-            ">
             <div class="flex justify-end space-x-2">
                 <button 
                     wire:click="confirmDeposit" 

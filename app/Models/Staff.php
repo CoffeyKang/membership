@@ -59,17 +59,12 @@ class Staff extends Model
 
     public function getNumberOfWorkingDaysAttribute()
     {   
-        $working_days = [];
-        foreach ($this->transactions()->get() as $work_day) {
-            $working_days[] = $work_day->created_at->format('Y-m-d');
-        }
-        $working_days = array_unique($working_days);
-        return count($working_days);
+        return count($this->getWorkingDates());
     }
 
     public function getNumberOfDayoffsAttribute()
     {
-        return count($this->dayoff_dates);
+        return count($this->getDayoffs());
     }
 
     public function getDayoffDatesAttribute()
@@ -115,6 +110,32 @@ class Staff extends Model
         $this->transactions()->unPaid()->get()->each->payCheque();
 
         return true;
+    }
+
+    public function getWorkingDates()
+    {
+        $working_days = [];
+        foreach ($this->transactions()->get() as $work_day) {
+            $working_days[] = $work_day->created_at->format('Y-m-d');
+        }
+        return array_unique($working_days);
+    }
+
+    public function getDayoffs()
+    {
+        $working_dates = $this->getWorkingDates();
+        
+        if (empty($working_dates)) {
+            return [];
+        }
+
+        $startDate = \Carbon\Carbon::parse(min($working_dates));
+        $endDate = \Carbon\Carbon::today();
+        $allDates = [];
+        for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+            $allDates[] = $date->format('Y-m-d');
+        }
+        return array_diff($allDates, $working_dates);
     }
 
 }

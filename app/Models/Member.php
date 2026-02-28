@@ -53,6 +53,11 @@ class Member extends Model
         $this->update(['is_primary' => true]);
     }
     
+    public function setNormal()
+    {
+        $this->update(['is_primary' => false]);
+    }
+
     /**
      * Mark the member as a walk-in client.
      *

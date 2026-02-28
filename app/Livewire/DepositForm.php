@@ -19,9 +19,8 @@ class DepositForm extends Component
     public function confirmDeposit()
     {
         $this->validate([
-            'depositAmount' => 'required|numeric|min:100',
+            'depositAmount' => 'required|numeric|min:0',
             'type' => 'required|in:0,1,2,3',
-            'confirmDepositAmount' => 'required|same:depositAmount',
         ]);
 
 
@@ -30,6 +29,10 @@ class DepositForm extends Component
 
         if ($this->depositAmount >= 1000) {
             $this->member->setPrimary();
+        }
+
+        if($this->depositAmount < 1000 && $this->member->balance < 1000) {
+            $this->member->setNormal();
         }
         
         $this->member->depositHistories()->create([

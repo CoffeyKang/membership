@@ -44,10 +44,6 @@ class MemberForm extends Component
             $validated['is_primary'] = 0;
         }
 
-        // 如果是更新现有会员，则不更新 balance 字段
-        if (!Auth::user()->isAdmin()) {
-            unset($validated['balance']); // 不更新 balance 字段
-        }
         // Update or create member
         $this->member->fill($validated)->save();
         // Dispatch event and redirect

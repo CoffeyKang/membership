@@ -25,6 +25,17 @@ class QuickSave extends Component
     public $signatureData = '';
     public $showMemberInfoModal = false;
     public $memberInfo = [];
+
+    public $services = [
+        '造型',
+        '剪发 - 男',
+        '剪发 - 女',
+        '烫发',
+        '染发',
+        '营养',
+    ];
+
+    public $selectedServices = [];
     
     protected $listeners = [
         'saveSignature' => 'saveSignature',
@@ -34,7 +45,6 @@ class QuickSave extends Component
         'selectedMemberID' => 'required|exists:members,id',
         'selectedStaffId'  => 'required|exists:staff,id',
         'amount'           => 'required|numeric|min:0',
-        'confirmAmount'    => 'required|same:amount',
         'notes'            => 'nullable|string|max:255',
     ];
 
@@ -127,6 +137,19 @@ class QuickSave extends Component
     public function saveSignature($signature)
     {
         $this->savedSignature = $signature;
+    }
+
+    public function addService($service)
+    {   
+        if (in_array($service, $this->selectedServices)) {
+            $this->selectedServices = array_diff($this->selectedServices, [$service]);
+            $this->notes = implode(', ', $this->selectedServices);
+            return;
+        }
+
+        $this->selectedServices[] = $service;
+
+        $this->notes = implode(', ', $this->selectedServices);
     }
 
     public function render()
