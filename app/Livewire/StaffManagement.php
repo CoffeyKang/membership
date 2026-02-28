@@ -10,11 +10,15 @@ class StaffManagement extends Component
 {   
     public $staff;
     public $todayTransactions;
+    public $todayWalkInTransactions;
+    public $todayMemberTransactions;
 
     public function mount()
     {   
         $this->staff = Staff::all();
         $this->todayTransactions = Transaction::todayTransactions();
+        $this->todayWalkInTransactions = Transaction::todayWalkInTransactionTotal();
+        $this->todayMemberTransactions = Transaction::todayMemberTransactionTotal();
     }
 
     public function payCheque($staffId)

@@ -70,9 +70,12 @@
         </div>
 
         <div class="bg-gradient-to-r from-green-50 to-emerald-50 px-6 py-4 text-center border-t border-gray-200">
-            <div class="text-sm font-medium mb-2">
-                {{ __('messages.today_transactions') }}: <span class="text-2xl text-green-700 font-bold"> $ {{ number_format($todayTransactions, 2) }} </span>
+            <div class="text-lg font-medium mb-2">
+                {{ __('messages.today_transactions') }}: <span class="text-3xl text-green-700 font-bold"> $ {{ number_format($todayTransactions, 2) }} </span> <br />
+                {{ __('messages.today_member_transactions') }}: <span class="text-2xl text-green-700 font-bold"> $ {{ number_format($todayMemberTransactions, 2) }} </span> <br />
+                {{ __('messages.today_walk_in_transactions') }}: <span class="text-2xl text-green-700 font-bold"> $ {{ number_format($todayWalkInTransactions, 2) }} </span>
             </div>
+            
             <div class="text-sm font-medium">
                 <a href="{{ route('staff.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-150">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

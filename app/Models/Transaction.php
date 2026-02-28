@@ -38,6 +38,11 @@ class Transaction extends Model
         return $this->hasMany(MemberSignature::class);
     }
 
+    public function scopeWalkIn($query)
+    {
+        return $query->where('member_id', 1);
+    }
+
     public function scopeSetPeriod($query, $period)
     {
         if (!in_array($period, $this->periods)) {
@@ -78,6 +83,15 @@ class Transaction extends Model
         return self::setPeriod('today')->sum('amount');
     }
 
+    public static function todayMemberTransactionTotal()
+    {
+        return self::setPeriod('today')->where('member_id', '!=', 1)->sum('amount');
+    }
+    public static function todayWalkInTransactionTotal()
+    {
+        return self::walkIn()->setPeriod('today')->sum('amount');
+    }  
+
     protected static function booted()
     {
         static::addGlobalScope('order', function ($query) {
@@ -92,4 +106,7 @@ class Transaction extends Model
             $transaction->memberSignature()->delete();
         });
     }
+
+     
+
 }
