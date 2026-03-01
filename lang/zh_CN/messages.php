@@ -1343,6 +1343,7 @@ return [
     'company_description' => '人民发艺——沈阳老北市口碑传承的老字号理发店，专注男女剪发、染发、烫发。老师傅手艺精湛，服务亲切，价格实惠，是街坊信赖、游客喜爱的地道美发老店。',
     'today_walk_in_transactions' => '今日散客交易金额',
     'today_member_transactions' => '今日会员交易金额',
+    'submit' => '提交',
 ];
 
 

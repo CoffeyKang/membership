@@ -157,10 +157,10 @@
                 <div class="flex justify-center w-full">
                     <button 
                         type="submit" 
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 w-full md:px-6 rounded shadow text-sm md:text-base"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 w-full md:px-6 py-4 rounded shadow text-sm md:text-base"
                         wire:click="saveQuick"
                         >
-                        {{ __('messages.save') }}
+                        {{ __('messages.submit') }}
                     </button>
                 </div>
     

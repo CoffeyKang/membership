@@ -33,6 +33,7 @@ class QuickSave extends Component
         '烫发',
         '染发',
         '营养',
+        '产品',
     ];
 
     public $selectedServices = [];
