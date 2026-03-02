@@ -77,6 +77,12 @@ new class extends Component
                                 {{ __('messages.staff_management') }}
                             </x-responsive-nav-link>
                         @endif
+
+                        @if(auth()->user()->isAdmin())
+                        <x-responsive-nav-link :href="route('add-records')" wire:navigate>
+                            {{ __('messages.add_records') }}
+                        </x-responsive-nav-link>
+                        @endif
                         
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
@@ -131,6 +137,12 @@ new class extends Component
                 @if(auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('reports.transactions')" wire:navigate>
                     {{ __('messages.today_transactions') }}
+                </x-responsive-nav-link>
+                @endif
+
+                @if(auth()->user()->isAdmin())
+                <x-responsive-nav-link :href="route('add-records')" wire:navigate>
+                    {{ __('messages.add_records') }}
                 </x-responsive-nav-link>
                 @endif
 

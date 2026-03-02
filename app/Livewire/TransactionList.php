@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Staff;
 use App\Models\Transaction;
 use Livewire\WithPagination;
 
@@ -14,11 +15,17 @@ class TransactionList extends Component
 
     public $period = 'today';
     public $perPage = 10;
+    public $selectedDate;
+    public $selectedStaffId;
+
+    public $staff;
 
 
     public function mount()
     {
         $this->getTodayTransactions();
+        $this->selectedDate = date('Y-m-d');
+        $this->staff = Staff::notLeft()->get();
     }
 
     public function deleteTransaction($id)
@@ -41,7 +48,7 @@ class TransactionList extends Component
 
         $this->getTodayTransactions();
 
-        session()->flash('success', 'Transaction deleted successfully.');
+        session()->flash('success', __('messages.transaction_deleted'));
     }
 
     public function getALlTransactions()
@@ -54,6 +61,36 @@ class TransactionList extends Component
     public function getTodayTransactions()
     {
         $this->transactions = Transaction::setPeriod('today')
+            ->setStaffId($this->selectedStaffId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $this->selectedDate = date('Y-m-d');
+    }
+    public function getYesterdayTransactions()
+    {
+        $this->transactions = Transaction::setPeriod('yesterday')
+            ->setStaffId($this->selectedStaffId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        $this->selectedDate = date('Y-m-d', strtotime('-1 day'));
+    }
+
+    public function filterByDatePicker()
+    {
+        $this->transactions = Transaction::whereDate('created_at', $this->selectedDate)
+            ->setStaffId($this->selectedStaffId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    public function setStaffFilter($staffId)
+    {
+        $this->selectedStaffId = $staffId;
+        
+        $this->transactions = Transaction::whereDate('created_at', $this->selectedDate)
+            ->setStaffId($this->selectedStaffId)
             ->orderBy('created_at', 'desc')
             ->get();
     }

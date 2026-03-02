@@ -1344,6 +1344,17 @@ return [
     'today_walk_in_transactions' => '今日散客交易金额',
     'today_member_transactions' => '今日会员交易金额',
     'submit' => '提交',
+    'filter_by_date' => '选择日期',
+    'yesterday' => '昨日',
+    'today' => '今日',
+    'staff_summary' => '员工摘要',
+    'transactions' => '交易',
+    'total' => '总金额',
+    'no_staff_transactions' => '暂无员工交易记录',
+    'filter_by_staff' => '选择员工',
+    'all_staff' => '所有员工',
+    'transaction_deleted' => '交易已删除',
+    'add_records' => '添加记录',
 ];
 
 

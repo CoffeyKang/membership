@@ -1,20 +1,69 @@
 <div class="overflow-x-auto">
-        @if (session('success'))
-            <div class="w-full p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
-                <svg class="inline w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                </svg>
-                {{ session('success') }}
+    @if (session('success'))
+        <div class="w-full p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+            <svg class="inline w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="w-full p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+            <svg class="inline w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {{ session('error') }}
+        </div>
+    @endif
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex space-x-2">
+            <button 
+                wire:click="getYesterdayTransactions()" 
+                class="px-10 py-2 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 transition">
+                {{ __('messages.yesterday') }}
+            </button>
+            <button 
+                wire:click="getTodayTransactions()" 
+                class="px-10 py-2 text-sm font-medium text-white bg-purple-600 rounded hover:bg-purple-700 transition">
+                {{ __('messages.today') }}
+            </button>
+        </div>
+        <div>
+            <h3 class="text-lg font-medium text-gray-900">{{ $selectedDate }}</h3>
+        </div>
+        <div>
+            <input 
+                type="date" 
+                wire:model="selectedDate" 
+                wire:change="filterByDatePicker" 
+                class="px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+    </div>
+
+    <div>
+        <!-- Staff Filter Buttons -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('messages.filter_by_staff') }}</label>
+            <div class="flex flex-wrap gap-2">
+                <button 
+                    wire:click="setStaffFilter(null)" 
+                    class="px-3 py-1 text-xs rounded-full border transition-colors
+                        {{ is_null($selectedStaffId) ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100' }}">
+                    {{ __('messages.all_staff') }}
+                </button>
+                @foreach($staff as $person)
+                    <button 
+                        wire:click="setStaffFilter({{ $person->id }})" 
+                        class="px-3 py-2 text-xs rounded-full border transition-colors
+                            {{ $selectedStaffId == $person->id ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100' }}">
+                        {{ $person->full_name }}
+                    </button>
+                @endforeach
             </div>
-        @endif
-        @if (session('error'))
-            <div class="w-full p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
-                <svg class="inline w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                {{ session('error') }}
-            </div>
-        @endif
+        </div>
+
+
+    </div>    
 
     <table class="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
         <thead class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
@@ -83,5 +132,34 @@
                 </tr>
             @endforeach
         </tbody>
+        <tbody class="divide-y divide-gray-200 bg-gray-50">
+            <tr class="bg-indigo-100">
+                <td colspan="7" class="px-6 py-3 text-sm font-semibold text-indigo-700 uppercase tracking-wider">
+                    {{ __('messages.staff_summary') }}
+                </td>
+            </tr>
+            @forelse($transactions->groupBy('staff_id') as $staffId => $group)
+                <tr class="hover:bg-indigo-50 transition-colors duration-200">
+                    <td colspan="5" class="px-6 py-4 text-sm text-gray-900 font-medium">{{ $group->first()->staff->full_name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-700">{{ $group->count() }} {{ __('messages.transactions') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 font-semibold text-right">${{ number_format($group->sum('amount'), 2) }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="px-6 py-4 text-sm text-gray-500 text-center">{{ __('messages.no_staff_transactions') }}</td>
+                </tr>
+            @endforelse
+        </tbody>
+        {{-- <tfoot class="bg-gray-100">
+            <tr>
+                <td colspan="7" class="px-6 py-3 text-sm text-gray-700 text-right font-semibold">
+                    {{ __('messages.total') }}: ${{ number_format($transactions->sum('amount'), 2) }} <br />
+                    {{ __('messages.today_walk_in_transactions') }}: ${{ number_format($transactions->where('member_id', 1)->sum('amount'), 2) }} <br />
+                    {{ __('messages.today_member_transactions') }}: ${{ number_format($transactions->where('member_id', '!=', 1)->sum('amount'), 2) }}
+                </td>
+            </tr>
+        </tfoot> --}}
     </table>
+
+    
 </div>

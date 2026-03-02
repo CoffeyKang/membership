@@ -21,7 +21,7 @@ class Transaction extends Model
         'is_paid',
     ];
 
-    protected $periods = ['today', 'this_month', 'this_year', 'all'];
+    protected $periods = ['today', 'yesterday', 'this_month', 'this_year', 'all'];
 
     public function member()
     {
@@ -53,6 +53,9 @@ class Transaction extends Model
                 case 'today':
                     $q->whereDate('created_at', today());
                     break;
+                case 'yesterday':
+                    $q->whereDate('created_at', \Carbon\Carbon::yesterday());
+                    break;
                 case 'this_month':
                     $q->whereMonth('created_at', now()->month)
                       ->whereYear('created_at', now()->year);
@@ -66,6 +69,14 @@ class Transaction extends Model
             }
         });
 
+    }
+
+    public function scopeSetStaffId($query, $staffId)
+    {
+        if ($staffId == null) {
+            return $query;
+        }
+        return $query->where('staff_id', $staffId);
     }
 
     public function payCheque()
@@ -90,7 +101,7 @@ class Transaction extends Model
     public static function todayWalkInTransactionTotal()
     {
         return self::walkIn()->setPeriod('today')->sum('amount');
-    }  
+    }
 
     protected static function booted()
     {

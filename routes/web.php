@@ -89,6 +89,12 @@ Route::get('reports/transactions', function () {
 Route::get('backup-manager', \App\Livewire\BackupManager::class)
     ->middleware(['auth'])
     ->name('backup.manager');
+
+Route::get('add-records', function () {
+    return view('add-records');
+})
+    ->middleware(['auth'])
+    ->name('add-records');
     
 Route::get('download-backup', [\App\Http\Controllers\DownloadController::class, 'downloadBackup'])
     ->middleware(['auth'])
