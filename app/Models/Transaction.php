@@ -19,6 +19,11 @@ class Transaction extends Model
         'amount',
         'notes',
         'is_paid',
+        'paid_at',
+    ];
+
+    protected $casts = [
+        'paid_at' => 'datetime',
     ];
 
     protected $periods = ['today', 'yesterday', 'this_month', 'this_year', 'all'];
@@ -86,7 +91,7 @@ class Transaction extends Model
 
     public function payCheque()
     {
-        $this->update(['is_paid' => true]);
+        $this->update(['is_paid' => true, 'paid_at' => now()]);
     }
 
     public function scopeUnPaid($query)
