@@ -77,14 +77,14 @@ class Staff extends Model
         return self::where('is_active', true);
     }
 
-    public function getTotalSalesAmountAttribute()
+    public function getTotalSalesAmount($fromDate, $tillDate)
     {
-        return $this->transactions()->sum('amount');
+        return $this->transactions()->setDateRange($fromDate, $tillDate)->sum('amount');
     }
 
-    public function getCommissionAmountAttribute()
+    public function getCommissionAmount($fromDate, $tillDate)
     {   
-        return $this->commission_rate * $this->total_sales_amount;
+        return $this->commission_rate * $this->getTotalSalesAmount($fromDate, $tillDate);
     }
 
     public function getTotalSalaryAttribute()
@@ -92,22 +92,24 @@ class Staff extends Model
        return max($this->base_salary,  $this->commission_amount) + $this->bonus;
     }
 
-    public function payout()
-    {   
-        if ($this->payoutHistories()->whereDate('payout_date', today())->exists()) {
+    public function payout($fromDate, $tillDate)
+    {
+        if ($this->payoutHistories()->whereDate('payout_date', today())->exists() && $this->getTotalSalesAmount($fromDate, $tillDate) == 0) {
             return false;
         }
         $this->payoutHistories()->create([
             'total_amount' => $this->total_salary,
             'base_salary' => $this->base_salary,
-            'sales_amount' => $this->total_sales_amount,
-            'commission_amount' => $this->commission_amount,
+            'sales_amount' => $this->getTotalSalesAmount($fromDate, $tillDate),
+            'commission_amount' => $this->getCommissionAmount($fromDate, $tillDate),
             'number_of_transactions' => $this->number_of_working_days,
+            'from_date' => $fromDate,
+            'till_date' => $tillDate,
             'payout_date' => today(),
         ]);
 
         $this->dayoffs()->notArchived()->get()->each->archive();
-        $this->transactions()->unPaid()->get()->each->payCheque();
+        $this->transactions()->unPaid()->setDateRange($fromDate, $tillDate)->get()->each->payCheque();
 
         return true;
     }

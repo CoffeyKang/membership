@@ -1248,6 +1248,7 @@ return [
     'spend_successfully' => 'Spend Successfully!',
     'member_info_updated' => 'Member info updated!',
     'member_info' => 'Member Info',
+    'time_period' => 'Time Period',
     'backup_manager' => 'Backup Manager',
     'backup_file_not_found' => 'Backup file not found',
     'backup_downloaded_successfully' => 'Backup downloaded successfully',

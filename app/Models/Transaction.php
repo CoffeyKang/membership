@@ -71,6 +71,11 @@ class Transaction extends Model
 
     }
 
+    public function scopeSetDateRange($query, $fromDate, $tillDate)
+    {
+        return $query->whereBetween('created_at', [$fromDate, $tillDate]);
+    }
+
     public function scopeSetStaffId($query, $staffId)
     {
         if ($staffId == null) {

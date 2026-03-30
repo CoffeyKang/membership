@@ -47,6 +47,39 @@
 
     <!-- Body -->
     <div class="p-6 space-y-6">
+        {{-- set a time period --}}
+        <div class="bg-gray-50 rounded-xl p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-top space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{ __('messages.time_period') }}</p>
+                        <div class="flex items-center space-x-10 justify-between">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">{{ __('messages.from_date') }}</label>
+                                <input 
+                                    type="date" 
+                                    wire:model.live="fromDate" 
+                                    class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">{{ __('messages.till_date') }}</label>
+                                <input 
+                                    type="date" 
+                                    wire:model.live="tillDate" 
+                                    class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Full Name -->
         <div class="bg-gray-50 rounded-xl p-4">
             <div class="flex items-center justify-between">
@@ -59,8 +92,8 @@
                     <div>
                         <p class="text-sm text-gray-500">{{ __('messages.full_name') }}</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $staff->full_name }} </p>
-                        <small class="text-sm text-gray-500">{{ __('messages.total_sales_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->total_sales_amount, 2) }}</span></small><br />
-                        <small class="text-sm text-gray-500">{{ __('messages.commission_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($staff->commission_amount, 2) }}</span></small>
+                        <small class="text-sm text-gray-500">{{ __('messages.total_sales_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($totalAmount, 2) }}</span></small><br />
+                        <small class="text-sm text-gray-500">{{ __('messages.commission_amount') }}: <span class="text-xl font-bold text-green-700">${{ number_format($commissionAmount, 2) }}</span></small>
                     </div>
                 </div>
             </div>

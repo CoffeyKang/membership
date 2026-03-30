@@ -1355,6 +1355,9 @@ return [
     'all_staff' => '所有员工',
     'transaction_deleted' => '交易已删除',
     'add_records' => '添加记录',
+    'time_period' => '时间周期',
+    'from_date' => '从日期',
+    'till_date' => '至日期',
 ];
 
 
