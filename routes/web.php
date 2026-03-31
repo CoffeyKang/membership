@@ -95,6 +95,13 @@ Route::get('add-records', function () {
 })
     ->middleware(['auth'])
     ->name('add-records');
+
+Route::get('deposite-records', function () {
+    return view('deposite-records');
+})
+    ->middleware(['auth'])
+    ->name('deposite-records');
+
     
 Route::get('download-backup', [\App\Http\Controllers\DownloadController::class, 'downloadBackup'])
     ->middleware(['auth'])

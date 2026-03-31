@@ -25,8 +25,25 @@ class DepositHistory extends Model
         return $this->belongsTo(Member::class);
     }
 
+    public function scopeNotWalkinClient($query)
+    {
+        return $query->where('member_id', '!=', 1);
+    }
+
     public function getTypeTextAttribute()
     {
         return __($this->depositTypes[$this->type] ?? 'messages.unknown');
+    }
+
+    public function scopeSetDateRange($query, $fromDate, $tillDate)
+    {
+        return $query->whereBetween('created_at', [$fromDate, $tillDate]);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('notWalkinClient', function ($query) {
+            $query->where('member_id', '!=', 1);
+        });
     }
 }

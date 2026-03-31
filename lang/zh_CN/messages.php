@@ -1358,6 +1358,7 @@ return [
     'time_period' => '时间周期',
     'from_date' => '从日期',
     'till_date' => '至日期',
+    'deposite_records' => '充值记录',
 ];
 
 

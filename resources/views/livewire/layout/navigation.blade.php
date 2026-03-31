@@ -83,6 +83,13 @@ new class extends Component
                             {{ __('messages.add_records') }}
                         </x-responsive-nav-link>
                         @endif
+
+                        @if(auth()->user()->isAdmin())
+                        <x-responsive-nav-link :href="route('deposite-records')" wire:navigate>
+                            {{ __('messages.deposite_records') }}
+                        </x-responsive-nav-link>
+                        @endif
+
                         
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
@@ -143,6 +150,12 @@ new class extends Component
                 @if(auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('add-records')" wire:navigate>
                     {{ __('messages.add_records') }}
+                </x-responsive-nav-link>
+                @endif
+
+                @if(auth()->user()->isAdmin())
+                <x-responsive-nav-link :href="route('deposite-records')" wire:navigate>
+                    {{ __('messages.deposite_records') }}
                 </x-responsive-nav-link>
                 @endif
 
