@@ -38,7 +38,6 @@
                     <label class="md:hidden block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.member') }}</label>
                     <!-- Live search input on mobile, read-only span on desktop -->
                     <div class="w-full md:hidden">
-
                         <div class="grid grid-cols-[1fr_auto] gap-0">
                             <input 
                                 type="text"

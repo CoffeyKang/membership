@@ -29,9 +29,41 @@
                     </div>
                     @error('selectedStaffId') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
-
+                {{-- Member --}}
+                <div class="grid grid-cols-[1fr_auto] gap-0">
+                    <input 
+                        type="text"
+                        class="w-full p-2 border rounded text-sm md:text-base md:hidden"
+                        placeholder="{{ __('messages.type_member_name') }}"
+                        wire:model.live.debounce.300ms="memberSearch"
+                        value="{{ $selectedMemberID ? $members->find($selectedMemberID)?->full_name : '' }}"
+                    >
+                    <button 
+                        type="button" 
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 transition duration-200 rounded"
+                        wire:click="selectWalkinClient"
+                        >
+                        {{ __('messages.walkin_client') }}
+                    </button>
+                </div>
+                @if(!empty($memberSearch))
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 md:max-h-100 overflow-y-auto mt-4">
+                        @forelse($memberResults as $member)
+                            <div
+                                class="mb-2 p-2 md:p-3 border-2 rounded-lg shadow-sm {{ $member->is_primary ? 'bg-yellow-200' : '' }} cursor-pointer {{ $selectedMemberID === $member->id ? 'border-green-500' : 'border-gray-300' }}"
+                                wire:click="selectClient({{ $member->id }})"
+                            >
+                                <h2 class="text-sm md:text-base font-semibold">{{ $member->full_name }} <small>({{ $member->phone_number }})</small></h2>
+                                <p class="text-xs md:text-sm"> {{ __('messages.last_transaction') }}: {{ $member->transactions->last()?->created_at ? $member->transactions->last()?->created_at->format('Y-m-d H:i') : __('messages.n_a') }}</p>
+                                <p class="text-xs md:text-sm"><strong>{{ __('messages.balance') }}: <span class="font-bold">{{ $member->balance }}</span></strong></p>
+                            </div>
+                        @empty
+                            <div class="p-2 text-gray-500 text-sm md:text-base">{{ __('messages.no_members_found') }}</div>
+                        @endforelse
+                    </div>
+                @endif
                 <!-- Amount -->
-                <div class="mb-4">
+                <div class="mb-4 mt-4">
                     <label class="block text-gray-700 font-bold mb-2 text-sm md:text-base">{{ __('messages.amount') }}</label>
                     <input type="number" wire:model="amount" class="w-full p-2 border rounded text-sm md:text-base" min="0" step="0.01" placeholder="{{ __('messages.enter_amount') }}" />
                     @error('amount') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
