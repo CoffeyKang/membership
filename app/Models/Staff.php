@@ -49,7 +49,7 @@ class Staff extends Model
 
     public function getUnpaidAmountAttribute()
     {
-        return $this->transactions()->sum('amount');
+        return $this->transactions()->unpaid()->sum('amount');
     }
 
     public function getTodayAmountAttribute()

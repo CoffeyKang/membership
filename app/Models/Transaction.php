@@ -119,10 +119,6 @@ class Transaction extends Model
             $query->orderByDesc('created_at');
         });
 
-        static::addGlobalScope('unpaid', function ($query) {
-            $query->unPaid();
-        });
-
         static::deleted(function ($transaction) {
             $transaction->memberSignature()->delete();
         });
