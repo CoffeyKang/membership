@@ -106,7 +106,7 @@
                         @endif
 					</div>
 					<div>
-						<span class="font-semibold">{{ __('messages.amount') }}:</span> <span class="font-bold">{{ $transaction->amount }}</span>
+						<span class="font-semibold">{{ __('messages.amount_spend') }}:</span> <span class="font-bold">{{ $transaction->amount }}</span>
 						<span class="font-semibold ml-2">{{ __('messages.balance_at_that_time') }}:</span> <span class="font-bold">{{ $transaction->balance ?? 'N/A' }}</span>
 					</div>
 					
