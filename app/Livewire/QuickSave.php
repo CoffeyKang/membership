@@ -85,6 +85,7 @@ class QuickSave extends Component
         $transaction = $member->transactions()->create([
             'staff_id' => $this->selectedStaffId,
             'amount' => $this->amount,
+            'balance' => $member->balance,
             'notes' => $this->notes,
         ]);
 

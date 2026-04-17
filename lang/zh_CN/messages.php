@@ -109,6 +109,7 @@ return [
     'backup' => '备份',
     'balance' => '余额',
     'balanced' => '平衡',
+    'balance_at_that_time' => '那时余额',
     'bargain' => '讨价还价',
     'barrier' => '屏障',
     'base_salary' => '基本工资',

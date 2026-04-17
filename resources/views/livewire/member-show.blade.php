@@ -106,12 +106,13 @@
                         @endif
 					</div>
 					<div>
-						<span class="font-semibold">{{ __('messages.amount') }}</span> {{ $transaction->amount }}
+						<span class="font-semibold">{{ __('messages.amount') }}:</span> <span class="font-bold">{{ $transaction->amount }}</span>
+						<span class="font-semibold ml-2">{{ __('messages.balance_at_that_time') }}:</span> <span class="font-bold">{{ $transaction->balance ?? 'N/A' }}</span>
 					</div>
 					
 				</div>
 				<div class="text-sm text-gray-600">
-					<span class="font-semibold">{{ __('messages.notes') }}</span> {{ $transaction->notes ?? __('messages.n_a') }}
+					<span class="font-semibold">{{ __('messages.notes') }}</span>{{ $transaction->notes ?? __('messages.n_a') }}
 				</div>
 			</div>
 		@endforeach	

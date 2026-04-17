@@ -17,6 +17,7 @@ class Transaction extends Model
         'member_id',
         'staff_id',
         'amount',
+        'balance',
         'notes',
         'is_paid',
         'paid_at',
