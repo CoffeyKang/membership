@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TodayTransactionSeeder extends Seeder
@@ -24,10 +23,10 @@ class TodayTransactionSeeder extends Seeder
         // Create 20 transactions
         for ($i = 0; $i < 20; $i++) {
             \App\Models\Transaction::create([
-                'staff_id'   => $staffIds[array_rand($staffIds)],
-                'member_id'  => $memberIds[array_rand($memberIds)],
-                'amount'     => rand(1000, 50000) / 100, // Random amount between 10.00 and 500.00
-                'notes'      => 'Transaction ' . ($i + 1), // Optional note
+                'staff_id' => $staffIds[array_rand($staffIds)],
+                'member_id' => $memberIds[array_rand($memberIds)],
+                'amount' => rand(1000, 50000) / 100, // Random amount between 10.00 and 500.00
+                'notes' => 'Transaction '.($i + 1), // Optional note
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

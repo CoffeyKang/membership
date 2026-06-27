@@ -5,16 +5,15 @@ namespace App\Livewire;
 use Livewire\Component;
 
 class Staff extends Component
-{   
+{
     public $staff;
-    
 
     public function toggleActive()
-    {   
-        $today  = now()->format('Y-m-d');
+    {
+        $today = now()->format('Y-m-d');
 
-        $this->staff->is_active = !$this->staff->is_active;
-        if( !$this->staff->is_active ) {
+        $this->staff->is_active = ! $this->staff->is_active;
+        if (! $this->staff->is_active) {
             $this->staff->dayoffs()->create([
                 'date' => $today,
             ]);
@@ -27,7 +26,7 @@ class Staff extends Component
 
         $this->staff->save();
     }
-        
+
     public function render()
     {
         return view('livewire.staff', [

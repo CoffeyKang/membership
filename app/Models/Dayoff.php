@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Database\Factories\DayoffFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 #[UseFactory(DayoffFactory::class)]
 class Dayoff extends Model
@@ -38,6 +38,4 @@ class Dayoff extends Model
             $builder->where('is_archived', false);
         });
     }
-
-    
 }

@@ -2,17 +2,20 @@
 
 namespace App\Livewire;
 
+use App\Models\Staff;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Staff;
 
 class StaffTransactions extends Component
-{   
+{
     use WithPagination;
 
     public Staff $staff;
+
     public $transactions;
+
     public $perPage = 7;
+
     public $period = 'this_month';
 
     public function mount(Staff $staff)
@@ -20,9 +23,8 @@ class StaffTransactions extends Component
         $this->staff = $staff;
     }
 
-
     public function getStaffTransactionsProperty()
-    {   
+    {
         return $this->staff->transactions()
             ->setPeriod($this->period)
             ->orderBy('created_at', 'desc')

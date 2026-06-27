@@ -2,20 +2,27 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Staff;
+use Livewire\Component;
 
 class StaffInfo extends Component
-{   
+{
     public ?Staff $staff = null;
 
     public $full_name;
+
     public $nick_name;
+
     public $phone_number;
+
     public $base_salary;
+
     public $commission_rate;
+
     public $is_left;
+
     public $bonus;
+
     public $created_at;
 
     protected $rules = [
@@ -28,7 +35,7 @@ class StaffInfo extends Component
     ];
 
     public function mount(Staff $staff)
-    {   
+    {
         $this->staff = $staff;
         $this->full_name = $staff->full_name;
         $this->nick_name = $staff->nick_name;
@@ -40,9 +47,9 @@ class StaffInfo extends Component
         $this->bonus = $staff->bonus;
     }
 
-    public function toggleLeft( )
-    {   
-        $this->staff->is_left = !$this->staff->is_left;
+    public function toggleLeft()
+    {
+        $this->staff->is_left = ! $this->staff->is_left;
         $this->staff->save();
         $this->is_left = $this->staff->is_left;
     }
@@ -53,7 +60,7 @@ class StaffInfo extends Component
         $this->staff->refresh();
         session()->flash('success', __('messages.staff_info_updated'));
     }
-    
+
     public function render()
     {
         return view('livewire.staff-info');

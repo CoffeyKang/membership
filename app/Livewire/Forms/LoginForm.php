@@ -29,12 +29,12 @@ class LoginForm extends Form
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-        
-        if($this->email == '人民发艺') {
+
+        if ($this->email == '人民发艺') {
             $this->email = 'user@rmfy.cn';
         }
 
-        if($this->email == '郭霞') {
+        if ($this->email == '郭霞') {
             $this->email = 'admin@rmfy.cn';
         }
 

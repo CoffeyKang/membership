@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class StaffTableSeeder extends Seeder
@@ -13,7 +12,7 @@ class StaffTableSeeder extends Seeder
     public function run(): void
     {
         $this->command->info('Creating Boss Info ...');
-        
+
         \App\Models\Staff::create([
             'nick_name' => '大侠',
             'full_name' => '郭霞',

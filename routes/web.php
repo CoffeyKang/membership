@@ -26,8 +26,8 @@ Route::get('members', function () {
     ->middleware(['auth'])
     ->name('members.index');
 
-Route::get('members/create', function() {
-    return view('members.form', ['member' => new \App\Models\Member()]);
+Route::get('members/create', function () {
+    return view('members.form', ['member' => new \App\Models\Member]);
 })
     ->middleware(['auth'])
     ->name('members.create');
@@ -38,7 +38,7 @@ Route::get('members/{member}', function (\App\Models\Member $member) {
     ->middleware(['auth'])
     ->name('members.show');
 
-Route::get('members/edit/{member}', function(\App\Models\Member $member) {
+Route::get('members/edit/{member}', function (\App\Models\Member $member) {
     return view('members.form', compact('member'));
 })
     ->middleware(['auth'])
@@ -50,33 +50,31 @@ Route::get('staff', function () {
     ->middleware(['auth'])
     ->name('staff.index');
 
-Route::get('staff/create', function() {
-    return view('staff.show', ['staff' => new \App\Models\Staff()]);
+Route::get('staff/create', function () {
+    return view('staff.show', ['staff' => new \App\Models\Staff]);
 })->name('staff.create');
 
-
-Route::get('staff/{staff}', function(\App\Models\Staff $staff){
+Route::get('staff/{staff}', function (\App\Models\Staff $staff) {
     return view('staff.show', compact('staff'));
 })
     ->middleware(['auth'])
     ->name('staff.show');
 
-    
 Route::get('staff-management', function () {
     return view('staff.management.index');
 })
-    ->middleware(['auth'])
-    ->name('staff-management.index');
+        ->middleware(['auth'])
+        ->name('staff-management.index');
 
-Route::get('staff/{staff}/payout', function(\App\Models\Staff $staff){
+Route::get('staff/{staff}/payout', function (\App\Models\Staff $staff) {
     return view('staff.management.payout', compact('staff'));
 })
     ->middleware(['auth'])
     ->name('staff.management.payout');
 
-Route::get('staff/{staff}/transactions', function(\App\Models\Staff $staff){
-        return view('staff.management.transactions', compact('staff'));
-    })
+Route::get('staff/{staff}/transactions', function (\App\Models\Staff $staff) {
+    return view('staff.management.transactions', compact('staff'));
+})
     ->middleware(['auth'])
     ->name('staff.management.transactions');
 
@@ -102,7 +100,6 @@ Route::get('deposite-records', function () {
     ->middleware(['auth'])
     ->name('deposite-records');
 
-    
 Route::get('download-backup', [\App\Http\Controllers\DownloadController::class, 'downloadBackup'])
-    ->middleware(['auth'])
-    ->name('download.backup');
+        ->middleware(['auth'])
+        ->name('download.backup');

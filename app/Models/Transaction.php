@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Database\Factories\TransactionFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(TransactionFactory::class)]
@@ -51,9 +51,10 @@ class Transaction extends Model
 
     public function scopeSetPeriod($query, $period)
     {
-        if (!in_array($period, $this->periods)) {
-            throw new \InvalidArgumentException("Invalid period. Allowed periods are: " . implode(', ', $this->periods));
+        if (! in_array($period, $this->periods)) {
+            throw new \InvalidArgumentException('Invalid period. Allowed periods are: '.implode(', ', $this->periods));
         }
+
         return $query->where(function ($q) use ($period) {
             switch ($period) {
                 case 'today':
@@ -64,7 +65,7 @@ class Transaction extends Model
                     break;
                 case 'this_month':
                     $q->whereMonth('created_at', now()->month)
-                      ->whereYear('created_at', now()->year);
+                        ->whereYear('created_at', now()->year);
                     break;
                 case 'this_year':
                     $q->whereYear('created_at', now()->year);
@@ -87,6 +88,7 @@ class Transaction extends Model
         if ($staffId == null) {
             return $query;
         }
+
         return $query->where('staff_id', $staffId);
     }
 
@@ -109,6 +111,7 @@ class Transaction extends Model
     {
         return self::setPeriod('today')->where('member_id', '!=', 1)->sum('amount');
     }
+
     public static function todayWalkInTransactionTotal()
     {
         return self::walkIn()->setPeriod('today')->sum('amount');
@@ -124,7 +127,4 @@ class Transaction extends Model
             $transaction->memberSignature()->delete();
         });
     }
-
-     
-
 }

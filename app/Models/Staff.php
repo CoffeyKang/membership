@@ -58,7 +58,7 @@ class Staff extends Model
     }
 
     public function getNumberOfWorkingDaysAttribute()
-    {   
+    {
         return count($this->getWorkingDates());
     }
 
@@ -83,13 +83,13 @@ class Staff extends Model
     }
 
     public function getCommissionAmount($fromDate, $tillDate)
-    {   
+    {
         return $this->commission_rate * $this->getTotalSalesAmount($fromDate, $tillDate);
     }
 
     public function getTotalSalaryAttribute()
     {
-       return max($this->base_salary,  $this->commission_amount) + $this->bonus;
+        return max($this->base_salary, $this->commission_amount) + $this->bonus;
     }
 
     public function payout($fromDate, $tillDate)
@@ -120,13 +120,14 @@ class Staff extends Model
         foreach ($this->transactions()->get() as $work_day) {
             $working_days[] = $work_day->created_at->format('Y-m-d');
         }
+
         return array_unique($working_days);
     }
 
     public function getDayoffs()
     {
         $working_dates = $this->getWorkingDates();
-        
+
         if (empty($working_dates)) {
             return [];
         }
@@ -137,7 +138,7 @@ class Staff extends Model
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
             $allDates[] = $date->format('Y-m-d');
         }
+
         return array_diff($allDates, $working_dates);
     }
-
 }

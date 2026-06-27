@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 
 class StaffList extends Component
-{   
+{
     public $staff;
 
     public function mount()
@@ -14,7 +14,7 @@ class StaffList extends Component
     }
 
     public function createStaff()
-    {   
+    {
         return $this->redirectRoute('staff.create');
     }
 

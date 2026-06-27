@@ -2,15 +2,17 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Member as MemberModel;
+use Livewire\Component;
 
 class Member extends Component
 {
     public $member;
+
     public $depositAmount;
 
     public $showSpendModal = false;
+
     public $showDepositModal = false;
 
     protected $listeners = [
@@ -26,7 +28,7 @@ class Member extends Component
     }
 
     public function balanceUpdated()
-    {   
+    {
         session()->flash('status', __('messages.deposit_successfully'));
         $this->showDepositModal = false;
     }
@@ -38,7 +40,7 @@ class Member extends Component
     }
 
     public function depositHistoryDeleted()
-    {   
+    {
         $this->member = MemberModel::find($this->member->id);
         session()->flash('status', __('messages.deposit_history_deleted'));
     }
@@ -56,7 +58,7 @@ class Member extends Component
 
     public function memberUpdated()
     {
-        session()->flash('status', __('messages.member_updated_successfully')); 
+        session()->flash('status', __('messages.member_updated_successfully'));
     }
 
     public function render()
@@ -68,6 +70,4 @@ class Member extends Component
             'showDepositModal' => $this->showDepositModal,
         ]);
     }
-
-    
 }

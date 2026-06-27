@@ -2,14 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Member;
 use App\Models\Staff;
-use App\Models\Transaction;
-use App\Models\Dayoff;
-use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TestCaseSeeder extends Seeder
 {
@@ -30,11 +26,11 @@ class TestCaseSeeder extends Seeder
 
         // Create test members (50 members)
         $this->command->info('Creating 50 members...');
-        
+
         $members = [];
         for ($i = 0; $i < 50; $i++) {
             $members[] = [
-                'full_name' => $faker->firstName . ' ' . $faker->lastName,
+                'full_name' => $faker->firstName.' '.$faker->lastName,
                 'phone_number' => $faker->numerify('1##########'), // Chinese-style phone number
                 'balance' => $faker->numberBetween(0, 5000),
                 'is_primary' => $faker->boolean(70), // 70% chance of being primary
@@ -42,7 +38,7 @@ class TestCaseSeeder extends Seeder
                 'updated_at' => $faker->dateTimeBetween('-2 years', 'now'),
             ];
         }
-        
+
         // Insert members in chunks to avoid memory issues
         foreach (array_chunk($members, 100) as $chunk) {
             DB::table('members')->insert($chunk);
@@ -52,11 +48,11 @@ class TestCaseSeeder extends Seeder
 
         // Create test staff (4 staff members)
         $this->command->info('Creating 4 staff members...');
-        
+
         $staffs = [];
         for ($i = 0; $i < 4; $i++) {
             $staffs[] = [
-                'full_name' => $faker->firstName . $faker->lastName,
+                'full_name' => $faker->firstName.$faker->lastName,
                 'nick_name' => $faker->firstName,
                 'phone_number' => $faker->numerify('1##########'), // Chinese-style phone number
                 'base_salary' => $faker->numberBetween(3000, 3500),
@@ -66,11 +62,11 @@ class TestCaseSeeder extends Seeder
                 'updated_at' => $faker->dateTimeBetween('-2 years', 'now'),
             ];
         }
-        
+
         foreach (array_chunk($staffs, 100) as $chunk) {
             DB::table('staff')->insert($chunk);
         }
-        
+
         $this->command->info('Created 4 staff members.');
 
         // Get the IDs after inserting
@@ -79,7 +75,7 @@ class TestCaseSeeder extends Seeder
 
         // Create test transactions (300 transactions)
         $this->command->info('Creating 300 transactions...');
-        
+
         $transactions = [];
         for ($i = 0; $i < 300; $i++) {
             $transactions[] = [
@@ -92,7 +88,7 @@ class TestCaseSeeder extends Seeder
                 'updated_at' => $faker->dateTimeBetween('2025-09-01', 'now'),
             ];
         }
-        
+
         foreach (array_chunk($transactions, 100) as $chunk) {
             DB::table('transactions')->insert($chunk);
         }
@@ -101,7 +97,7 @@ class TestCaseSeeder extends Seeder
 
         // Create test dayoffs (100 dayoffs)
         $this->command->info('Creating 100 dayoffs...');
-        
+
         $dayoffs = [];
         for ($i = 0; $i < 100; $i++) {
             $dayoffs[] = [
@@ -112,7 +108,7 @@ class TestCaseSeeder extends Seeder
                 'updated_at' => $faker->dateTimeBetween('2025-09-01', 'now'),
             ];
         }
-        
+
         foreach (array_chunk($dayoffs, 100) as $chunk) {
             DB::table('dayoffs')->insert($chunk);
         }
@@ -143,7 +139,6 @@ class TestCaseSeeder extends Seeder
 
         $this->command->info('Created 80 payout histories.');
 
-        
         $this->command->info('Test data seeding completed successfully!');
         $this->command->info('Summary:');
         $this->command->info('- 50 Members created');
@@ -151,6 +146,4 @@ class TestCaseSeeder extends Seeder
         $this->command->info('- 300 Transactions created');
         $this->command->info('- 100 Dayoffs created');
     }
-
-        
 }

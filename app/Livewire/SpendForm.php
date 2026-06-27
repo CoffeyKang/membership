@@ -2,16 +2,21 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Staff;
+use Livewire\Component;
 
 class SpendForm extends Component
-{   
+{
     public $member;
+
     public $staff;
+
     public $spendAmount;
+
     public $confirmSpendAmount;
+
     public $notes;
+
     public $selectedStaff;
 
     public function mount($member)
@@ -25,13 +30,13 @@ class SpendForm extends Component
         // Validate spend amount
         $this->validate([
             'selectedStaff' => 'required|exists:staff,id',
-            'spendAmount' => 'required|numeric|min:10|max:' . $this->member->balance,
+            'spendAmount' => 'required|numeric|min:10|max:'.$this->member->balance,
             'confirmSpendAmount' => 'required|same:spendAmount',
             'notes' => 'nullable|string|max:255',
         ]);
 
         // Deduct amount from member's balance
-        
+
         $this->member->spend($this->spendAmount);
         $this->member->save();
 
@@ -49,6 +54,7 @@ class SpendForm extends Component
         // Close the modal
         $this->closeModal();
     }
+
     public function closeModal()
     {
         $this->dispatch('modalClosed');
@@ -56,7 +62,7 @@ class SpendForm extends Component
 
     public function render()
     {
-        return view('livewire.spend-form',[
+        return view('livewire.spend-form', [
             'member' => $this->member,
             'staff' => $this->staff,
             'spendAmount' => $this->spendAmount,

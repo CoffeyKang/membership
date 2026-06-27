@@ -32,7 +32,7 @@ class BackupDatabase extends Command
         $this->info('Starting backup process...');
 
         $commandOptions = [];
-        
+
         // Only add --only-db flag since we're specifically doing database backups
         $commandOptions['--only-db'] = true;
 
@@ -44,7 +44,7 @@ class BackupDatabase extends Command
 
         if ($exitCode === 0) {
             $this->info('Database backup completed successfully!');
-            
+
             // Show the list of backups
             $this->call('backup:list');
         } else {

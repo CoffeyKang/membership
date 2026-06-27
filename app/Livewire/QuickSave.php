@@ -2,28 +2,41 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\Staff;
 use App\Models\Member;
 use App\Models\MemberSignature;
+use App\Models\Staff;
+use Livewire\Component;
 
 class QuickSave extends Component
-{   
+{
     public $staff;
+
     public $members;
+
     public $selectedMemberID;
+
     public $memberSearch;
+
     public $memberResults;
+
     public $walkinClientID;
+
     public $memberTransactions;
 
     public $selectedStaffId;
+
     public $amount;
+
     public $confirmAmount;
+
     public $notes;
+
     public $savedSignature;
+
     public $signatureData = '';
+
     public $showMemberInfoModal = false;
+
     public $memberInfo = [];
 
     public $services = [
@@ -37,33 +50,33 @@ class QuickSave extends Component
     ];
 
     public $selectedServices = [];
-    
+
     protected $listeners = [
         'saveSignature' => 'saveSignature',
     ];
 
     protected $rules = [
         'selectedMemberID' => 'required|exists:members,id',
-        'selectedStaffId'  => 'required|exists:staff,id',
-        'amount'           => 'required|numeric|min:0',
-        'notes'            => 'nullable|string|max:255',
+        'selectedStaffId' => 'required|exists:staff,id',
+        'amount' => 'required|numeric|min:0',
+        'notes' => 'nullable|string|max:255',
     ];
 
     public function mount()
-    {   
+    {
         $this->members = Member::all();
         $this->staff = Staff::activeStaff()->notLeft()->get();
         $this->selectedMemberID = Member::first()->id;
         $this->walkinClientID = Member::first()->id;
-    
+
     }
 
     public function updatedMemberSearch()
     {
-        $this->memberResults = \App\Models\Member::where(function($query) {
+        $this->memberResults = \App\Models\Member::where(function ($query) {
             $query
-                ->where('full_name', 'like', '%' . $this->memberSearch . '%')
-                ->orWhere('phone_number', 'like', '%' . $this->memberSearch . '%');
+                ->where('full_name', 'like', '%'.$this->memberSearch.'%')
+                ->orWhere('phone_number', 'like', '%'.$this->memberSearch.'%');
         })->get();
     }
 
@@ -75,6 +88,7 @@ class QuickSave extends Component
         // Check if amount exceeds member balance
         if ($this->amount > $member->balance) {
             session()->flash('error', __('messages.amount_exceeds_member_balance'));
+
             return false;
         }
         // update member balance
@@ -97,7 +111,7 @@ class QuickSave extends Component
                 'signature' => $this->savedSignature,
             ]);
         }
-        
+
         // Reset form fields after successful save
         $this->reset(['selectedMemberID', 'selectedStaffId', 'amount', 'confirmAmount', 'notes']);
 
@@ -105,17 +119,17 @@ class QuickSave extends Component
         $this->memberResults = null;
         $this->savedSignature = null;
         session()->flash('success', __('messages.savings_recorded_successfully'));
-        
+
         // 设置会员信息并显示弹窗
         $this->memberInfo = [
             'full_name' => $member->full_name,
             'balance' => $member->balance,
         ];
         $this->showMemberInfoModal = true;
-        
+
         // Dispatch event to notify any necessary updates
         $this->dispatch('form-saved');
-      
+
     }
 
     public function selectClient($memberID)
@@ -125,7 +139,7 @@ class QuickSave extends Component
         $this->memberTransactions = $client->transactions()->take(5)->get();
 
         $this->memberSearch = $client->full_name;
-        $this->memberResults = 
+        $this->memberResults =
             Member::whereIn('id', [$client->id])->get();
     }
 
@@ -142,10 +156,11 @@ class QuickSave extends Component
     }
 
     public function addService($service)
-    {   
+    {
         if (in_array($service, $this->selectedServices)) {
             $this->selectedServices = array_diff($this->selectedServices, [$service]);
             $this->notes = implode(', ', $this->selectedServices);
+
             return;
         }
 

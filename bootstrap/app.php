@@ -14,15 +14,15 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withCommands([
-        __DIR__.'/../app/Console/Commands/*.php'
+        __DIR__.'/../app/Console/Commands/*.php',
     ])
     ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule) {
         // Schedule daily backups at 2 AM
         $schedule->command('backup:run')->daily()->at('02:00');
-        
+
         // Schedule weekly cleanup of old backups
         $schedule->command('backup:clean')->weekly();
-        
+
         // Schedule daily health checks
         $schedule->command('backup:monitor')->daily();
     })

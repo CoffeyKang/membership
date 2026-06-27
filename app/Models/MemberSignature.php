@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MemberSignature extends Model
 {
     protected $table = 'member_signatures';
+
     protected $fillable = [
         'member_id',
         'transaction_id',

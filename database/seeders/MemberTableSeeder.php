@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MemberTableSeeder extends Seeder
@@ -13,7 +12,7 @@ class MemberTableSeeder extends Seeder
     public function run(): void
     {
         $this->command->info('Creating Walkin Client Member Info ...');
-        
+
         \App\Models\Member::create([
             'full_name' => '散客',
             'phone_number' => '0912345678',

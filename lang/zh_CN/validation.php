@@ -22,7 +22,7 @@ return [
             'numeric' => '请输入基础工资, 只包含数字',
             'min' => '基础工资不能小于0',
         ],
-        
+
         'commission_rate' => [
             'required' => '请输入佣金率',
             'numeric' => '请输入佣金率, 只包含数字',
@@ -81,5 +81,5 @@ return [
             'required' => '请选择日期',
             'date' => '请选择日期',
         ],
-    ]
+    ],
 ];

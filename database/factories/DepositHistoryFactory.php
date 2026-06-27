@@ -17,7 +17,7 @@ class DepositHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            
+
         ];
     }
 }

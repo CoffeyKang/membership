@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Staff; // Using the Staff model to update staff status
+use App\Models\Staff;
+use Illuminate\Console\Command; // Using the Staff model to update staff status
 
 class SetStaffActiveCommand extends Command
 {
@@ -33,7 +33,7 @@ class SetStaffActiveCommand extends Command
         $updatedCount = Staff::update(['is_active' => true]);
 
         $this->info("Successfully updated {$updatedCount} staff member(s) to active status.");
-        
+
         return 0;
     }
 }

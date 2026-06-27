@@ -2,24 +2,26 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Staff;
 use App\Models\Transaction;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class TransactionList extends Component
-{   
+{
     use WithPagination;
 
     public $transactions;
 
     public $period = 'today';
+
     public $perPage = 10;
+
     public $selectedDate;
+
     public $selectedStaffId;
 
     public $staff;
-
 
     public function mount()
     {
@@ -29,16 +31,18 @@ class TransactionList extends Component
     }
 
     public function deleteTransaction($id)
-    {   
+    {
         $transaction = Transaction::find($id);
-        if ( !$transaction) {
+        if (! $transaction) {
             session()->flash('error', 'Transaction not found.');
+
             return false;
         }
         $member = $transaction->member;
         // update member balance
-        if (!$member) {
+        if (! $member) {
             session()->flash('error', 'Member not found.');
+
             return false;
         }
         $member->update(['balance' => $member->balance + $transaction->amount]);
@@ -67,13 +71,14 @@ class TransactionList extends Component
 
         $this->selectedDate = date('Y-m-d');
     }
+
     public function getYesterdayTransactions()
     {
         $this->transactions = Transaction::setPeriod('yesterday')
             ->setStaffId($this->selectedStaffId)
             ->orderBy('created_at', 'desc')
             ->get();
-        
+
         $this->selectedDate = date('Y-m-d', strtotime('-1 day'));
     }
 
@@ -88,7 +93,7 @@ class TransactionList extends Component
     public function setStaffFilter($staffId)
     {
         $this->selectedStaffId = $staffId;
-        
+
         $this->transactions = Transaction::whereDate('created_at', $this->selectedDate)
             ->setStaffId($this->selectedStaffId)
             ->orderBy('created_at', 'desc')

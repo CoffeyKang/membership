@@ -2,21 +2,23 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Staff;
-
+use Livewire\Component;
 
 class StaffPayout extends Component
-{   
+{
     public Staff $staff;
 
     public $fromDate;
+
     public $tillDate;
+
     public $totalAmount;
+
     public $commissionAmount;
 
     public function mount(Staff $staff)
-    {   
+    {
         $this->staff = $staff;
         $this->fromDate = date('Y-m-d', strtotime($this->staff->transactions()->unPaid()->min('created_at') ?? today()));
         $this->tillDate = date('Y-m-d');
@@ -38,8 +40,9 @@ class StaffPayout extends Component
 
     public function payout()
     {
-        if( !$this->staff->payout($this->fromDate, $this->tillDate)) {
+        if (! $this->staff->payout($this->fromDate, $this->tillDate)) {
             session()->flash('fail', __('messages.payout_failed'));
+
             return;
         }
         session()->flash('success', __('messages.payout_processed_successfully'));

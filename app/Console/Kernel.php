@@ -11,20 +11,19 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
-    {   
+    {
         // Schedule daily reset of staff status to active at 00:01 AM
         $schedule->command('set:staff-active')->daily()->at('01:00');
-    
+
         // Schedule daily backups at 2 AM
         $schedule->command('backup:run --only-db')->daily()->at('10:40');
-        
+
         // Schedule weekly cleanup of old backups
         $schedule->command('backup:clean')->weekly();
-        
+
         // Schedule daily health checks
         $schedule->command('backup:monitor')->daily();
-        
-        
+
     }
 
     /**

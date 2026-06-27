@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Database\Factories\MemberFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 #[UseFactory(MemberFactory::class)]
 class Member extends Model
@@ -32,7 +32,7 @@ class Member extends Model
             ]);
         });
     }
-    
+
     public function depositHistories()
     {
         return $this->hasMany(DepositHistory::class);
@@ -52,7 +52,7 @@ class Member extends Model
     {
         $this->update(['is_primary' => true]);
     }
-    
+
     public function setNormal()
     {
         $this->update(['is_primary' => false]);
@@ -67,15 +67,17 @@ class Member extends Model
     {
         return $this->full_name == '散客';
     }
+
     /**
      * Spend money from the member's balance.
      * If the amount exceeds the current balance, no action is taken and a message is returned.
      *
      * @int int $amount
+     *
      * @return string
      */
     public function spend(int $amount): void
-    {   
+    {
         $this->decrement('balance', $amount);
     }
 }

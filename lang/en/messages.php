@@ -1279,10 +1279,5 @@ return [
     'weekly_backups_retained' => 'Weekly backups are retained for 16 weeks',
     'monthly_backups_retained' => 'Monthly backups are retained for 4 months',
     'yearly_backups_retained' => 'Yearly backups are retained for 2 years',
-    
+
 ];
-
-
-
-
-

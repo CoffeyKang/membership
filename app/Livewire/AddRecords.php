@@ -2,14 +2,15 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\Staff;
 use App\Models\Member;
+use App\Models\Staff;
 use App\Models\Transaction;
+use Livewire\Component;
 
 class AddRecords extends Component
-{   
+{
     public $staff;
+
     public $services = [
         '造型',
         '剪发 - 男',
@@ -21,32 +22,42 @@ class AddRecords extends Component
     ];
 
     public $selectedServices = [];
+
     public $notes = '';
+
     public $amount = 0;
+
     public $selectedStaffId;
+
     public $date;
+
     public $selectedMemberID = 1;
+
     public $members;
+
     public $memberSearch;
+
     public $memberResults;
+
     public $walkinClientID;
+
     public $memberTransactions;
 
     public function updatedMemberSearch()
     {
-        $this->memberResults = \App\Models\Member::where(function($query) {
+        $this->memberResults = \App\Models\Member::where(function ($query) {
             $query
-                ->where('full_name', 'like', '%' . $this->memberSearch . '%')
-                ->orWhere('phone_number', 'like', '%' . $this->memberSearch . '%');
+                ->where('full_name', 'like', '%'.$this->memberSearch.'%')
+                ->orWhere('phone_number', 'like', '%'.$this->memberSearch.'%');
         })->get();
     }
 
     protected $rules = [
-        'selectedStaffId'  => 'required|exists:staff,id',
+        'selectedStaffId' => 'required|exists:staff,id',
         'selectedMemberID' => 'required|exists:members,id',
-        'amount'           => 'required|numeric|min:0',
-        'date'             => 'required|date',
-        'notes'            => 'nullable|string|max:255',
+        'amount' => 'required|numeric|min:0',
+        'date' => 'required|date',
+        'notes' => 'nullable|string|max:255',
     ];
 
     public function mount()
@@ -59,10 +70,11 @@ class AddRecords extends Component
     }
 
     public function addService($service)
-    {   
+    {
         if (in_array($service, $this->selectedServices)) {
             $this->selectedServices = array_diff($this->selectedServices, [$service]);
             $this->notes = implode(', ', $this->selectedServices);
+
             return;
         }
 
@@ -78,7 +90,7 @@ class AddRecords extends Component
         $this->memberTransactions = $client->transactions()->take(5)->get();
 
         $this->memberSearch = $client->full_name;
-        $this->memberResults = 
+        $this->memberResults =
             Member::whereIn('id', [$client->id])->get();
     }
 
@@ -89,7 +101,6 @@ class AddRecords extends Component
         $this->memberTransactions = null;
     }
 
-
     public function saveQuick()
     {
         $this->validate();
@@ -98,7 +109,7 @@ class AddRecords extends Component
             'member_id' => $this->selectedMemberID,
             'staff_id' => $this->selectedStaffId,
             'amount' => $this->amount,
-            'notes' => $this->notes . "( 补录于 " . now()->toDateString() . ' )',
+            'notes' => $this->notes.'( 补录于 '.now()->toDateString().' )',
         ]);
         $transaction->save();
 
@@ -107,7 +118,6 @@ class AddRecords extends Component
         $transaction->member->save();
         $transaction->save();
 
-
         $this->selectedServices = [];
         $this->selectedStaffId = null;
         $this->selectedMemberID = 1;
@@ -115,8 +125,9 @@ class AddRecords extends Component
         $this->amount = 0;
         $this->date = null;
         session()->flash('success', __('messages.savings_recorded_successfully'));
-        
+
     }
+
     public function render()
     {
         return view('livewire.add-records');

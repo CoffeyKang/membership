@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Staff;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dayoff>
@@ -16,8 +16,9 @@ class DayoffFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {   
+    {
         $staff_id = Staff::activeStaff()->notLeft()->inRandomOrder()->first()->id;
+
         return [
             'staff_id' => $staff_id,
             'date' => $this->faker->dateTimeBetween('-1 year', 'now'),

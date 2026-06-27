@@ -2,52 +2,56 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Member;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class MemberForm extends Component
 {
-    
     public ?Member $member = null;
-    
+
     public $is_primary;
+
     public $full_name;
+
     public $phone_number;
+
     public $balance;
 
     public function mount(Member $member)
     {
-        $this->member = $member ?? new Member();
+        $this->member = $member ?? new Member;
         $this->full_name = $member->full_name;
         $this->phone_number = $member->phone_number;
-        $this->balance = $member->balance;  
+        $this->balance = $member->balance;
         $this->is_primary = $member->is_primary;
     }
 
     public function updateMember()
-    {   
+    {
         dispatch('memberUpdated');
+
         return redirect()->route('members.show', $this->member);
-        
+
     }
+
     public function save()
     {
         $validated = $this->validate([
-            'full_name'     => 'required|string|max:255',
-            'phone_number'  => 'nullable|string|max:20',
-            'balance'       => 'required|numeric|min:0',
-            'is_primary'    => 'nullable|boolean',
+            'full_name' => 'required|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'balance' => 'required|numeric|min:0',
+            'is_primary' => 'nullable|boolean',
         ]);
 
-        if($validated['is_primary'] == null) {
+        if ($validated['is_primary'] == null) {
             $validated['is_primary'] = 0;
         }
 
         // Update or create member
         $this->member->fill($validated)->save();
+
         // Dispatch event and redirect
-        return redirect()->route('members.show', $this->member)->with('status', __("messages.member_info_updated"));
+        return redirect()->route('members.show', $this->member)->with('status', __('messages.member_info_updated'));
     }
 
     public function render()

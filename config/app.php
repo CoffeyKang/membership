@@ -64,7 +64,7 @@ return [
     | is set to "UTC" by default as it is suitable for most use cases.
     |
     */
-    
+
     'timezone' => 'Asia/Shanghai',
 
     /*
@@ -82,7 +82,7 @@ return [
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'zh-CN'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'zh_CN'), 
+    'faker_locale' => env('APP_FAKER_LOCALE', 'zh_CN'),
 
     /*
     |--------------------------------------------------------------------------
