@@ -93,20 +93,18 @@ class AddRecords extends Component
     public function saveQuick()
     {
         $this->validate();
+        $member = Member::find($this->selectedMemberID);
+        $member->balance -= $this->amount;
+        $member->save();
 
         $transaction = new Transaction([
             'member_id' => $this->selectedMemberID,
             'staff_id' => $this->selectedStaffId,
             'amount' => $this->amount,
+            'balance' => $member->balance,
             'notes' => $this->notes . "( 补录于 " . now()->toDateString() . ' )',
         ]);
         $transaction->save();
-
-        $transaction->member->balance -= $this->amount;
-        $transaction->created_at = $this->date;
-        $transaction->member->save();
-        $transaction->save();
-
 
         $this->selectedServices = [];
         $this->selectedStaffId = null;
