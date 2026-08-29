@@ -103,6 +103,7 @@ class AddRecords extends Component
             'amount' => $this->amount,
             'balance' => $member->balance,
             'notes' => $this->notes . "( 补录于 " . now()->toDateString() . ' )',
+            'created_at' => $this->date,
         ]);
         $transaction->save();
 

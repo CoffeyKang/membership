@@ -21,6 +21,7 @@ class Transaction extends Model
         'notes',
         'is_paid',
         'paid_at',
+        'created_at',
     ];
 
     protected $casts = [
